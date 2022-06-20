@@ -13,7 +13,7 @@ export interface ICenterSectionComponentProps {
   img: ImageDataLike;
   componentInfo: {
     header: string;
-    subHeader: string;
+    subHeader?: string;
     description: string;
     buttonLeft: string;
     buttonRight: string;
@@ -26,6 +26,7 @@ export const CenterSectionComponent = ({
 }: ICenterSectionComponentProps) => {
   const { header, subHeader, description, buttonLeft, buttonRight } =
     componentInfo;
+
   return (
     <SectionWrapper>
       <Grid
@@ -35,6 +36,7 @@ export const CenterSectionComponent = ({
           justifyContent: 'center',
           alignItems: 'center',
           height: '100%',
+          position: 'relative',
         }}
       >
         <Grid

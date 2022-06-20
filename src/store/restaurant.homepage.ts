@@ -1,5 +1,5 @@
 export const homePageData = {
-  heroInfoCenter: {
+  heroSection: {
     header: 'MAISON-TOM',
     subHeader: '— Asian Restaurant —',
     description:
@@ -7,19 +7,19 @@ export const homePageData = {
     buttonLeft: 'Menu Review ',
     buttonRight: 'Kontaktiere Uns fur mehr',
   },
-  bookingInfoLeft: {
+  bookingSection: {
     smallHeader: 'Online Reservieren',
     description:
       'With a busy life, it is very convenient for us to schedule an online appointment so that we don have to wait. You could call us directly to book a table or fill the form on our system. The system is available 24/7 and 365 days a year. ',
-    CTAbutton: 'Online Reservieren',
+    CTAButton: 'Online Reservieren',
   },
-  menuInfoRight: {
+  menuSection: {
     smallHeader: 'Our Menu',
     description:
       'Variety comes from our menu. We create culinary masterpieces and you will be the one to admire it. ',
-    CTAbutton: 'Our Menu',
+    CTAButton: 'Our Menu',
   },
-  aboutInfoCenter: {
+  aboutSection: {
     header: 'MAISON - TOM',
     description:
       "We're all juggling busy schedules. That's why we're constantly looking for new ways to make life easier for our clients—like making it quicker to book your next appointment, for example! Scheduling your next visit is now convenient and hassle-free with our online booking platform. Whether you struggle to call during normal working hours or prefer to do everything digitally, you can make a booking anytime you like, right here on our website. Just find a time that suits you then confirm your booking with a click.",
