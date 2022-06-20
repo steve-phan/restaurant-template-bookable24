@@ -82,7 +82,7 @@ h1 {
   padding-left: 0;
   padding-right: 0;
   padding-top: 0;
-  margin-bottom: 1.45rem;
+  margin-bottom: 0;
   color: inherit;
   font-family: 'Playfair Display', serif;
   font-weight: bold;
@@ -163,7 +163,7 @@ input,
 optgroup,
 select,
 textarea {
-  font: inherit;
+  font-family: 'Mukta', sans-serif;
   margin: 0;
 }
 optgroup {
@@ -278,7 +278,7 @@ h3 {
   padding-left: 0;
   padding-right: 0;
   padding-top: 0;
-  margin-bottom: 1.45rem;
+  margin-bottom: 0;
   color: inherit;
   font-family: 'Mukta', sans-serif;
   font-weight: bold;
