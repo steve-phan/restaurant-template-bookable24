@@ -6,6 +6,7 @@ import {
   HeaderSt,
   SubHeaderSt,
   DescriptionSt,
+  ButtonGroupSt,
 } from './SectionContext.styles';
 
 interface IButtonProps {
@@ -18,8 +19,10 @@ interface ISection {
   smallHeader?: string;
   subHeader?: string;
   description?: string;
-  ctaButton?: IButtonProps;
-  background: 'transparent' | 'primary';
+  ctaButton?: string;
+  background: 'transparent' | 'black';
+  buttonLeft?: string;
+  buttonRight?: string;
 }
 
 export const SectionContext = ({
@@ -29,13 +32,22 @@ export const SectionContext = ({
   description,
   ctaButton,
   background,
+  buttonLeft,
+  buttonRight,
 }: ISection) => {
   return (
     <SectionContextSt background={background}>
       {!!header && <HeaderSt>{header}</HeaderSt>}
       {!!subHeader && <SubHeaderSt>{subHeader}</SubHeaderSt>}
+      {!!smallHeader && <SubHeaderSt>{smallHeader}</SubHeaderSt>}
       {!!description && <DescriptionSt>{description}</DescriptionSt>}
-      {!!ctaButton?.text && <CTAButton hasBackground text={ctaButton?.text} />}
+      {!!ctaButton && <CTAButton hasBackground text={ctaButton} />}
+      {!!buttonLeft && !!buttonRight && (
+        <ButtonGroupSt>
+          <CTAButton text={buttonLeft} />
+          <CTAButton hasBackground text={buttonRight} />
+        </ButtonGroupSt>
+      )}
     </SectionContextSt>
   );
 };

@@ -7,10 +7,25 @@ import {
 import { Grid } from '@mui/material';
 import { DynamicImage } from '@bookable24/components/molecules/DynamicImage/DynamicImage';
 import { SectionContext } from '@bookable24/components/molecules/SectionContext/SectionContext';
+import { ImageDataLike } from 'gatsby-plugin-image';
 
-import { heroInfo } from './hero.info';
+export interface ICenterSectionComponentProps {
+  img: ImageDataLike;
+  componentInfo: {
+    header: string;
+    subHeader: string;
+    description: string;
+    buttonLeft: string;
+    buttonRight: string;
+  };
+}
 
-const Hero = ({ img }: { img: any }) => {
+export const CenterSectionComponent = ({
+  img,
+  componentInfo,
+}: ICenterSectionComponentProps) => {
+  const { header, subHeader, description, buttonLeft, buttonRight } =
+    componentInfo;
   return (
     <SectionWrapper>
       <Grid
@@ -38,17 +53,15 @@ const Hero = ({ img }: { img: any }) => {
         </Grid>
         <Grid item xs={12}>
           <SectionContext
-            header={heroInfo.header}
-            subHeader={heroInfo.subHeader}
-            description={heroInfo.description}
+            header={header}
+            subHeader={subHeader}
+            description={description}
+            buttonLeft={buttonLeft}
+            buttonRight={buttonRight}
             background='transparent'
-            buttonLeft={heroInfo.buttonLeft}
-            buttonRight={heroInfo.buttonRight}
           />
         </Grid>
       </Grid>
     </SectionWrapper>
   );
 };
-
-export default Hero;
