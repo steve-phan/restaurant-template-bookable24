@@ -7,6 +7,7 @@ import Layout from '@bookable24/components/Layout/Layout';
 import { homePageData } from '@bookable24/store/restaurant.homepage';
 import { CenterSectionComponent } from '@bookable24/components/SectionsComponent/CenterSectionComponent/CenterSectionComponent';
 import { OneSideSectionComponent } from '@bookable24/components/SectionsComponent/OneSideSectionComponent/OneSideSectionComponent';
+import { GoogleMap } from '@bookable24/components/SectionsComponent/GoogleMap/GoogleMap';
 
 interface IDataIndexPage {
   locale: { nodes: any[] };
@@ -60,6 +61,8 @@ const IndexPage: React.FC<PageProps<IDataIndexPage>> = ({ location, data }) => {
         img={imgMapping['about_section']}
         componentInfo={aboutSection}
       />
+
+      <GoogleMap />
     </Layout>
   );
 };
