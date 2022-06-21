@@ -1,15 +1,15 @@
-import React from "react"
+import React from 'react';
 // import { render } from "@testing-library/react"
 // import "jest-styled-components"
-import { recomposeColor } from "@mui/system"
+import { recomposeColor } from '@mui/system';
 
-import { render } from "../../../../tests/customRender"
+import { render } from '../../../../tests/customRender';
 
-import Footer from "./Footer"
+import Footer from './Footer';
 
-test("Displays the correct title", () => {
-  const { getByText } = render(<Footer />)
+test('Displays the correct title', () => {
+  const { getByText } = render(<Footer shopName='BookAble24' />);
   expect(
     getByText(`@ ${new Date().getFullYear()} BookAble24`)
-  ).toBeInTheDocument()
-})
+  ).toBeInTheDocument();
+});
