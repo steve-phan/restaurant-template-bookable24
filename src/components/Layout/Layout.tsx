@@ -14,6 +14,7 @@ import { BodySt } from './Layout.styles';
 import { RootState } from 'src/store/store';
 
 import './reset.css';
+import { RestaurantName } from '@bookable24/RESTAURANT.CONFIG/RESTAURANT.CONFIG';
 
 export const inputGlobalStyles = <GlobalStyles styles={globalStyles} />;
 
@@ -48,7 +49,7 @@ const Layout = ({ children, location, isShop }: ILayoutProps) => {
           // isShop={isShop}
           />
           <BodySt>{children}</BodySt>
-          <Footer />
+          <Footer shopName={RestaurantName} />
         </Container>
       </ThemeProviderSt>
     </ThemeProvider>

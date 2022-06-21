@@ -3,6 +3,8 @@ import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import ContactPhoneOutlinedIcon from '@mui/icons-material/ContactPhoneOutlined';
 import ScheduleOutlinedIcon from '@mui/icons-material/ScheduleOutlined';
 
+export const RestaurantName = 'MaisonTom';
+
 export const restaurantInfos = {
   address: {
     icon: <HomeOutlinedIcon />,
