@@ -11,6 +11,7 @@ export const BoxFoodItemSt = styled('div')(({ theme }) => ({
   borderStyle: 'solid',
   borderColor: theme.color.borderColor,
   boxShadow: `2px -2px 1px ${theme.color.borderColor}`,
+  cursor: 'default',
 }));
 
 export const FoodItemInfoSt = styled('div')(({ theme }) => ({
@@ -61,6 +62,8 @@ export const FoodItemPriceSt = styled('p')(({ theme }) => ({
 
 export const FoodItemOderQtyst = styled('div')(({ theme }) => ({
   position: 'absolute',
+  cursor: 'pointer',
+
   width: 36,
   height: 36,
   textAlign: 'center',
@@ -70,14 +73,18 @@ export const FoodItemOderQtyst = styled('div')(({ theme }) => ({
   fontWeight: 600,
   color: theme.color.secondary,
 
-  borderWidth: 1,
-  borderStyle: 'outset',
+  borderRightWidth: 0,
+  borderTopWidth: 0,
+  borderBottomWidth: 1,
+  borderLeftWidth: 1,
+  borderStyle: 'solid',
   borderColor: theme.color.borderColor,
 }));
 
 export const FoodItemViewMorest = styled('div')(({ theme }) => ({
   position: 'absolute',
   zIndex: 2,
+  cursor: 'pointer',
 
   textAlign: 'center',
   bottom: 0,

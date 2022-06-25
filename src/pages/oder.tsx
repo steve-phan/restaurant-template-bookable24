@@ -1,19 +1,22 @@
 import React from 'react';
+import { graphql } from 'gatsby';
 
 import Layout from '@bookable24/components/Layout/Layout';
-import { graphql } from 'gatsby';
 import { useTranslation } from 'gatsby-plugin-react-i18next';
+import { BoxFoodItem } from '@bookable24/components/molecules/BoxFoodItem/BoxFoodItem';
 import {
-  BoxFoodItem,
   BundauMamTom,
-} from '@bookable24/components/molecules/BoxFoodItem/BoxFoodItem';
+  restaurantMenu,
+} from '@bookable24/RESTAURANT.CONFIG/RESTAURANT.MENU';
+import { ShopOnline } from '@bookable24/components/ShopOnline/ShopOnline';
 
 const OderPage = () => {
   const { t } = useTranslation();
 
   return (
     <Layout>
-      <BoxFoodItem item={BundauMamTom} />
+      {/* <BoxFoodItem item={BundauMamTom} /> */}
+      <ShopOnline restaurantMenu={restaurantMenu} />
     </Layout>
   );
 };
