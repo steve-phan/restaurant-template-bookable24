@@ -14,6 +14,7 @@ declare module '@mui/material/styles' {
       activeBackground: string;
       activeColor: string;
       iconColor: string;
+      borderColor: string;
     };
     config: {
       heightNavbar: number;
@@ -34,6 +35,7 @@ declare module '@mui/material/styles' {
       activeBackground: string;
       activeColor: string;
       iconColor: string;
+      borderColor: string;
     };
     config: {
       heightNavbar: number;

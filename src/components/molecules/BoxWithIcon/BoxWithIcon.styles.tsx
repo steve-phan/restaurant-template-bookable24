@@ -29,7 +29,7 @@ export const BoxHeading = styled('span')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   marginLeft: 8,
-  fontSize: 30,
+  fontSize: 26,
   color: theme.color.gray,
 
   [theme.breakpoints.up('md')]: {
