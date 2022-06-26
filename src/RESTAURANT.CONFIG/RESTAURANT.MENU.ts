@@ -1,13 +1,5 @@
 import { IFoodItem, TCategory } from './restaurant.types';
 
-export const CATEGORY = [
-  'STARTERS',
-  'SOUPS',
-  'MAIN COURSES',
-  'DRINKS',
-  'DESSERT',
-];
-
 export const restaurantMenu: IFoodItem[] = [
   {
     title: 'Reis mit RihnFleisch',
@@ -132,7 +124,7 @@ export const restaurantMenu: IFoodItem[] = [
       'four dumplings with a spicy filling of shrimps, sweet potatoes, Dau Que beans in a spicy ginger-chili sauce with crispy fried onions, if desired without fried onions',
     price: 10.35,
     id: 'BDMT05',
-    category: 'MAIN COURSES',
+    category: 'MAIN-COURSES',
     otherOption: '',
   },
   {
@@ -141,7 +133,7 @@ export const restaurantMenu: IFoodItem[] = [
       'four dumplings with a spicy filling of shrimps, sweet potatoes, Dau Que beans in a spicy ginger-chili sauce with crispy fried onions, if desired without fried onions',
     price: 10.35,
     id: 'BDMT06',
-    category: 'MAIN COURSES',
+    category: 'MAIN-COURSES',
     otherOption: '',
   },
   {
@@ -150,7 +142,7 @@ export const restaurantMenu: IFoodItem[] = [
       'four dumplings with a spicy filling of shrimps, sweet potatoes, Dau Que beans in a spicy ginger-chili sauce with crispy fried onions, if desired without fried onions',
     price: 10.35,
     id: 'BDMT06',
-    category: 'MAIN COURSES',
+    category: 'MAIN-COURSES',
     otherOption: '',
   },
   {
@@ -159,7 +151,7 @@ export const restaurantMenu: IFoodItem[] = [
       'four dumplings with a spicy filling of shrimps, sweet potatoes, Dau Que beans in a spicy ginger-chili sauce with crispy fried onions, if desired without fried onions',
     price: 10.35,
     id: 'BDMT06',
-    category: 'MAIN COURSES',
+    category: 'MAIN-COURSES',
     otherOption: '',
   },
   {
@@ -168,7 +160,7 @@ export const restaurantMenu: IFoodItem[] = [
       'four dumplings with a spicy filling of shrimps, sweet potatoes, Dau Que beans in a spicy ginger-chili sauce with crispy fried onions, if desired without fried onions',
     price: 10.35,
     id: 'BDMT06',
-    category: 'MAIN COURSES',
+    category: 'MAIN-COURSES',
     otherOption: '',
   },
   {
@@ -177,7 +169,7 @@ export const restaurantMenu: IFoodItem[] = [
       'four dumplings with a spicy filling of shrimps, sweet potatoes, Dau Que beans in a spicy ginger-chili sauce with crispy fried onions, if desired without fried onions',
     price: 10.35,
     id: 'BDMT06',
-    category: 'MAIN COURSES',
+    category: 'MAIN-COURSES',
     otherOption: '',
   },
   {
@@ -186,7 +178,7 @@ export const restaurantMenu: IFoodItem[] = [
       'four dumplings with a spicy filling of shrimps, sweet potatoes, Dau Que beans in a spicy ginger-chili sauce with crispy fried onions, if desired without fried onions',
     price: 10.35,
     id: 'BDMT06',
-    category: 'MAIN COURSES',
+    category: 'MAIN-COURSES',
     otherOption: '',
   },
   {
@@ -195,7 +187,7 @@ export const restaurantMenu: IFoodItem[] = [
       'four dumplings with a spicy filling of shrimps, sweet potatoes, Dau Que beans in a spicy ginger-chili sauce with crispy fried onions, if desired without fried onions',
     price: 10.35,
     id: 'BDMT06',
-    category: 'MAIN COURSES',
+    category: 'MAIN-COURSES',
     otherOption: '',
   },
   {
@@ -328,17 +320,17 @@ export const restaurantMenu: IFoodItem[] = [
 
 export const menuMapping = (
   menuArr: IFoodItem[]
-): Record<TCategory, IFoodItem[]> => {
+): Record<TCategory, { foodItems: IFoodItem[] }> => {
   return menuArr.reduce(
-    (acc: Record<TCategory, IFoodItem[]>, cur: IFoodItem) => {
+    (acc: Record<TCategory, { foodItems: IFoodItem[] }>, cur: IFoodItem) => {
       const { category } = cur;
       if (category in acc) {
-        acc[category] = [...acc[category], cur];
+        acc[category] = { foodItems: [...acc[category].foodItems, cur] };
       } else {
-        acc[category] = [cur];
+        acc[category] = { foodItems: [cur] };
       }
       return acc;
     },
-    {} as Record<TCategory, IFoodItem[]>
+    {} as Record<TCategory, { foodItems: IFoodItem[] }>
   );
 };
