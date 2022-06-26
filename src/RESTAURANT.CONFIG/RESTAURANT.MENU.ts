@@ -1,13 +1,12 @@
-import { IFoodItem } from './restaurant.types';
+import { IFoodItem, TCategory } from './restaurant.types';
 
-export const BundauMamTom: IFoodItem = {
-  title: 'Bun Vit Mam Tom',
-  description:
-    'four dumplings with a spicy filling of shrimps, sweet potatoes, Dau Que beans in a spicy ginger-chili sauce with crispy fried onions, if desired without fried onions',
-  price: 10.5,
-  id: 'BDMT01',
-  otherOption: '',
-};
+export const CATEGORY = [
+  'STARTERS',
+  'SOUPS',
+  'MAIN COURSES',
+  'DRINKS',
+  'DESSERT',
+];
 
 export const restaurantMenu: IFoodItem[] = [
   {
@@ -16,6 +15,52 @@ export const restaurantMenu: IFoodItem[] = [
       'four dumplings with a spicy filling of shrimps, sweet potatoes, Dau Que beans in a spicy ginger-chili sauce with crispy fried onions, if desired without fried onions',
     price: 8.5,
     id: 'BDMT02',
+    category: 'STARTERS',
+    otherOption: '',
+  },
+  {
+    title: 'Reis mit RihnFleisch',
+    description:
+      'four dumplings with a spicy filling of shrimps, sweet potatoes, Dau Que beans in a spicy ginger-chili sauce with crispy fried onions, if desired without fried onions',
+    price: 8.5,
+    id: 'BDMT02',
+    category: 'STARTERS',
+    otherOption: '',
+  },
+  {
+    title: 'Reis mit RihnFleisch',
+    description:
+      'four dumplings with a spicy filling of shrimps, sweet potatoes, Dau Que beans in a spicy ginger-chili sauce with crispy fried onions, if desired without fried onions',
+    price: 8.5,
+    id: 'BDMT02',
+    category: 'STARTERS',
+    otherOption: '',
+  },
+  {
+    title: 'Reis mit RihnFleisch',
+    description:
+      'four dumplings with a spicy filling of shrimps, sweet potatoes, Dau Que beans in a spicy ginger-chili sauce with crispy fried onions, if desired without fried onions',
+    price: 8.5,
+    id: 'BDMT02',
+    category: 'STARTERS',
+    otherOption: '',
+  },
+  {
+    title: 'Reis mit RihnFleisch',
+    description:
+      'four dumplings with a spicy filling of shrimps, sweet potatoes, Dau Que beans in a spicy ginger-chili sauce with crispy fried onions, if desired without fried onions',
+    price: 8.5,
+    id: 'BDMT02',
+    category: 'STARTERS',
+    otherOption: '',
+  },
+  {
+    title: 'Reis mit RihnFleisch',
+    description:
+      'four dumplings with a spicy filling of shrimps, sweet potatoes, Dau Que beans in a spicy ginger-chili sauce with crispy fried onions, if desired without fried onions',
+    price: 8.5,
+    id: 'BDMT02',
+    category: 'STARTERS',
     otherOption: '',
   },
   {
@@ -24,6 +69,7 @@ export const restaurantMenu: IFoodItem[] = [
       'four dumplings with a spicy filling of shrimps, sweet potatoes, Dau Que beans in a spicy ginger-chili sauce with crispy fried onions, if desired without fried onions',
     price: 10.35,
     id: 'BDMT03',
+    category: 'SOUPS',
     otherOption: '',
   },
   {
@@ -32,6 +78,52 @@ export const restaurantMenu: IFoodItem[] = [
       'four dumplings with a spicy filling of shrimps, sweet potatoes, Dau Que beans in a spicy ginger-chili sauce with crispy fried onions, if desired without fried onions',
     price: 10.35,
     id: 'BDMT04',
+    category: 'SOUPS',
+    otherOption: '',
+  },
+  {
+    title: 'Bun Vit Mam Tom',
+    description:
+      'four dumplings with a spicy filling of shrimps, sweet potatoes, Dau Que beans in a spicy ginger-chili sauce with crispy fried onions, if desired without fried onions',
+    price: 10.35,
+    id: 'BDMT04',
+    category: 'SOUPS',
+    otherOption: '',
+  },
+  {
+    title: 'Bun Vit Mam Tom',
+    description:
+      'four dumplings with a spicy filling of shrimps, sweet potatoes, Dau Que beans in a spicy ginger-chili sauce with crispy fried onions, if desired without fried onions',
+    price: 10.35,
+    id: 'BDMT04',
+    category: 'SOUPS',
+    otherOption: '',
+  },
+  {
+    title: 'Bun Vit Mam Tom',
+    description:
+      'four dumplings with a spicy filling of shrimps, sweet potatoes, Dau Que beans in a spicy ginger-chili sauce with crispy fried onions, if desired without fried onions',
+    price: 10.35,
+    id: 'BDMT04',
+    category: 'SOUPS',
+    otherOption: '',
+  },
+  {
+    title: 'Bun Vit Mam Tom',
+    description:
+      'four dumplings with a spicy filling of shrimps, sweet potatoes, Dau Que beans in a spicy ginger-chili sauce with crispy fried onions, if desired without fried onions',
+    price: 10.35,
+    id: 'BDMT04',
+    category: 'SOUPS',
+    otherOption: '',
+  },
+  {
+    title: 'Bun Vit Mam Tom',
+    description:
+      'four dumplings with a spicy filling of shrimps, sweet potatoes, Dau Que beans in a spicy ginger-chili sauce with crispy fried onions, if desired without fried onions',
+    price: 10.35,
+    id: 'BDMT04',
+    category: 'SOUPS',
     otherOption: '',
   },
   {
@@ -40,6 +132,7 @@ export const restaurantMenu: IFoodItem[] = [
       'four dumplings with a spicy filling of shrimps, sweet potatoes, Dau Que beans in a spicy ginger-chili sauce with crispy fried onions, if desired without fried onions',
     price: 10.35,
     id: 'BDMT05',
+    category: 'MAIN COURSES',
     otherOption: '',
   },
   {
@@ -48,6 +141,61 @@ export const restaurantMenu: IFoodItem[] = [
       'four dumplings with a spicy filling of shrimps, sweet potatoes, Dau Que beans in a spicy ginger-chili sauce with crispy fried onions, if desired without fried onions',
     price: 10.35,
     id: 'BDMT06',
+    category: 'MAIN COURSES',
+    otherOption: '',
+  },
+  {
+    title: 'Hu Tieu Nam Vang',
+    description:
+      'four dumplings with a spicy filling of shrimps, sweet potatoes, Dau Que beans in a spicy ginger-chili sauce with crispy fried onions, if desired without fried onions',
+    price: 10.35,
+    id: 'BDMT06',
+    category: 'MAIN COURSES',
+    otherOption: '',
+  },
+  {
+    title: 'Hu Tieu Nam Vang',
+    description:
+      'four dumplings with a spicy filling of shrimps, sweet potatoes, Dau Que beans in a spicy ginger-chili sauce with crispy fried onions, if desired without fried onions',
+    price: 10.35,
+    id: 'BDMT06',
+    category: 'MAIN COURSES',
+    otherOption: '',
+  },
+  {
+    title: 'Hu Tieu Nam Vang',
+    description:
+      'four dumplings with a spicy filling of shrimps, sweet potatoes, Dau Que beans in a spicy ginger-chili sauce with crispy fried onions, if desired without fried onions',
+    price: 10.35,
+    id: 'BDMT06',
+    category: 'MAIN COURSES',
+    otherOption: '',
+  },
+  {
+    title: 'Hu Tieu Nam Vang',
+    description:
+      'four dumplings with a spicy filling of shrimps, sweet potatoes, Dau Que beans in a spicy ginger-chili sauce with crispy fried onions, if desired without fried onions',
+    price: 10.35,
+    id: 'BDMT06',
+    category: 'MAIN COURSES',
+    otherOption: '',
+  },
+  {
+    title: 'Hu Tieu Nam Vang',
+    description:
+      'four dumplings with a spicy filling of shrimps, sweet potatoes, Dau Que beans in a spicy ginger-chili sauce with crispy fried onions, if desired without fried onions',
+    price: 10.35,
+    id: 'BDMT06',
+    category: 'MAIN COURSES',
+    otherOption: '',
+  },
+  {
+    title: 'Hu Tieu Nam Vang',
+    description:
+      'four dumplings with a spicy filling of shrimps, sweet potatoes, Dau Que beans in a spicy ginger-chili sauce with crispy fried onions, if desired without fried onions',
+    price: 10.35,
+    id: 'BDMT06',
+    category: 'MAIN COURSES',
     otherOption: '',
   },
   {
@@ -56,6 +204,70 @@ export const restaurantMenu: IFoodItem[] = [
       'four dumplings with a spicy filling of shrimps, sweet potatoes, Dau Que beans in a spicy ginger-chili sauce with crispy fried onions, if desired without fried onions',
     price: 10.35,
     id: 'BDMT07',
+    category: 'DRINKS',
+    otherOption: '',
+  },
+  {
+    title: 'Chicken Curry',
+    description:
+      'four dumplings with a spicy filling of shrimps, sweet potatoes, Dau Que beans in a spicy ginger-chili sauce with crispy fried onions, if desired without fried onions',
+    price: 10.35,
+    id: 'BDMT07',
+    category: 'DRINKS',
+    otherOption: '',
+  },
+  {
+    title: 'Chicken Curry',
+    description:
+      'four dumplings with a spicy filling of shrimps, sweet potatoes, Dau Que beans in a spicy ginger-chili sauce with crispy fried onions, if desired without fried onions',
+    price: 10.35,
+    id: 'BDMT07',
+    category: 'DRINKS',
+    otherOption: '',
+  },
+  {
+    title: 'Chicken Curry',
+    description:
+      'four dumplings with a spicy filling of shrimps, sweet potatoes, Dau Que beans in a spicy ginger-chili sauce with crispy fried onions, if desired without fried onions',
+    price: 10.35,
+    id: 'BDMT07',
+    category: 'DRINKS',
+    otherOption: '',
+  },
+  {
+    title: 'Chicken Curry',
+    description:
+      'four dumplings with a spicy filling of shrimps, sweet potatoes, Dau Que beans in a spicy ginger-chili sauce with crispy fried onions, if desired without fried onions',
+    price: 10.35,
+    id: 'BDMT07',
+    category: 'DRINKS',
+    otherOption: '',
+  },
+  {
+    title: 'Chicken Curry',
+    description:
+      'four dumplings with a spicy filling of shrimps, sweet potatoes, Dau Que beans in a spicy ginger-chili sauce with crispy fried onions, if desired without fried onions',
+    price: 10.35,
+    id: 'BDMT07',
+    category: 'DRINKS',
+    otherOption: '',
+  },
+  {
+    title: 'Chicken Curry',
+    description:
+      'four dumplings with a spicy filling of shrimps, sweet potatoes, Dau Que beans in a spicy ginger-chili sauce with crispy fried onions, if desired without fried onions',
+    price: 10.35,
+    id: 'BDMT07',
+    category: 'DRINKS',
+    otherOption: '',
+  },
+  {
+    title: 'Chicken Curry',
+    description:
+      'four dumplings with a spicy filling of shrimps, sweet potatoes, Dau Que beans in a spicy ginger-chili sauce with crispy fried onions, if desired without fried onions',
+    price: 10.35,
+    id: 'BDMT07',
+    category: 'DRINKS',
     otherOption: '',
   },
   {
@@ -64,6 +276,69 @@ export const restaurantMenu: IFoodItem[] = [
       'four dumplings with a spicy filling of shrimps, sweet potatoes, Dau Que beans in a spicy ginger-chili sauce with crispy fried onions, if desired without fried onions',
     price: 10.35,
     id: 'BDMT08',
+    category: 'DESSERT',
+    otherOption: '',
+  },
+  {
+    title: 'BO Luc lac',
+    description:
+      'four dumplings with a spicy filling of shrimps, sweet potatoes, Dau Que beans in a spicy ginger-chili sauce with crispy fried onions, if desired without fried onions',
+    price: 10.35,
+    id: 'BDMT08',
+    category: 'DESSERT',
+    otherOption: '',
+  },
+  {
+    title: 'BO Luc lac',
+    description:
+      'four dumplings with a spicy filling of shrimps, sweet potatoes, Dau Que beans in a spicy ginger-chili sauce with crispy fried onions, if desired without fried onions',
+    price: 10.35,
+    id: 'BDMT08',
+    category: 'DESSERT',
+    otherOption: '',
+  },
+  {
+    title: 'BO Luc lac',
+    description:
+      'four dumplings with a spicy filling of shrimps, sweet potatoes, Dau Que beans in a spicy ginger-chili sauce with crispy fried onions, if desired without fried onions',
+    price: 10.35,
+    id: 'BDMT08',
+    category: 'DESSERT',
+    otherOption: '',
+  },
+  {
+    title: 'BO Luc lac',
+    description:
+      'four dumplings with a spicy filling of shrimps, sweet potatoes, Dau Que beans in a spicy ginger-chili sauce with crispy fried onions, if desired without fried onions',
+    price: 10.35,
+    id: 'BDMT08',
+    category: 'DESSERT',
+    otherOption: '',
+  },
+  {
+    title: 'BO Luc lac',
+    description:
+      'four dumplings with a spicy filling of shrimps, sweet potatoes, Dau Que beans in a spicy ginger-chili sauce with crispy fried onions, if desired without fried onions',
+    price: 10.35,
+    id: 'BDMT08',
+    category: 'DESSERT',
     otherOption: '',
   },
 ];
+
+export const menuMapping = (
+  menuArr: IFoodItem[]
+): Record<TCategory, IFoodItem[]> => {
+  return menuArr.reduce(
+    (acc: Record<TCategory, IFoodItem[]>, cur: IFoodItem) => {
+      const { category } = cur;
+      if (category in acc) {
+        acc[category] = [...acc[category], cur];
+      } else {
+        acc[category] = [cur];
+      }
+      return acc;
+    },
+    {} as Record<TCategory, IFoodItem[]>
+  );
+};

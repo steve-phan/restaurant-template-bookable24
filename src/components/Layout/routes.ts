@@ -1,19 +1,19 @@
-import HomeWorkTwoToneIcon from "@mui/icons-material/HomeWorkTwoTone"
-import AboutIcon from "@mui/icons-material/PeopleOutline"
-import MenuIcon from "@mui/icons-material/MenuBook"
-import ContactIcon from "@mui/icons-material/ContactPhone"
+import HomeWorkTwoToneIcon from '@mui/icons-material/HomeWorkTwoTone';
+import AboutIcon from '@mui/icons-material/PeopleOutline';
+import MenuIcon from '@mui/icons-material/MenuBook';
+import ContactIcon from '@mui/icons-material/ContactPhone';
 
 const routes = [
   {
-    path: "/",
-    name: "Home",
+    path: '/',
+    name: 'Home',
     icon: HomeWorkTwoToneIcon,
   },
-  // {
-  //   path: "/services",
-  //   name: "Services",
-  //   icon: MenuIcon,
-  // },
+  {
+    path: '/oder',
+    name: 'Oder Online',
+    icon: MenuIcon,
+  },
 
   // {
   //   path: "/about",
@@ -22,8 +22,8 @@ const routes = [
   // },
 
   {
-    path: "/contact",
-    name: "Contact",
+    path: '/contact',
+    name: 'Contact',
     icon: ContactIcon,
   },
 
@@ -32,6 +32,6 @@ const routes = [
   //   name: "Blog",
   //   icon: AboutIcon,
   // },
-]
+];
 
-export { routes }
+export { routes };

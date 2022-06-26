@@ -24,11 +24,11 @@ export const FoodItemInfoSt = styled('div')(({ theme }) => ({
 
 export const FoodItemTitleSt = styled('h3')(({ theme }) => ({
   fontFamily: 'Work Sans, sans-serif',
-  fontSize: 18,
+  fontSize: 16,
   marginBottom: 6,
 
   [theme.breakpoints.up('md')]: {
-    fontSize: 20,
+    fontSize: 18,
   },
 }));
 

@@ -4,10 +4,7 @@ import { graphql } from 'gatsby';
 import Layout from '@bookable24/components/Layout/Layout';
 import { useTranslation } from 'gatsby-plugin-react-i18next';
 import { BoxFoodItem } from '@bookable24/components/molecules/BoxFoodItem/BoxFoodItem';
-import {
-  BundauMamTom,
-  restaurantMenu,
-} from '@bookable24/RESTAURANT.CONFIG/RESTAURANT.MENU';
+import { restaurantMenu } from '@bookable24/RESTAURANT.CONFIG/RESTAURANT.MENU';
 import { ShopOnline } from '@bookable24/components/ShopOnline/ShopOnline';
 
 const OderPage = () => {
@@ -15,7 +12,6 @@ const OderPage = () => {
 
   return (
     <Layout>
-      {/* <BoxFoodItem item={BundauMamTom} /> */}
       <ShopOnline restaurantMenu={restaurantMenu} />
     </Layout>
   );

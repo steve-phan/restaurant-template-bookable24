@@ -10,7 +10,7 @@ export const theme = createTheme({
     gray: '#666',
     text: '#202124',
     invalid: '#f33a58',
-    background: '#f3f3f3ee',
+    background: '#fdefe1',
     black: '#000000',
     activeBackground: '#fff1f9',
     activeColor: 'deeppink',
