@@ -30,7 +30,7 @@ export const CategorySt = styled('div')(({ theme }) => ({
   // padding: '8px 16px',
   position: 'relative',
   width: 'calc(100% + 180px)',
-  transition: 'left 450 linear',
+  transition: 'all 0.5s linear',
 }));
 
 export const CategoryMenuSt = styled('div')(({ theme }) => ({
@@ -44,18 +44,25 @@ export const CategoryMenuSt = styled('div')(({ theme }) => ({
   padding: '8px 16px',
 }));
 
-export const CategoryItemSt = styled('div')(({ theme }) => ({
-  position: 'relative',
-  padding: '8px 16px',
-  maxWidth: '40vh',
-  margin: '0 auto',
-  lineHeight: 1.4,
-  whiteSpace: 'nowrap',
-
-  p: {
+export const CategoryItemSt = styled('div')<{ active: 'active' | 'normal' }>(
+  ({ theme, active }) => ({
     position: 'relative',
-  },
-}));
+    padding: '8px 16px',
+    maxWidth: '40vh',
+    margin: '0 auto',
+    lineHeight: 1.4,
+    whiteSpace: 'nowrap',
+
+    color: active === 'active' ? theme.color.secondary : 'black',
+    backgroundColor:
+      active === 'active' ? theme.color.secondaryBackground : 'white',
+    borderRadius: 6,
+    border:
+      active === 'active'
+        ? `1px solid ${theme.color.secondaryBackground}`
+        : `0 solid white`,
+  })
+);
 
 export const HeadingSectionSt = styled('h2')(({ theme }) => ({
   margin: 0,

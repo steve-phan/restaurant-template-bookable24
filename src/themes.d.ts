@@ -4,6 +4,7 @@ declare module '@mui/material/styles' {
     color: {
       primary: string;
       secondary: string;
+      secondaryBackground: string;
       warning: string;
       white: string;
       gray: string;
@@ -25,6 +26,7 @@ declare module '@mui/material/styles' {
     color: {
       primary: string;
       secondary: string;
+      secondaryBackground: string;
       warning: string;
       white: string;
       gray: string;

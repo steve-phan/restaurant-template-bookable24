@@ -27,6 +27,12 @@ export const scrollTo = (element: HTMLElement) => {
   });
 };
 
+const isInView = (element: HTMLElement, offset = 110) => {
+  const top = element.getBoundingClientRect().top;
+  const bottom = element.getBoundingClientRect().bottom;
+
+  return offset - top >= 0 && bottom - offset > 0;
+};
 interface TMenuList {
   isInview: boolean;
   category: TCategory;
@@ -45,8 +51,16 @@ export const ShopOnline = ({
   const [menuList, setMenuList] = useState<TMenuList[]>([]);
   const [activeMenu, setActiveMenu] = useState(CATEGORY[0]);
   const [transform, setTransform] = useState(0);
+
+  const draw = (transform: number) => {
+    const menuListElement = document.getElementById(
+      'menulist-id'
+    ) as HTMLElement;
+    menuListElement.style.left = `-${transform}px`;
+  };
   const spy = () => {
-    const filterCategorys = CATEGORY.map((category) => {
+    draw(transform);
+    const filterCategories = CATEGORY.map((category) => {
       const targetCategoryElement = document.getElementById(category);
       const isInview = isInView(targetCategoryElement as HTMLElement);
       if (isInview) setActiveMenu(category);
@@ -55,27 +69,29 @@ export const ShopOnline = ({
         category,
       };
     });
-    setMenuList(filterCategorys);
-
+    const isFirstMenuActive = filterCategories.find(
+      (filterCategory, index) => !!filterCategory && filterCategory.isInview
+    );
+    if (!isFirstMenuActive) {
+      filterCategories[0].isInview = true;
+      draw(16);
+    }
+    setMenuList(filterCategories);
     numberRef.current = requestAnimationFrame(spy);
   };
 
-  const isInView = (element: HTMLElement, offset = 120) => {
-    const top = element.getBoundingClientRect().top;
-    return top + offset >= 0 && top - offset <= window.innerHeight;
-  };
   useEffect(() => {
-    setTransform(navRef.current?.getClientRects()[0].x || 0);
-    // return () => setIsTransform(false);
+    setTransform(navRef.current?.getBoundingClientRect().left || 16);
   }, [activeMenu]);
 
   useEffect(() => {
     numberRef.current = requestAnimationFrame(spy);
     return () => cancelAnimationFrame(numberRef.current);
-  }, []);
-  // if (navRef.current?.getClientRects()[0].x)
-  //   console.log({ navRef: navRef.current?.getClientRects()[0].x });
-  console.log({ menuTransform: navRef.current?.getClientRects()[0].x });
+  }, [activeMenu]);
+
+  // console.log({
+  //   menuTransform: navRef.current?.getBoundingClientRect().left,
+  // });
   return (
     <ShopOnlineSt>
       <ShopOnlineInfoSt>
@@ -83,19 +99,16 @@ export const ShopOnline = ({
         <p>We deliver around 5km from 15 Euro</p>
       </ShopOnlineInfoSt>
       <WrapCategorySt>
-        <CategorySt
-          style={{
-            left: `${-transform}px`,
-          }}
-        >
+        <CategorySt id='menulist-id'>
           <CategoryMenuSt>
             {menuList.map(({ isInview, category }, index) => (
               <CategoryItemSt
                 ref={isInview ? navRef : null}
-                style={{
-                  background: isInview ? 'red' : 'white',
-                }}
+                // style={{
+                //   background: isInview ? 'red' : 'white',
+                // }}
                 key={index}
+                active={isInview ? 'active' : 'normal'}
               >
                 {category}
               </CategoryItemSt>
