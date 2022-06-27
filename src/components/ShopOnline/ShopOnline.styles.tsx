@@ -18,44 +18,59 @@ export const WrapCategorySt = styled('div')(({ theme }) => ({
   paddingBottom: 6,
   paddingRight: 16,
   background: 'white',
-  overflow: 'hidden',
+  overflow: 'visible',
   position: 'sticky',
-
-  top: 64,
-  zIndex: 3,
+  zIndex: 2020,
   height: 45,
+  listStyle: 'none',
+  overflowX: 'scroll',
+  // width: 'calc(100% + 32px)',
+  WebkitOverflowScrolling: 'touch',
+  scrollbarWidth: 'none',
+  scrollPadding: 0,
+  top: 64,
 }));
 
 export const CategorySt = styled('div')(({ theme }) => ({
   // padding: '8px 16px',
-  position: 'relative',
-  width: '100%',
-  // width: 'calc(100% + 180px)',
-  transition: 'all 0.5s linear',
-}));
-
-export const CategoryMenuSt = styled('div')(({ theme }) => ({
   WebkitOverflowScrolling: 'touch',
   overflowX: 'scroll',
   scrollbarWidth: 'none',
   scrollPadding: 0,
   position: 'relative',
-  listStyle: 'none',
-  width: 'calc(100% + 32px)',
-
-  display: 'flex',
-  padding: '8px 16px',
+  width: '100%',
+  // width: 'calc(100% + 180px)',
+  transition: 'all 0.5s linear',
+  zIndex: 2022,
 }));
 
-export const CategoryItemSt = styled('div')<{ active: 'active' | 'normal' }>(
+export const CategoryMenuSt = styled('div')(({ theme }) => ({
+  position: 'sticky',
+  top: 64,
+
+  display: 'inline-block',
+  // padding: '8px 16px',
+  // transform: 'translateZ(0)',
+  background: 'white',
+  // overflow: 'visible',
+  width: '100%',
+  // height: 60,
+  zIndex: 2020,
+}));
+
+export const CategoryItemSt = styled('div')<{ active?: 'active' | 'normal' }>(
   ({ theme, active }) => ({
     position: 'relative',
     cursor: 'pointer',
-    padding: '8px 16px',
+    padding: '8px 10px',
     maxWidth: '40vh',
     margin: '0 auto',
     lineHeight: 1.4,
     whiteSpace: 'nowrap',
+    // flexShrink: 0,
+    width: 'auto',
+    zIndex: 3,
+    textAlign: 'center',
 
     color: active === 'active' ? theme.color.secondary : 'black',
     backgroundColor:

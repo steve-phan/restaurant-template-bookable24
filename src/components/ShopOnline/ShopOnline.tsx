@@ -1,4 +1,9 @@
-import React, { ReactElement, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+
+import { useI18next } from 'gatsby-plugin-react-i18next';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 import {
   CATEGORY,
@@ -36,25 +41,23 @@ export const ShopOnline = ({
   restaurantMenu: IFoodItem[];
 }) => {
   const numberRef = useRef(0);
+  const timeOutRef = useRef(0);
   const navRef = useRef<HTMLDivElement>(null);
+  const slickRef = useRef(null);
 
   const categoryMenu = Object.entries(menuMapping(restaurantMenu));
 
   const [menuList, setMenuList] = useState<TMenuList[]>([]);
   const [activeMenu, setActiveMenu] = useState(CATEGORY[0]);
   const [transform, setTransform] = useState(0);
+  const { navigate } = useI18next();
 
-  const draw = (transform: number) => {
-    const menuListElement = document.getElementById(
-      'menulist-id'
-    ) as HTMLElement;
-    menuListElement.style.left = `-${transform}px`;
-  };
   const spy = () => {
-    // draw(transform);
     const filterCategories = CATEGORY.map((category) => {
       const targetCategoryElement = document.getElementById(category);
-      const isInview = isInView(targetCategoryElement as HTMLElement);
+      const isInview =
+        !!targetCategoryElement &&
+        isInView(targetCategoryElement as HTMLElement);
       if (isInview) setActiveMenu(category);
       return {
         isInview,
@@ -66,24 +69,29 @@ export const ShopOnline = ({
     );
     if (!isFirstMenuActive) {
       filterCategories[0].isInview = true;
-      // draw(16);
     }
     setMenuList(filterCategories);
     numberRef.current = requestAnimationFrame(spy);
   };
 
   useEffect(() => {
-    if (navRef.current) {
-      navRef.current.scrollIntoView(true);
-    }
+    const findIndex = CATEGORY.findIndex((item) => item === activeMenu);
 
-    // setTransform(navRef.current?.getBoundingClientRect().left || 16);
+    if (slickRef.current) {
+      // @ts-ignore
+      slickRef.current.slickGoTo(findIndex);
+    }
   }, [activeMenu]);
 
   useEffect(() => {
-    numberRef.current = requestAnimationFrame(spy);
-    return () => cancelAnimationFrame(numberRef.current);
-  }, [activeMenu]);
+    window.addEventListener('scroll', spy);
+    return () => window.removeEventListener('scroll', spy);
+  }, []);
+  const settings = {
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 3,
+  };
 
   return (
     <ShopOnlineSt>
@@ -91,32 +99,25 @@ export const ShopOnline = ({
         <h2>Wellcome to MaiSonTom</h2>
         <p>We deliver around 5km from 15 Euro</p>
       </ShopOnlineInfoSt>
-      <WrapCategorySt>
-        <CategorySt id='menulist-id'>
-          <CategoryMenuSt>
-            {menuList.map(({ isInview, category }, index) => (
-              <CategoryItemSt
-                ref={isInview ? navRef : null}
-                key={index}
-                active={isInview ? 'active' : 'normal'}
-                onClick={() => {
-                  // setActiveMenu(category);
-                  const targetCategoryElement = document.getElementById(
-                    category
-                  ) as HTMLElement;
-                  targetCategoryElement.scrollIntoView({
-                    // block: 'nearest',
-                    behavior: 'smooth',
-                  });
-                  // targetCategoryElement.scrollIntoView(true);
-                }}
-              >
-                {category}
-              </CategoryItemSt>
-            ))}
-          </CategoryMenuSt>
-        </CategorySt>
-      </WrapCategorySt>
+
+      <CategoryMenuSt id='menulist-id'>
+        <Slider {...settings} arrows={false} ref={slickRef}>
+          {menuList.map(({ isInview, category }, index) => (
+            <CategoryItemSt
+              ref={isInview ? navRef : null}
+              key={index}
+              active={isInview ? 'active' : 'normal'}
+              onClick={() => {
+                navigate(`/oder/#${category}`);
+                setActiveMenu(category);
+              }}
+            >
+              {category}
+            </CategoryItemSt>
+          ))}
+        </Slider>
+      </CategoryMenuSt>
+
       <div>
         {categoryMenu.map(([id, category], outerIndex) => (
           <CategorySectionSt key={outerIndex} id={id}>
