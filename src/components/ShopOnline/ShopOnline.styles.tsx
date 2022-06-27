@@ -29,16 +29,19 @@ export const WrapCategorySt = styled('div')(({ theme }) => ({
 export const CategorySt = styled('div')(({ theme }) => ({
   // padding: '8px 16px',
   position: 'relative',
-  width: 'calc(100% + 180px)',
+  width: '100%',
+  // width: 'calc(100% + 180px)',
   transition: 'all 0.5s linear',
 }));
 
 export const CategoryMenuSt = styled('div')(({ theme }) => ({
+  WebkitOverflowScrolling: 'touch',
   overflowX: 'scroll',
   scrollbarWidth: 'none',
   scrollPadding: 0,
   position: 'relative',
   listStyle: 'none',
+  width: 'calc(100% + 32px)',
 
   display: 'flex',
   padding: '8px 16px',
@@ -47,6 +50,7 @@ export const CategoryMenuSt = styled('div')(({ theme }) => ({
 export const CategoryItemSt = styled('div')<{ active: 'active' | 'normal' }>(
   ({ theme, active }) => ({
     position: 'relative',
+    cursor: 'pointer',
     padding: '8px 16px',
     maxWidth: '40vh',
     margin: '0 auto',
@@ -65,7 +69,8 @@ export const CategoryItemSt = styled('div')<{ active: 'active' | 'normal' }>(
 );
 
 export const HeadingSectionSt = styled('h2')(({ theme }) => ({
-  margin: 0,
+  maxWidth: 700,
+  margin: '0 auto',
   fontSize: 20,
   padding: 16,
   background: theme.color.background,

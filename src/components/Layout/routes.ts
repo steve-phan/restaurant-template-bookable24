@@ -11,7 +11,7 @@ const routes = [
   },
   {
     path: '/oder',
-    name: 'Oder Online',
+    name: 'Oder',
     icon: MenuIcon,
   },
 

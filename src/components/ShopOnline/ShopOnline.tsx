@@ -19,14 +19,6 @@ import {
 } from './ShopOnline.styles';
 import { BoxFoodItem } from '../molecules/BoxFoodItem/BoxFoodItem';
 
-export const scrollTo = (element: HTMLElement) => {
-  element.scrollIntoView({
-    behavior: 'smooth',
-    block: 'start',
-    inline: 'nearest',
-  });
-};
-
 const isInView = (element: HTMLElement, offset = 110) => {
   const top = element.getBoundingClientRect().top;
   const bottom = element.getBoundingClientRect().bottom;
@@ -59,7 +51,7 @@ export const ShopOnline = ({
     menuListElement.style.left = `-${transform}px`;
   };
   const spy = () => {
-    draw(transform);
+    // draw(transform);
     const filterCategories = CATEGORY.map((category) => {
       const targetCategoryElement = document.getElementById(category);
       const isInview = isInView(targetCategoryElement as HTMLElement);
@@ -74,14 +66,18 @@ export const ShopOnline = ({
     );
     if (!isFirstMenuActive) {
       filterCategories[0].isInview = true;
-      draw(16);
+      // draw(16);
     }
     setMenuList(filterCategories);
     numberRef.current = requestAnimationFrame(spy);
   };
 
   useEffect(() => {
-    setTransform(navRef.current?.getBoundingClientRect().left || 16);
+    if (navRef.current) {
+      navRef.current.scrollIntoView(true);
+    }
+
+    // setTransform(navRef.current?.getBoundingClientRect().left || 16);
   }, [activeMenu]);
 
   useEffect(() => {
@@ -89,9 +85,6 @@ export const ShopOnline = ({
     return () => cancelAnimationFrame(numberRef.current);
   }, [activeMenu]);
 
-  // console.log({
-  //   menuTransform: navRef.current?.getBoundingClientRect().left,
-  // });
   return (
     <ShopOnlineSt>
       <ShopOnlineInfoSt>
@@ -104,11 +97,19 @@ export const ShopOnline = ({
             {menuList.map(({ isInview, category }, index) => (
               <CategoryItemSt
                 ref={isInview ? navRef : null}
-                // style={{
-                //   background: isInview ? 'red' : 'white',
-                // }}
                 key={index}
                 active={isInview ? 'active' : 'normal'}
+                onClick={() => {
+                  // setActiveMenu(category);
+                  const targetCategoryElement = document.getElementById(
+                    category
+                  ) as HTMLElement;
+                  targetCategoryElement.scrollIntoView({
+                    // block: 'nearest',
+                    behavior: 'smooth',
+                  });
+                  // targetCategoryElement.scrollIntoView(true);
+                }}
               >
                 {category}
               </CategoryItemSt>
@@ -116,14 +117,16 @@ export const ShopOnline = ({
           </CategoryMenuSt>
         </CategorySt>
       </WrapCategorySt>
-      {categoryMenu.map(([id, category], outerIndex) => (
-        <CategorySectionSt key={outerIndex} id={id}>
-          <HeadingSectionSt> {id} </HeadingSectionSt>
-          {category?.foodItems?.map((item, innerIndex) => (
-            <BoxFoodItem key={innerIndex} item={item} />
-          ))}
-        </CategorySectionSt>
-      ))}
+      <div>
+        {categoryMenu.map(([id, category], outerIndex) => (
+          <CategorySectionSt key={outerIndex} id={id}>
+            <HeadingSectionSt> {id} </HeadingSectionSt>
+            {category?.foodItems?.map((item, innerIndex) => (
+              <BoxFoodItem key={innerIndex} item={item} />
+            ))}
+          </CategorySectionSt>
+        ))}
+      </div>
     </ShopOnlineSt>
   );
 };
