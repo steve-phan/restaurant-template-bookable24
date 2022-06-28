@@ -1,10 +1,11 @@
-import {
-  IFoodItem,
-  IFoodItemFromContentFul,
-} from '@bookable24/RESTAURANT.CONFIG/restaurant.types';
+import React, { ReactNode } from 'react';
+import { GatsbyImage, getImage, IGatsbyImageData } from 'gatsby-plugin-image';
+import AddShoppingCartOutlinedIcon from '@mui/icons-material/AddShoppingCartOutlined';
+import { Grid } from '@mui/material';
+
+import { IFoodItemFromContentFul } from '@bookable24/RESTAURANT.CONFIG/restaurant.types';
 import { useAppDispatch, useAppSelector } from '@bookable24/store/hooks';
 import { addItemToCart } from '@bookable24/store/shop/bookingSlice';
-import React, { ReactNode } from 'react';
 
 import {
   BoxFoodItemSt,
@@ -17,7 +18,8 @@ import {
 } from './BoxFoodItem.styles';
 
 export const BoxFoodItem = ({ item }: { item: IFoodItemFromContentFul }) => {
-  const { foodName, descriptionAboutFood, priceOfFood, foodId } = item;
+  const { foodName, descriptionAboutFood, priceOfFood, foodId, foodImage } =
+    item;
   const dispatch = useAppDispatch();
   const { cartItems } = useAppSelector((state) => state.booking);
 
@@ -25,20 +27,52 @@ export const BoxFoodItem = ({ item }: { item: IFoodItemFromContentFul }) => {
     !!cartItems && cartItems.find((item) => foodId === item.foodId);
 
   const currentQuantity =
-    exitsItem && foodId === exitsItem.foodId ? exitsItem.quantity : '+';
+    exitsItem && foodId === exitsItem.foodId ? (
+      exitsItem.quantity
+    ) : (
+      <AddShoppingCartOutlinedIcon fontSize='small' />
+    );
 
   const foodItem = {
     foodId,
     foodName,
     quantity: 1,
   };
+
+  const image = getImage(foodImage) as IGatsbyImageData;
   return (
     <BoxFoodItemSt>
-      <FoodItemInfoSt>
-        <FoodItemTitleSt>{foodName} </FoodItemTitleSt>
-        <FoodItemDescSt> {descriptionAboutFood} </FoodItemDescSt>
-      </FoodItemInfoSt>
-      <FoodItemPriceSt>{priceOfFood} € </FoodItemPriceSt>
+      <Grid
+        container
+        sx={{
+          paddingRight: '28px',
+          alignItems: 'center',
+        }}
+      >
+        <Grid item xs={2} md={2}>
+          <GatsbyImage
+            image={image}
+            alt='bookable24.de Booking Online System'
+            style={{
+              borderRadius: '4px',
+            }}
+          />
+        </Grid>
+        <Grid
+          item
+          xs={10}
+          md={10}
+          sx={{
+            padding: '8px 12px',
+          }}
+        >
+          <FoodItemInfoSt>
+            <FoodItemTitleSt>{foodName} </FoodItemTitleSt>
+            <FoodItemDescSt> {descriptionAboutFood} </FoodItemDescSt>
+          </FoodItemInfoSt>
+          <FoodItemPriceSt>{priceOfFood} € </FoodItemPriceSt>
+        </Grid>
+      </Grid>
       <FoodItemOderQtyst
         onClick={() => {
           dispatch(addItemToCart(foodItem));

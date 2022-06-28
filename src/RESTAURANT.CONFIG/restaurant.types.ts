@@ -1,3 +1,5 @@
+import { ImageDataLike } from 'gatsby-plugin-image';
+
 export interface IBoxWithIconInfos {
   icon: JSX.Element;
   heading: string;
@@ -49,5 +51,5 @@ export interface IFoodItemFromContentFul {
   priceOfFood: number;
   foodId: string;
   category: TCategory;
-  foodImage: any; // GatsbyImageData
+  foodImage: ImageDataLike;
 }

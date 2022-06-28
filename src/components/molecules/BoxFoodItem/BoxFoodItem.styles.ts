@@ -6,26 +6,19 @@ export const BoxFoodItemSt = styled('div')(({ theme }) => ({
   maxWidth: 700,
   margin: '0 auto',
   marginTop: 16,
-
-  borderWidth: 1,
-  borderStyle: 'solid',
-  borderColor: theme.color.borderColor,
-  boxShadow: `2px -2px 1px ${theme.color.borderColor}`,
+  borderBottom: `1px solid ${theme.color.borderColor}`,
   cursor: 'default',
 }));
 
 export const FoodItemInfoSt = styled('div')(({ theme }) => ({
   maxWidth: 650,
-  paddingTop: 16,
-  paddingBottom: 0,
-  paddingLeft: 16,
-  paddingRight: 60,
+  padding: 0,
 }));
 
 export const FoodItemTitleSt = styled('h3')(({ theme }) => ({
   fontFamily: 'Work Sans, sans-serif',
   fontSize: 16,
-  marginBottom: 6,
+  marginBottom: 0,
 
   [theme.breakpoints.up('md')]: {
     fontSize: 18,
@@ -48,49 +41,46 @@ export const FoodItemDescSt = styled('p')(({ theme }) => ({
 
 export const FoodItemPriceSt = styled('p')(({ theme }) => ({
   margin: 0,
-  padding: 16,
-  paddingTop: 4,
-  fontSize: 20,
+  padding: 0,
+  fontSize: 16,
   fontWeight: 600,
 
   color: theme.color.primary,
 
   [theme.breakpoints.up('md')]: {
-    fontSize: 22,
+    fontSize: 20,
   },
 }));
 
 export const FoodItemOderQtyst = styled('div')(({ theme }) => ({
   position: 'absolute',
   cursor: 'pointer',
-
+  userSelect: 'none',
   width: 36,
   height: 36,
   textAlign: 'center',
-  top: 0,
+  top: 8,
   right: 0,
-  fontSize: 20,
-  fontWeight: 600,
+  fontSize: 18,
+  fontWeight: 400,
   color: theme.color.secondary,
-
-  borderRightWidth: 0,
-  borderTopWidth: 0,
-  borderBottomWidth: 1,
-  borderLeftWidth: 1,
-  borderStyle: 'solid',
-  borderColor: theme.color.borderColor,
 }));
 
 export const FoodItemViewMorest = styled('div')(({ theme }) => ({
   position: 'absolute',
   zIndex: 2,
   cursor: 'pointer',
-
+  userSelect: 'none',
   textAlign: 'center',
   bottom: 0,
   right: 0,
-  padding: 16,
+  padding: 12,
   fontSize: 14,
   fontWeight: 400,
   color: theme.color.secondary,
+
+  '&:hover': {
+    color: theme.color.primary,
+    fontWeight: 600,
+  },
 }));
