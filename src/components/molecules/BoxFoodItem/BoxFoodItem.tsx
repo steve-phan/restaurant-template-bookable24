@@ -10,7 +10,10 @@ import { Grid } from '@mui/material';
 
 import { IFoodItemFromContentFul } from '@bookable24/RESTAURANT.CONFIG/restaurant.types';
 import { useAppDispatch, useAppSelector } from '@bookable24/store/hooks';
-import { addItemToCart } from '@bookable24/store/shop/bookingSlice';
+import {
+  addItemToCart,
+  openFoodItemModal,
+} from '@bookable24/store/shop/bookingSlice';
 
 import {
   BoxFoodItemSt,
@@ -20,8 +23,9 @@ import {
   FoodItemPriceSt,
   FoodItemOderQtyst,
   FoodItemViewMorest,
+  ButtonViewMorest,
 } from './BoxFoodItem.styles';
-import { ShowDetailsFoodItem } from './ShowDetailsFoodItem';
+// import { ShowDetailsFoodItem } from './ShowDetailsFoodItem';
 
 export const BoxFoodItem = ({ item }: { item: IFoodItemFromContentFul }) => {
   const { foodName, descriptionAboutFood, priceOfFood, foodId, foodImage } =
@@ -86,14 +90,21 @@ export const BoxFoodItem = ({ item }: { item: IFoodItemFromContentFul }) => {
       >
         {currentQuantity}
       </FoodItemOderQtyst>
-      <ShowDetailsFoodItem item={item} />
-      {/* <FoodItemViewMorest
+      {/* <ShowDetailsFoodItem item={item} /> */}
+      <FoodItemViewMorest
         onClick={() => {
-          console.log('clicking');
+          dispatch(
+            openFoodItemModal({
+              ...item,
+              isOpenModal: true,
+              quantity:
+                typeof currentQuantity === 'number' ? currentQuantity : 1,
+            })
+          );
         }}
       >
-        More info
-      </FoodItemViewMorest> */}
+        <ButtonViewMorest>More info</ButtonViewMorest>
+      </FoodItemViewMorest>
     </BoxFoodItemSt>
   );
 };

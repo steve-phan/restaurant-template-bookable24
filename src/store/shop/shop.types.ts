@@ -1,3 +1,6 @@
+import { IFoodItemFromContentFul } from '@bookable24/RESTAURANT.CONFIG/restaurant.types';
+import { ImageDataLike } from 'gatsby-plugin-image';
+
 export interface IShopInfo {
   city: string;
   cityCode: string;
@@ -114,6 +117,13 @@ export interface IBookingState extends IBooking {
   isValidInfo: boolean;
   isSubmitted: boolean;
 
-  customerInfo: ICustomerInfos | null;
-  cartItems: TCartItems | null;
+  customerInfo: ICustomerInfos;
+  cartItems: TCartItems;
+  foodItemModal: IFoodItemModal;
+}
+
+export interface IFoodItemModal
+  extends Omit<IFoodItemFromContentFul, 'category'> {
+  isOpenModal: boolean;
+  quantity: number;
 }

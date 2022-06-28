@@ -19,6 +19,7 @@ import {
 } from './ShopOnline.styles';
 import { BoxFoodItem } from '../molecules/BoxFoodItem/BoxFoodItem';
 import { IShopOnlineProps, menuSlideSettings } from './ShopOnline.utils';
+import { ShowDetailsFoodItem } from '../molecules/BoxFoodItem/ShowDetailsFoodItem/ShowDetailsFoodItem';
 
 export const ShopOnline = ({ restaurantMenu, CATEGORY }: IShopOnlineProps) => {
   const navRef = useRef<HTMLDivElement>(null);
@@ -35,8 +36,6 @@ export const ShopOnline = ({ restaurantMenu, CATEGORY }: IShopOnlineProps) => {
     ) as TCategoryMenu;
     return [category, { foodItems: foundMenu[1].foodItems }];
   }) as TCategoryMenu[];
-
-  console.log({ sortingCategoryMenu });
 
   useEffect(() => {
     const findIndex = CATEGORY.findIndex((item) => item === activeMenu);
@@ -71,7 +70,6 @@ export const ShopOnline = ({ restaurantMenu, CATEGORY }: IShopOnlineProps) => {
         </Slider>
       </CategoryMenuSt>
       {sortingCategoryMenu.map(([foodName, category], outerIndex) => {
-        console.log({ foodName });
         return (
           <CategorySectionSt key={outerIndex} id={foodName}>
             <HeadingSectionSt>{foodName}</HeadingSectionSt>
@@ -81,6 +79,7 @@ export const ShopOnline = ({ restaurantMenu, CATEGORY }: IShopOnlineProps) => {
           </CategorySectionSt>
         );
       })}
+      <ShowDetailsFoodItem />
     </ShopOnlineSt>
   );
 };

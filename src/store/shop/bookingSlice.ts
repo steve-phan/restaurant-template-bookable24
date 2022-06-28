@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { StaticQuery } from 'gatsby';
 
 import {
   IBookingState,
@@ -7,6 +8,7 @@ import {
   IInfoUserProps,
   IFoodItem,
   TCartItems,
+  IFoodItemModal,
 } from './shop.types';
 
 const intialBooking: IBooking = {
@@ -20,42 +22,65 @@ const intialBooking: IBooking = {
   require: '',
 };
 
+const initialFoodItemModal = {
+  foodId: '',
+  foodName: '',
+  descriptionAboutFood: '',
+  isOpenModal: false,
+  quantity: 0,
+  priceOfFood: 1,
+};
+
 const initialBookingState: IBookingState = {
   ...intialBooking,
   isValidInfo: false,
   isSubmitted: false,
 
   customerInfo: null,
-  cartItems: null,
+  cartItems: [],
+  foodItemModal: initialFoodItemModal,
 };
 
-export const existingCartItem = ({
-  prevCartItems,
-  nextCartItem,
-}: IAddToCartProps) => {
+export const existingCartItem = (
+  prevCartItems?: IFoodItem[],
+  nextCartItem?: IFoodItem
+) => {
+  if (!nextCartItem || !prevCartItems) {
+    return false;
+  }
   return (
     !!prevCartItems &&
     prevCartItems.find((cartItem) => cartItem.foodId === nextCartItem.foodId)
   );
 };
 
+export const getCurrentQuantity = (cartItems: IFoodItem[], foodId: string) => {
+  const exitsItem = cartItems.find((item) => item.foodId === foodId);
+
+  const currentQuantity =
+    exitsItem && foodId === exitsItem.foodId ? exitsItem.quantity : 0;
+
+  return currentQuantity;
+};
 interface IAddToCartProps {
-  prevCartItems: TCartItems | null;
-  nextCartItem: IFoodItem;
+  prevCartItems?: IFoodItem[];
+  nextCartItem?: IFoodItem;
+  cartItemToReduce?: IFoodItem;
 }
 const addToCart = ({ prevCartItems, nextCartItem }: IAddToCartProps) => {
   let newCarItems = prevCartItems ? prevCartItems : [];
-  const cartItemExists = existingCartItem({
-    prevCartItems,
-    nextCartItem,
-  });
+  const cartItemExists = existingCartItem(prevCartItems, nextCartItem);
+
+  if (!nextCartItem) {
+    return prevCartItems;
+  }
 
   if (!!cartItemExists) {
     return newCarItems.map((cartItem) =>
       cartItem.foodId === nextCartItem.foodId
         ? {
             ...cartItem,
-            quantity: cartItem.quantity + 1,
+            quantity: cartItem.quantity + nextCartItem.quantity,
           }
         : cartItem
     );
@@ -70,15 +95,83 @@ const addToCart = ({ prevCartItems, nextCartItem }: IAddToCartProps) => {
   ];
 };
 
+export const handleReduceCartItem = ({
+  prevCartItems,
+  cartItemToReduce,
+}: IAddToCartProps) => {
+  const cartItemExists = existingCartItem(prevCartItems, cartItemToReduce);
+  console.log({ cartItemExists: cartItemExists });
+  if (!cartItemExists || !prevCartItems) {
+    return prevCartItems;
+  }
+
+  if (!!cartItemExists && cartItemExists.quantity === 1) {
+    return prevCartItems.filter(
+      (cartItem) => cartItem.foodId !== cartItemExists.foodId
+    );
+  }
+
+  return prevCartItems.map((cartItem) =>
+    cartItem.foodId === cartItemExists?.foodId
+      ? {
+          ...cartItem,
+          quantity: cartItem.quantity - 1,
+        }
+      : cartItem
+  );
+};
+
 const bookingSlice = createSlice({
   name: 'booking',
   initialState: initialBookingState,
   reducers: {
     addItemToCart: (state: IBookingState, action: PayloadAction<IFoodItem>) => {
-      state.cartItems = addToCart({
+      const newCartItems = addToCart({
         prevCartItems: state.cartItems,
         nextCartItem: action.payload,
-      });
+      }) as IFoodItem[];
+      state.cartItems = newCartItems;
+
+      const currentQuantity = getCurrentQuantity(
+        newCartItems,
+        action.payload.foodId
+      );
+
+      state.foodItemModal.quantity = currentQuantity;
+    },
+    removeItemFromCart: (
+      state: IBookingState,
+      action: PayloadAction<IFoodItem>
+    ) => {
+      const newCartItems = handleReduceCartItem({
+        prevCartItems: state.cartItems,
+        cartItemToReduce: action.payload,
+      }) as IFoodItem[];
+
+      const currentQuantity = getCurrentQuantity(
+        newCartItems,
+        action.payload.foodId
+      );
+      state.cartItems = newCartItems;
+      state.foodItemModal.quantity = currentQuantity;
+    },
+    openFoodItemModal: (
+      state: IBookingState,
+      action: PayloadAction<IFoodItemModal>
+    ) => {
+      const { cartItems } = state;
+      const currentQuantity = getCurrentQuantity(
+        cartItems,
+        action.payload.foodId
+      );
+      state.foodItemModal = {
+        ...action.payload,
+        isOpenModal: true,
+        quantity: currentQuantity,
+      };
+    },
+    closeFoodItemModal: (state: IBookingState) => {
+      state.foodItemModal = initialFoodItemModal;
     },
     setNumberOfCustomer: (
       state: IBookingState,
@@ -124,6 +217,9 @@ export const {
 
   // NEW PROJECT :
   addItemToCart,
+  removeItemFromCart,
+  openFoodItemModal,
+  closeFoodItemModal,
 } = bookingSlice.actions;
 
 export default bookingSlice.reducer;

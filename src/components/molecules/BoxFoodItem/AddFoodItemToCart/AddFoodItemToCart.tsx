@@ -1,40 +1,40 @@
-import React, { useState } from 'react';
-import { styled } from '@mui/material/styles';
-import Paper from '@mui/material/Paper';
+import React, { useEffect, useState } from 'react';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button/Button';
 import ButtonGroup from '@mui/material/ButtonGroup/ButtonGroup';
 
 import {
+  addItemToCart,
+  removeItemFromCart,
+} from '@bookable24/store/shop/bookingSlice';
+import { useAppDispatch, useAppSelector } from '@bookable24/store/hooks';
+import { IFoodItemFromContentFul } from '@bookable24/RESTAURANT.CONFIG/restaurant.types';
+
+import {
   AddFoodItemToCartSt,
   FoodItemPriceSt,
   SumFoodItemPriceSt,
-} from './BoxFoodItem.styles';
-import { addItemToCart } from '@bookable24/store/shop/bookingSlice';
-import { useAppDispatch } from '@bookable24/store/hooks';
-import {
-  IFoodItem,
-  IFoodItemFromContentFul,
-} from '@bookable24/RESTAURANT.CONFIG/restaurant.types';
+} from './AddFoodItemToCart.styles';
+import { IFoodItemModal } from '@bookable24/store/shop/shop.types';
 
-type TAddFoodItemToCartProps = Omit<
+type TFoodItemToCartProps = Omit<
   IFoodItemFromContentFul,
   'category' | 'descriptionAboutFood'
 >;
 
-export const AddFoodItemToCart = ({
-  priceOfFood,
-  foodId,
-  foodName,
-}: TAddFoodItemToCartProps) => {
+export const AddFoodItemToCart = () => {
   const dispatch = useAppDispatch();
-  const [number, setNumber] = useState(1);
+
+  const {
+    cartItems,
+    foodItemModal: { foodId, foodName, quantity, priceOfFood },
+  } = useAppSelector((state) => state.booking);
 
   const foodItem = {
     foodId,
     foodName,
-    quantity: number,
   };
+
   return (
     <AddFoodItemToCartSt>
       <Grid container spacing={2} columns={16} justifyContent='space-between'>
@@ -49,18 +49,18 @@ export const AddFoodItemToCart = ({
           >
             <Button
               onClick={() => {
-                if (number === 1) return;
-                setNumber(number - 1);
+                if (quantity === 0) return;
+                dispatch(removeItemFromCart({ ...foodItem, quantity: 1 }));
               }}
             >
               -
             </Button>
             <Button color='primary' disabled>
-              <FoodItemPriceSt>{number}</FoodItemPriceSt>
+              <FoodItemPriceSt>{quantity}</FoodItemPriceSt>
             </Button>
             <Button
               onClick={() => {
-                setNumber(number + 1);
+                dispatch(addItemToCart({ ...foodItem, quantity: 1 }));
               }}
             >
               +
@@ -73,14 +73,16 @@ export const AddFoodItemToCart = ({
             fullWidth
             sx={{
               justifyContent: 'space-around',
+              fontSize: '14px',
             }}
-            onClick={() => {
-              dispatch(addItemToCart(foodItem));
-            }}
+            // onClick={() => {
+            //   dispatch(addItemToCart({ ...foodItem, quantity: number }));
+            //   setNumber(1);
+            // }}
           >
-            Add
+            go Cart
             <SumFoodItemPriceSt>
-              {(number * priceOfFood).toFixed(2)}€
+              {(quantity * priceOfFood).toFixed(2)}€
             </SumFoodItemPriceSt>
           </Button>
         </Grid>

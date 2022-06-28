@@ -52,20 +52,6 @@ export const FoodItemPriceSt = styled('p')(({ theme }) => ({
   },
 }));
 
-export const FoodItemOderQtyst = styled('div')(({ theme }) => ({
-  position: 'absolute',
-  cursor: 'pointer',
-  userSelect: 'none',
-  width: 36,
-  height: 36,
-  textAlign: 'center',
-  top: 8,
-  right: 0,
-  fontSize: 18,
-  fontWeight: 400,
-  color: theme.color.secondary,
-}));
-
 export const FoodItemViewMorest = styled('div')(({ theme }) => ({
   position: 'absolute',
   bottom: 0,
@@ -86,12 +72,23 @@ export const ButtonViewMorest = styled('button')(({ theme }) => ({
   background: 'transparent',
 }));
 
+export const FoodItemOderQtyst = styled('div')(({ theme }) => ({
+  position: 'absolute',
+  cursor: 'pointer',
+  userSelect: 'none',
+  width: 36,
+  height: 36,
+  textAlign: 'center',
+  top: 8,
+  right: 0,
+  fontSize: 18,
+  fontWeight: 400,
+  color: theme.color.secondary,
+}));
+
 export const AddFoodItemToCartSt = styled('div')(({ theme }) => ({
   padding: '12px',
-  // cursor: 'pointer',
   userSelect: 'none',
-  // textAlign: 'center',
-
   fontSize: 14,
   fontWeight: 400,
   color: theme.color.secondary,
