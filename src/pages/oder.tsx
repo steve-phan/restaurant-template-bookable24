@@ -6,13 +6,14 @@ import { useTranslation } from 'gatsby-plugin-react-i18next';
 import { BoxFoodItem } from '@bookable24/components/molecules/BoxFoodItem/BoxFoodItem';
 import { restaurantMenu } from '@bookable24/RESTAURANT.CONFIG/RESTAURANT.MENU';
 import { ShopOnline } from '@bookable24/components/ShopOnline/ShopOnline';
+import { CATEGORY } from '@bookable24/RESTAURANT.CONFIG/restaurant.types';
 
 const OderPage = () => {
   const { t } = useTranslation();
 
   return (
     <Layout>
-      <ShopOnline restaurantMenu={restaurantMenu} />
+      <ShopOnline restaurantMenu={restaurantMenu} CATEGORY={CATEGORY} />
     </Layout>
   );
 };
