@@ -1,4 +1,7 @@
-import { IFoodItem } from '@bookable24/RESTAURANT.CONFIG/restaurant.types';
+import {
+  IFoodItem,
+  IFoodItemFromContentFul,
+} from '@bookable24/RESTAURANT.CONFIG/restaurant.types';
 import { useAppDispatch, useAppSelector } from '@bookable24/store/hooks';
 import { addItemToCart } from '@bookable24/store/shop/bookingSlice';
 import React, { ReactNode } from 'react';
@@ -13,28 +16,29 @@ import {
   FoodItemViewMorest,
 } from './BoxFoodItem.styles';
 
-export const BoxFoodItem = ({ item }: { item: IFoodItem }) => {
-  const { title, description, price, id } = item;
+export const BoxFoodItem = ({ item }: { item: IFoodItemFromContentFul }) => {
+  const { foodName, descriptionAboutFood, priceOfFood, foodId } = item;
   const dispatch = useAppDispatch();
   const { cartItems } = useAppSelector((state) => state.booking);
 
-  const exitsItem = !!cartItems && cartItems.find((item) => id === item.id);
+  const exitsItem =
+    !!cartItems && cartItems.find((item) => foodId === item.foodId);
 
   const currentQuantity =
-    exitsItem && id === exitsItem.id ? exitsItem.quantity : '+';
+    exitsItem && foodId === exitsItem.foodId ? exitsItem.quantity : '+';
 
   const foodItem = {
-    id,
-    title,
+    foodId,
+    foodName,
     quantity: 1,
   };
   return (
     <BoxFoodItemSt>
       <FoodItemInfoSt>
-        <FoodItemTitleSt>{title} </FoodItemTitleSt>
-        <FoodItemDescSt> {description} </FoodItemDescSt>
+        <FoodItemTitleSt>{foodName} </FoodItemTitleSt>
+        <FoodItemDescSt> {descriptionAboutFood} </FoodItemDescSt>
       </FoodItemInfoSt>
-      <FoodItemPriceSt>{price} € </FoodItemPriceSt>
+      <FoodItemPriceSt>{priceOfFood} € </FoodItemPriceSt>
       <FoodItemOderQtyst
         onClick={() => {
           dispatch(addItemToCart(foodItem));

@@ -18,14 +18,22 @@ export type TRestaurantInfos = Record<TRestaurantKeys, IBoxWithIconInfos>;
 
 export const CategoryConstants = {
   STARTERS: 'STARTERS',
-  SOUPS: 'SOUPS',
   MAINCOURSES: 'MAIN-COURSES',
+  SOUPS: 'SOUPS',
   DRINKS: 'DRINKS',
   DESSERT: 'DESSERT',
 } as const;
 
 export const CATEGORY = Object.values(CategoryConstants);
 export type TCategory = GetValuesOf<typeof CategoryConstants>;
+
+export type TCategoryMenu = [
+  TCategory,
+  {
+    foodItems: IFoodItemFromContentFul[];
+  }
+];
+
 export interface IFoodItem {
   title: string;
   description: string;
@@ -33,4 +41,13 @@ export interface IFoodItem {
   id: string;
   category: TCategory;
   otherOption?: string;
+}
+
+export interface IFoodItemFromContentFul {
+  foodName: string;
+  descriptionAboutFood: string;
+  priceOfFood: number;
+  foodId: string;
+  category: TCategory;
+  foodImage: any; // GatsbyImageData
 }

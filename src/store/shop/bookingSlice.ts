@@ -35,7 +35,7 @@ export const existingCartItem = ({
 }: IAddToCartProps) => {
   return (
     !!prevCartItems &&
-    prevCartItems.find((cartItem) => cartItem.id === nextCartItem.id)
+    prevCartItems.find((cartItem) => cartItem.foodId === nextCartItem.foodId)
   );
 };
 
@@ -52,7 +52,7 @@ const addToCart = ({ prevCartItems, nextCartItem }: IAddToCartProps) => {
 
   if (!!cartItemExists) {
     return newCarItems.map((cartItem) =>
-      cartItem.id === nextCartItem.id
+      cartItem.foodId === nextCartItem.foodId
         ? {
             ...cartItem,
             quantity: cartItem.quantity + 1,

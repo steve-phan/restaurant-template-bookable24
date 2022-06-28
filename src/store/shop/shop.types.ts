@@ -96,8 +96,8 @@ export interface IBooking {
 export type TCartItems = IFoodItem[];
 
 export interface IFoodItem {
-  title: string;
-  id: string;
+  foodName: string;
+  foodId: string;
   quantity: number;
   require?: string;
 }

@@ -1,10 +1,10 @@
 import {
-  IFoodItem,
+  IFoodItemFromContentFul,
   TCategory,
 } from '@bookable24/RESTAURANT.CONFIG/restaurant.types';
 
 export interface IShopOnlineProps {
-  restaurantMenu: IFoodItem[];
+  restaurantMenu: IFoodItemFromContentFul[];
   CATEGORY: TCategory[];
 }
 

@@ -1,4 +1,9 @@
-import { IFoodItem, TCategory } from './restaurant.types';
+import {
+  CATEGORY,
+  IFoodItem,
+  IFoodItemFromContentFul,
+  TCategory,
+} from './restaurant.types';
 
 export const restaurantMenu: IFoodItem[] = [
   {
@@ -318,11 +323,19 @@ export const restaurantMenu: IFoodItem[] = [
   },
 ];
 
+export type TFoodCategory = Record<
+  TCategory,
+  { foodItems: IFoodItemFromContentFul[] }
+>;
+
 export const menuMapping = (
-  menuArr: IFoodItem[]
-): Record<TCategory, { foodItems: IFoodItem[] }> => {
+  menuArr: IFoodItemFromContentFul[]
+): TFoodCategory => {
   return menuArr.reduce(
-    (acc: Record<TCategory, { foodItems: IFoodItem[] }>, cur: IFoodItem) => {
+    (
+      acc: Record<TCategory, { foodItems: IFoodItemFromContentFul[] }>,
+      cur: IFoodItemFromContentFul
+    ) => {
       const { category } = cur;
       if (category in acc) {
         acc[category] = { foodItems: [...acc[category].foodItems, cur] };
@@ -331,6 +344,6 @@ export const menuMapping = (
       }
       return acc;
     },
-    {} as Record<TCategory, { foodItems: IFoodItem[] }>
+    {} as Record<TCategory, { foodItems: IFoodItemFromContentFul[] }>
   );
 };
