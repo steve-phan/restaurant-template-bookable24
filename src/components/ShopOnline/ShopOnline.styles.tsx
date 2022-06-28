@@ -20,7 +20,7 @@ export const WrapCategorySt = styled('div')(({ theme }) => ({
   background: 'white',
   overflow: 'visible',
   position: 'sticky',
-  zIndex: 2020,
+  zIndex: 1100,
   height: 45,
   listStyle: 'none',
   overflowX: 'scroll',
@@ -41,7 +41,7 @@ export const CategorySt = styled('div')(({ theme }) => ({
   width: '100%',
   // width: 'calc(100% + 180px)',
   transition: 'all 0.5s linear',
-  zIndex: 2022,
+  zIndex: 1100,
 }));
 
 export const CategoryMenuSt = styled('div')(({ theme }) => ({
@@ -55,7 +55,7 @@ export const CategoryMenuSt = styled('div')(({ theme }) => ({
   // overflow: 'visible',
   width: '100%',
   // height: 60,
-  zIndex: 2020,
+  zIndex: 1100,
 }));
 
 export const CategoryItemSt = styled('div')<{ active?: 'active' | 'normal' }>(
@@ -71,6 +71,7 @@ export const CategoryItemSt = styled('div')<{ active?: 'active' | 'normal' }>(
     width: 'auto',
     zIndex: 3,
     textAlign: 'center',
+    fontFamily: 'Mukta, sans-serif',
 
     color: active === 'active' ? theme.color.secondary : 'black',
     backgroundColor:

@@ -24,13 +24,18 @@ import {
 } from './ShopOnline.styles';
 import { BoxFoodItem } from '../molecules/BoxFoodItem/BoxFoodItem';
 
-const isInView = (element: HTMLElement, offset = 110) => {
+export const isInView = (element: HTMLElement, offset = 110) => {
   const top = element.getBoundingClientRect().top;
   const bottom = element.getBoundingClientRect().bottom;
 
   return offset - top >= 0 && bottom - offset > 0;
 };
-interface TMenuList {
+
+export const defaultMenuList = CATEGORY.map((category) => ({
+  category,
+  isInview: false,
+}));
+export interface TMenuList {
   isInview: boolean;
   category: TCategory;
 }
@@ -47,9 +52,8 @@ export const ShopOnline = ({
 
   const categoryMenu = Object.entries(menuMapping(restaurantMenu));
 
-  const [menuList, setMenuList] = useState<TMenuList[]>([]);
+  const [menuList, setMenuList] = useState<TMenuList[]>(defaultMenuList);
   const [activeMenu, setActiveMenu] = useState(CATEGORY[0]);
-  const [transform, setTransform] = useState(0);
   const { navigate } = useI18next();
 
   const spy = () => {
@@ -87,8 +91,12 @@ export const ShopOnline = ({
     window.addEventListener('scroll', spy);
     return () => window.removeEventListener('scroll', spy);
   }, []);
+
   const settings = {
-    speed: 500,
+    infinite: false,
+    arrow: false,
+
+    speed: 300,
     slidesToShow: 3,
     slidesToScroll: 3,
   };
@@ -101,7 +109,7 @@ export const ShopOnline = ({
       </ShopOnlineInfoSt>
 
       <CategoryMenuSt id='menulist-id'>
-        <Slider {...settings} arrows={false} ref={slickRef}>
+        <Slider {...settings} ref={slickRef}>
           {menuList.map(({ isInview, category }, index) => (
             <CategoryItemSt
               ref={isInview ? navRef : null}
