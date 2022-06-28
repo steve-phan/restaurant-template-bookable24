@@ -5,11 +5,9 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-import {
-  menuMapping,
-  TFoodCategory,
-} from '@bookable24/RESTAURANT.CONFIG/RESTAURANT.MENU';
+import { menuMapping } from '@bookable24/RESTAURANT.CONFIG/RESTAURANT.MENU';
 import { useScrollSpy } from '@bookable24/hooks/useScrollSpy';
+import { TCategoryMenu } from '@bookable24/RESTAURANT.CONFIG/restaurant.types';
 
 import {
   ShopOnlineSt,
@@ -21,11 +19,6 @@ import {
 } from './ShopOnline.styles';
 import { BoxFoodItem } from '../molecules/BoxFoodItem/BoxFoodItem';
 import { IShopOnlineProps, menuSlideSettings } from './ShopOnline.utils';
-import {
-  IFoodItemFromContentFul,
-  TCategory,
-  TCategoryMenu,
-} from '@bookable24/RESTAURANT.CONFIG/restaurant.types';
 
 export const ShopOnline = ({ restaurantMenu, CATEGORY }: IShopOnlineProps) => {
   const navRef = useRef<HTMLDivElement>(null);

@@ -51,5 +51,5 @@ export interface IFoodItemFromContentFul {
   priceOfFood: number;
   foodId: string;
   category: TCategory;
-  foodImage: ImageDataLike;
+  foodImage?: ImageDataLike;
 }

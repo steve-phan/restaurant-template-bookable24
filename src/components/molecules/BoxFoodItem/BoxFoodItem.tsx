@@ -1,5 +1,10 @@
 import React, { ReactNode } from 'react';
-import { GatsbyImage, getImage, IGatsbyImageData } from 'gatsby-plugin-image';
+import {
+  GatsbyImage,
+  getImage,
+  IGatsbyImageData,
+  ImageDataLike,
+} from 'gatsby-plugin-image';
 import AddShoppingCartOutlinedIcon from '@mui/icons-material/AddShoppingCartOutlined';
 import { Grid } from '@mui/material';
 
@@ -16,6 +21,7 @@ import {
   FoodItemOderQtyst,
   FoodItemViewMorest,
 } from './BoxFoodItem.styles';
+import { ShowDetailsFoodItem } from './ShowDetailsFoodItem';
 
 export const BoxFoodItem = ({ item }: { item: IFoodItemFromContentFul }) => {
   const { foodName, descriptionAboutFood, priceOfFood, foodId, foodImage } =
@@ -39,7 +45,7 @@ export const BoxFoodItem = ({ item }: { item: IFoodItemFromContentFul }) => {
     quantity: 1,
   };
 
-  const image = getImage(foodImage) as IGatsbyImageData;
+  const image = getImage(foodImage as ImageDataLike) as IGatsbyImageData;
   return (
     <BoxFoodItemSt>
       <Grid
@@ -80,13 +86,14 @@ export const BoxFoodItem = ({ item }: { item: IFoodItemFromContentFul }) => {
       >
         {currentQuantity}
       </FoodItemOderQtyst>
-      <FoodItemViewMorest
+      <ShowDetailsFoodItem item={item} />
+      {/* <FoodItemViewMorest
         onClick={() => {
           console.log('clicking');
         }}
       >
         More info
-      </FoodItemViewMorest>
+      </FoodItemViewMorest> */}
     </BoxFoodItemSt>
   );
 };

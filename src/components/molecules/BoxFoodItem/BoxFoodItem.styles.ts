@@ -68,19 +68,46 @@ export const FoodItemOderQtyst = styled('div')(({ theme }) => ({
 
 export const FoodItemViewMorest = styled('div')(({ theme }) => ({
   position: 'absolute',
+  bottom: 0,
+  right: 0,
   zIndex: 2,
+}));
+
+export const ButtonViewMorest = styled('button')(({ theme }) => ({
+  padding: '10px 10px 4px',
   cursor: 'pointer',
   userSelect: 'none',
   textAlign: 'center',
-  bottom: 0,
-  right: 0,
-  padding: 12,
+
   fontSize: 14,
   fontWeight: 400,
   color: theme.color.secondary,
+  border: 'none',
+  background: 'transparent',
+}));
 
-  '&:hover': {
-    color: theme.color.primary,
-    fontWeight: 600,
+export const AddFoodItemToCartSt = styled('div')(({ theme }) => ({
+  padding: '12px',
+  // cursor: 'pointer',
+  userSelect: 'none',
+  // textAlign: 'center',
+
+  fontSize: 14,
+  fontWeight: 400,
+  color: theme.color.secondary,
+  border: 'none',
+  background: 'transparent',
+}));
+
+export const SumFoodItemPriceSt = styled('p')(({ theme }) => ({
+  margin: 0,
+  padding: 0,
+  fontSize: 14,
+  fontWeight: 400,
+
+  color: theme.color.white,
+
+  [theme.breakpoints.up('md')]: {
+    fontSize: 18,
   },
 }));

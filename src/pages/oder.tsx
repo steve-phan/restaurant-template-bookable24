@@ -39,7 +39,7 @@ export const query = graphql`
       nodes {
         category
         foodImage {
-          gatsbyImageData(width: 100, quality: 20)
+          gatsbyImageData(width: 100, quality: 50)
         }
         foodName
         priceOfFood
