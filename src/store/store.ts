@@ -1,12 +1,12 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 
 // import shopReducer from "./shop/shopSlice"
-// import bookingReducer from "./shop/bookingSlice"
+import bookingReducer from './shop/bookingSlice';
 
 export const store = configureStore({
   reducer: {
     // shop: shopReducer,
-    // booking: bookingReducer,
+    booking: bookingReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }),
