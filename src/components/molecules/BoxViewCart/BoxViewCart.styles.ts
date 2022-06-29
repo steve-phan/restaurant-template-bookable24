@@ -62,6 +62,7 @@ export const FoodListItemSt = styled('li')(({ theme }) => ({
   // background: theme.color.primary,
   padding: '8px 0',
   borderBottom: `1px solid ${theme.color.borderColor}`,
-  width: 700,
+  width: '100%',
+  maxWidth: 700,
   margin: '0 auto',
 }));
