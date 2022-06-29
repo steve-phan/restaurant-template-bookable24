@@ -1,17 +1,34 @@
 import { styled } from '@mui/material/styles';
 
-export const BoxViewCartst = styled('div')(({ theme }) => ({
+export const WrapperBoxViewCartst = styled('div')(({ theme }) => ({
+  width: '100%',
+  background: 'white',
   position: 'fixed',
+  bottom: 0,
+  left: 0,
+  right: 0,
+
+  // height: '60px',
+  display: 'flex',
+  justifyContent: 'center',
+  cursor: 'pointer',
+}));
+
+export const BoxViewCartst = styled('div')(({ theme }) => ({
+  // position: 'fixed',
   bottom: 0,
   left: 0,
   right: 0,
   width: '100vw',
   zIndex: 1100,
+  maxWidth: 700,
 
   background: theme.color.secondary,
 
   [theme.breakpoints.up('md')]: {
-    display: 'none',
+    // display: 'none',
+    left: 'calc(50vw - 358px)',
+    right: 'calc(50vw - 358px)',
   },
 }));
 
@@ -41,6 +58,10 @@ export const FoodListSt = styled('ul')(({ theme }) => ({
 }));
 
 export const FoodListItemSt = styled('li')(({ theme }) => ({
-  color: 'white',
-  background: theme.color.primary,
+  // color: 'white',
+  // background: theme.color.primary,
+  padding: '8px 0',
+  borderBottom: `1px solid ${theme.color.borderColor}`,
+  width: 700,
+  margin: '0 auto',
 }));

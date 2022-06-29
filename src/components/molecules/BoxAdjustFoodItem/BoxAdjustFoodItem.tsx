@@ -11,14 +11,20 @@ import { useAppDispatch } from '@bookable24/store/hooks';
 import { FoodItemQuantitySt } from './BoxAdjustFoodItem.styles';
 import { IFoodItem } from '@bookable24/store/shop/shop.types';
 
-export const BoxAdjustFoodItem = ({ item }: { item: IFoodItem }) => {
+export const BoxAdjustFoodItem = ({
+  item,
+  widthCount,
+}: {
+  item: IFoodItem;
+  widthCount?: boolean;
+}) => {
   const dispatch = useAppDispatch();
   const { quantity } = item;
 
   return (
     <ButtonGroup
+      size='small'
       sx={{
-        width: '100%',
         fontWeight: 600,
       }}
       variant='outlined'
@@ -32,9 +38,11 @@ export const BoxAdjustFoodItem = ({ item }: { item: IFoodItem }) => {
       >
         -
       </Button>
-      <Button color='primary' disabled>
-        <FoodItemQuantitySt>{quantity}</FoodItemQuantitySt>
-      </Button>
+      {widthCount && (
+        <Button color='primary' disabled>
+          <FoodItemQuantitySt>{quantity}</FoodItemQuantitySt>
+        </Button>
+      )}
       <Button
         onClick={() => {
           dispatch(addItemToCart(item));

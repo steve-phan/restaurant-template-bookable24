@@ -14,6 +14,7 @@ export const theme = createTheme({
     background: '#fdefe1',
     black: '#000000',
     activeBackground: '#fff1f9',
+    greyBackground: '#f5f5f5',
     activeColor: 'deeppink',
     iconColor: '#e84b63',
     borderColor: '#e4e4e4',

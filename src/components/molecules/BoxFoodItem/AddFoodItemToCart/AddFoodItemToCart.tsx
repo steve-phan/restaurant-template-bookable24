@@ -20,7 +20,7 @@ export const AddFoodItemToCart = () => {
     <AddFoodItemToCartSt>
       <Grid container spacing={2} columns={16} justifyContent='space-between'>
         <Grid item xs={6}>
-          <BoxAdjustFoodItem item={foodItemModal} />
+          <BoxAdjustFoodItem item={foodItemModal} widthCount />
         </Grid>
         <Grid item xs={9}>
           <Button

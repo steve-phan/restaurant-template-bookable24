@@ -84,7 +84,7 @@ export const HeadingSectionSt = styled('h2')(({ theme }) => ({
   margin: '0 auto',
   fontSize: 20,
   padding: 16,
-  background: theme.color.background,
+  background: theme.color.greyBackground,
 
   [theme.breakpoints.up('md')]: {
     fontSize: 22,

@@ -18,8 +18,10 @@ import {
   FoodListItemSt,
   FoodListSt,
   SumQuantitiesSt,
+  WrapperBoxViewCartst,
 } from './BoxViewCart.styles';
 import { BoxViewCartFoodItem } from './BoxViewCartFoodItem/BoxViewCartFoodItem';
+import { useI18next } from 'gatsby-plugin-react-i18next';
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -54,7 +56,7 @@ export const BoxViewCart = () => {
   const { cartItems, isViewCartModal } = useAppSelector(
     (state) => state.booking
   );
-
+  const { navigate } = useI18next();
   const { sumPrices, sumQuantities } = getSumDetailsCartItem(cartItems);
 
   const handleClickOpen = () => {
@@ -72,62 +74,118 @@ export const BoxViewCart = () => {
   }, [isViewCartModal]);
 
   return (
-    <BoxViewCartst>
-      <Toolbar onClick={handleClickOpen}>
-        <IconButton
-          edge='start'
-          sx={{
-            color: 'white',
-          }}
-          onClick={handleClose}
-          aria-label='open'
-        >
-          <ShoppingBagIcon />
-          <SumQuantitiesSt>{sumQuantities}</SumQuantitiesSt>
-        </IconButton>
-        <Typography
-          sx={{ ml: 2, flex: 1, textAlign: 'center', color: 'white' }}
-          variant='body1'
-          component='div'
-        >
-          {`Basket (${sumPrices.toFixed(2)} €)`}
-        </Typography>
-      </Toolbar>
-      <Dialog
-        fullScreen
-        open={open}
-        onClose={handleClose}
-        TransitionComponent={Transition}
-      >
-        <AppBar sx={{ position: 'relative' }}>
-          <Toolbar
+    <WrapperBoxViewCartst>
+      <BoxViewCartst>
+        <Toolbar onClick={handleClickOpen}>
+          <IconButton
+            edge='start'
             sx={{
-              background: 'white',
-              color: 'black',
+              color: 'white',
             }}
+            onClick={handleClose}
+            aria-label='open'
           >
-            <Typography sx={{ ml: 2, flex: 1 }} variant='body1' component='div'>
-              Basket
-            </Typography>
-
-            <IconButton
-              edge='end'
-              color='inherit'
-              onClick={handleClose}
-              aria-label='close'
+            <ShoppingBagIcon />
+            <SumQuantitiesSt>{sumQuantities}</SumQuantitiesSt>
+          </IconButton>
+          <Typography
+            sx={{ ml: 2, flex: 1, textAlign: 'center', color: 'white' }}
+            variant='body1'
+            component='div'
+          >
+            {`Basket (${sumPrices.toFixed(2)} €)`}
+          </Typography>
+        </Toolbar>
+        <WrapperBoxViewCartst>
+          <BoxViewCartst>
+            <Dialog
+              fullScreen
+              open={open}
+              onClose={handleClose}
+              TransitionComponent={Transition}
             >
-              <CloseIcon />
-            </IconButton>
-          </Toolbar>
-        </AppBar>
-        <FoodListSt>
-          {cartItems.map((item, index) => (
-            <FoodListItemSt key={index}>
-              <BoxViewCartFoodItem item={item} />
-            </FoodListItemSt>
-          ))}
-        </FoodListSt>
-      </Dialog>
-    </BoxViewCartst>
+              <AppBar
+                sx={{
+                  position: 'relative',
+                  paddingRight: '0 !important',
+                  background: 'white',
+                }}
+              >
+                <Toolbar
+                  sx={{
+                    background: 'white',
+                    color: 'black',
+                  }}
+                >
+                  <Typography
+                    sx={{ ml: 2, flex: 1 }}
+                    variant='body1'
+                    component='div'
+                  >
+                    Basket
+                  </Typography>
+
+                  <IconButton
+                    edge='end'
+                    color='inherit'
+                    onClick={handleClose}
+                    aria-label='close'
+                  >
+                    <CloseIcon />
+                  </IconButton>
+                </Toolbar>
+              </AppBar>
+              <FoodListSt>
+                {cartItems.map((item, index) => (
+                  <FoodListItemSt key={index}>
+                    <BoxViewCartFoodItem item={item} />
+                  </FoodListItemSt>
+                ))}
+              </FoodListSt>
+              <WrapperBoxViewCartst>
+                <BoxViewCartst>
+                  <AppBar
+                    position='relative'
+                    color='primary'
+                    sx={{ top: 'auto', bottom: 0 }}
+                  >
+                    <Toolbar
+                      onClick={() => {
+                        alert('Page is building');
+                        handleClose();
+                        navigate('/oder');
+                      }}
+                    >
+                      <IconButton
+                        edge='start'
+                        sx={{
+                          color: 'white',
+                        }}
+                        aria-label='icon'
+                      >
+                        <ShoppingBagIcon />
+                        <SumQuantitiesSt>{sumQuantities}</SumQuantitiesSt>
+                      </IconButton>
+                      <Typography
+                        sx={{
+                          ml: 2,
+                          flex: 1,
+                          textAlign: 'center',
+                          color: 'white',
+                        }}
+                        variant='body1'
+                        component='div'
+                      >
+                        {`Checkout (${sumPrices.toFixed(2)} €)`}
+                      </Typography>
+                    </Toolbar>
+                  </AppBar>
+                </BoxViewCartst>
+              </WrapperBoxViewCartst>
+            </Dialog>
+          </BoxViewCartst>
+        </WrapperBoxViewCartst>
+      </BoxViewCartst>
+    </WrapperBoxViewCartst>
   );
 };

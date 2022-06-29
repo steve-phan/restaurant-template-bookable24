@@ -13,6 +13,7 @@ declare module '@mui/material/styles' {
       background: string;
       black: string;
       activeBackground: string;
+      greyBackground: string;
       activeColor: string;
       iconColor: string;
       borderColor: string;
@@ -35,6 +36,7 @@ declare module '@mui/material/styles' {
       background: string;
       black: string;
       activeBackground: string;
+      greyBackground: string;
       activeColor: string;
       iconColor: string;
       borderColor: string;
