@@ -10,6 +10,7 @@ import { useScrollSpy } from '@bookable24/hooks/useScrollSpy';
 import { TCategoryMenu } from '@bookable24/RESTAURANT.CONFIG/restaurant.types';
 
 import {
+  CategorySt,
   ShopOnlineSt,
   CategorySectionSt,
   CategoryMenuSt,
@@ -20,6 +21,7 @@ import {
 import { BoxFoodItem } from '../molecules/BoxFoodItem/BoxFoodItem';
 import { IShopOnlineProps, menuSlideSettings } from './ShopOnline.utils';
 import { ShowDetailsFoodItem } from '../molecules/BoxFoodItem/ShowDetailsFoodItem/ShowDetailsFoodItem';
+import { BoxViewCart } from '../molecules/BoxViewCart/BoxViewCart';
 
 export const ShopOnline = ({ restaurantMenu, CATEGORY }: IShopOnlineProps) => {
   const navRef = useRef<HTMLDivElement>(null);
@@ -51,24 +53,25 @@ export const ShopOnline = ({ restaurantMenu, CATEGORY }: IShopOnlineProps) => {
         <h2>Wellcome to MaiSonTom</h2>
         <p>We deliver around 5km from 15 Euro</p>
       </ShopOnlineInfoSt>
-
-      <CategoryMenuSt id='menulist-id'>
-        <Slider {...menuSlideSettings} ref={slickRef}>
-          {menuList.map(({ isInview, category }, index) => (
-            <CategoryItemSt
-              ref={isInview ? navRef : null}
-              key={index}
-              active={isInview ? 'active' : 'normal'}
-              onClick={() => {
-                navigate(`/oder/#${category}`);
-                setActiveMenu(category);
-              }}
-            >
-              {category}
-            </CategoryItemSt>
-          ))}
-        </Slider>
-      </CategoryMenuSt>
+      <CategorySt>
+        <CategoryMenuSt id='menulist-id'>
+          <Slider {...menuSlideSettings} ref={slickRef}>
+            {menuList.map(({ isInview, category }, index) => (
+              <CategoryItemSt
+                ref={isInview ? navRef : null}
+                key={index}
+                active={isInview ? 'active' : 'normal'}
+                onClick={() => {
+                  navigate(`/oder/#${category}`);
+                  setActiveMenu(category);
+                }}
+              >
+                {category}
+              </CategoryItemSt>
+            ))}
+          </Slider>
+        </CategoryMenuSt>
+      </CategorySt>
       {sortingCategoryMenu.map(([foodName, category], outerIndex) => {
         return (
           <CategorySectionSt key={outerIndex} id={foodName}>
@@ -80,6 +83,7 @@ export const ShopOnline = ({ restaurantMenu, CATEGORY }: IShopOnlineProps) => {
         );
       })}
       <ShowDetailsFoodItem />
+      <BoxViewCart />
     </ShopOnlineSt>
   );
 };

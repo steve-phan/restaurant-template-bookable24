@@ -15,12 +15,6 @@ import {
   FoodItemPriceSt,
   SumFoodItemPriceSt,
 } from './AddFoodItemToCart.styles';
-import { IFoodItemModal } from '@bookable24/store/shop/shop.types';
-
-type TFoodItemToCartProps = Omit<
-  IFoodItemFromContentFul,
-  'category' | 'descriptionAboutFood'
->;
 
 export const AddFoodItemToCart = () => {
   const dispatch = useAppDispatch();
@@ -33,6 +27,7 @@ export const AddFoodItemToCart = () => {
   const foodItem = {
     foodId,
     foodName,
+    priceOfFood,
   };
 
   return (

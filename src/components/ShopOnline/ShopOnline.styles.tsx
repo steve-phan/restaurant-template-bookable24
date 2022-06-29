@@ -32,30 +32,25 @@ export const WrapCategorySt = styled('div')(({ theme }) => ({
 }));
 
 export const CategorySt = styled('div')(({ theme }) => ({
-  // padding: '8px 16px',
-  WebkitOverflowScrolling: 'touch',
-  overflowX: 'scroll',
-  scrollbarWidth: 'none',
-  scrollPadding: 0,
-  position: 'relative',
+  position: 'sticky',
+  top: 64,
   width: '100%',
-  // width: 'calc(100% + 180px)',
-  transition: 'all 0.5s linear',
-  zIndex: 1100,
+  background: 'white',
+  zIndex: 1000,
 }));
 
 export const CategoryMenuSt = styled('div')(({ theme }) => ({
   position: 'sticky',
   top: 64,
-
+  left: 'calc(50vw - 358px)',
+  right: 'calc(50vw - 358px)',
   display: 'inline-block',
-  // padding: '8px 16px',
-  // transform: 'translateZ(0)',
-  background: 'white',
-  // overflow: 'visible',
+  maxWidth: 700,
+  margin: '0 auto',
+  transform: 'translateZ(0)',
+  background: 'transparent',
   width: '100%',
-  // height: 60,
-  zIndex: 1100,
+  zIndex: 1000,
 }));
 
 export const CategoryItemSt = styled('div')<{ active?: 'active' | 'normal' }>(

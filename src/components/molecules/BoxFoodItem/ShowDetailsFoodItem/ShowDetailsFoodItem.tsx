@@ -13,20 +13,14 @@ import Slide from '@mui/material/Slide';
 import { TransitionProps } from '@mui/material/transitions';
 import CloseIcon from '@mui/icons-material/Close';
 
-import { IFoodItemFromContentFul } from '@bookable24/RESTAURANT.CONFIG/restaurant.types';
+import { useAppDispatch, useAppSelector } from '@bookable24/store/hooks';
+import { closeFoodItemModal } from '@bookable24/store/shop/bookingSlice';
 
 import {
   CloseButtonSt,
-  ButtonViewMorest,
   FoodItemViewMorest,
 } from './ShowDetailsFoodItem.styles';
 import { AddFoodItemToCart } from '../AddFoodItemToCart/AddFoodItemToCart';
-import { useAppDispatch, useAppSelector } from '@bookable24/store/hooks';
-import { IFoodItemModal } from '@bookable24/store/shop/shop.types';
-import {
-  closeFoodItemModal,
-  openFoodItemModal,
-} from '@bookable24/store/shop/bookingSlice';
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -38,7 +32,6 @@ const Transition = React.forwardRef(function Transition(
 });
 
 export const ShowDetailsFoodItem = () => {
-  const [open, setOpen] = React.useState(false);
   const dispatch = useAppDispatch();
   const {
     foodItemModal: {
@@ -54,23 +47,7 @@ export const ShowDetailsFoodItem = () => {
 
   const image = getImage(foodImage as ImageDataLike) as IGatsbyImageData;
 
-  const handleClickOpen = () => {
-    setOpen(true);
-    dispatch(
-      openFoodItemModal({
-        foodId,
-        foodName,
-        quantity,
-        foodImage,
-        isOpenModal,
-        descriptionAboutFood,
-        priceOfFood,
-      })
-    );
-  };
-
   const handleClose = () => {
-    // setOpen(false);
     dispatch(closeFoodItemModal());
   };
 

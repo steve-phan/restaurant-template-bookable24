@@ -46,6 +46,7 @@ export const BoxFoodItem = ({ item }: { item: IFoodItemFromContentFul }) => {
   const foodItem = {
     foodId,
     foodName,
+    priceOfFood,
     quantity: 1,
   };
 

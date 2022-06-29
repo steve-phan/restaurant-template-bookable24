@@ -101,6 +101,7 @@ export type TCartItems = IFoodItem[];
 export interface IFoodItem {
   foodName: string;
   foodId: string;
+  priceOfFood: number;
   quantity: number;
   require?: string;
 }
