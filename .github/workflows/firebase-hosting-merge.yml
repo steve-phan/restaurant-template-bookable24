@@ -9,6 +9,7 @@ name: Deploy to Firebase Hosting on merge
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
+    environment: shoponline24
     steps:
       - uses: actions/checkout@v2
       - run: yarn ci && yarn build
@@ -18,3 +19,7 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_SHOPONLINE_EU }}'
           channelId: live
           projectId: shoponline-eu
+        env:
+          GATSBY_GOOGLE_API_KEY: '${{ secrets.GATSBY_GOOGLE_API_KEY }}'
+          GATSBY_CONTENTFUL_SPACE_ID: '${{ secrets.GATSBY_CONTENTFUL_SPACE_ID }}'
+          GATSBY_CONTENTFUL_ACCESS_TOKEN: '${{ secrets.  GATSBY_CONTENTFUL_ACCESS_TOKEN }}'
