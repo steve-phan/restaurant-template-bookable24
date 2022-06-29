@@ -30,6 +30,7 @@ export const initialBookingState: IBookingState = {
   customerInfo: null,
   cartItems: [],
   foodItemModal: initialFoodItemModal,
+  isViewCartModal: false,
 };
 
 export const existingCartItem = (
@@ -71,7 +72,7 @@ export const addToCart = ({ prevCartItems, nextCartItem }: IAddToCartProps) => {
       cartItem.foodId === nextCartItem.foodId
         ? {
             ...cartItem,
-            quantity: cartItem.quantity + nextCartItem.quantity,
+            quantity: cartItem.quantity + 1,
           }
         : cartItem
     );

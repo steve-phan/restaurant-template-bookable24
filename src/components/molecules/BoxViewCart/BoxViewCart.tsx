@@ -1,10 +1,5 @@
-import React, { useState } from 'react';
-import Button from '@mui/material/Button';
+import React, { useEffect, useState } from 'react';
 import Dialog from '@mui/material/Dialog';
-import ListItemText from '@mui/material/ListItemText';
-import ListItem from '@mui/material/ListItem';
-import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
@@ -15,6 +10,8 @@ import { TransitionProps } from '@mui/material/transitions';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 
 import { useAppDispatch, useAppSelector } from '@bookable24/store/hooks';
+import { closeViewCartModal } from '@bookable24/store/shop/bookingSlice';
+import { TCartItems } from '@bookable24/store/shop/shop.types';
 
 import {
   BoxViewCartst,
@@ -22,7 +19,6 @@ import {
   FoodListSt,
   SumQuantitiesSt,
 } from './BoxViewCart.styles';
-import { TCartItems } from '@bookable24/store/shop/shop.types';
 import { BoxViewCartFoodItem } from './BoxViewCartFoodItem/BoxViewCartFoodItem';
 
 const Transition = React.forwardRef(function Transition(
@@ -55,7 +51,9 @@ const getSumDetailsCartItem = (cartItems: TCartItems) => {
 export const BoxViewCart = () => {
   const [open, setOpen] = useState(false);
   const dispatch = useAppDispatch();
-  const { cartItems } = useAppSelector((state) => state.booking);
+  const { cartItems, isViewCartModal } = useAppSelector(
+    (state) => state.booking
+  );
 
   const { sumPrices, sumQuantities } = getSumDetailsCartItem(cartItems);
 
@@ -65,7 +63,13 @@ export const BoxViewCart = () => {
 
   const handleClose = () => {
     setOpen(false);
+    dispatch(closeViewCartModal());
   };
+  useEffect(() => {
+    if (isViewCartModal) {
+      handleClickOpen();
+    }
+  }, [isViewCartModal]);
 
   return (
     <BoxViewCartst>

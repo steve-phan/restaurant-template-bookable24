@@ -5,7 +5,6 @@ export const FoodItemQuantitySt = styled('p')(({ theme }) => ({
   padding: 0,
   fontSize: 16,
   fontWeight: 600,
-
   color: theme.color.primary,
 
   [theme.breakpoints.up('md')]: {

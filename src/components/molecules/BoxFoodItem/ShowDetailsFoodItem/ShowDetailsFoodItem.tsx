@@ -48,16 +48,10 @@ export const ShowDetailsFoodItem = () => {
   } = useAppSelector((state) => state.booking);
 
   const image = getImage(foodImage as ImageDataLike) as IGatsbyImageData;
-  // const { quantity, foodId, foodName, descriptionAboutFood } =
-  //   foodItem as IFoodItem;
 
   const handleClose = () => {
     dispatch(closeFoodItemModal());
   };
-
-  React.useEffect(() => {
-    if (quantity === 0) handleClose();
-  }, [quantity]);
 
   return (
     <FoodItemViewMorest>

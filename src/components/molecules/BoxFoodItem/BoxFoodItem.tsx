@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import {
   GatsbyImage,
   getImage,
@@ -99,6 +99,7 @@ export const BoxFoodItem = ({ item }: { item: IFoodItemFromContentFul }) => {
               ...foodItem,
               isOpenModal: true,
               foodImage: image,
+              quantity: exitsItem?.quantity || 0,
             })
           );
         }}

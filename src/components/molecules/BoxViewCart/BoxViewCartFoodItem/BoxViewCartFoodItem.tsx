@@ -9,7 +9,7 @@ import {
 } from './BoxViewCartFoodItem.styles';
 
 export const BoxViewCartFoodItem = ({ item }: { item: IFoodItem }) => {
-  const { foodId, foodName, priceOfFood, quantity } = item;
+  const { foodName, priceOfFood, quantity } = item;
   return (
     <BoxViewCartFoodItemSt>
       <QuantityFoodItemSt>{quantity}</QuantityFoodItemSt>

@@ -6,25 +6,14 @@ import {
   addItemToCart,
   removeItemFromCart,
 } from '@bookable24/store/shop/bookingSlice';
-import { useAppDispatch, useAppSelector } from '@bookable24/store/hooks';
+import { useAppDispatch } from '@bookable24/store/hooks';
 
 import { FoodItemQuantitySt } from './BoxAdjustFoodItem.styles';
 import { IFoodItem } from '@bookable24/store/shop/shop.types';
 
 export const BoxAdjustFoodItem = ({ item }: { item: IFoodItem }) => {
   const dispatch = useAppDispatch();
-  const { foodId, foodName, quantity, priceOfFood, descriptionAboutFood } =
-    item;
-  //   const {
-  //     foodItemModal: { foodId, foodName, quantity, priceOfFood },
-  //   } = useAppSelector((state) => state.booking);
-
-  const foodItem = {
-    foodId,
-    foodName,
-    priceOfFood,
-    descriptionAboutFood,
-  };
+  const { quantity } = item;
 
   return (
     <ButtonGroup
@@ -38,7 +27,7 @@ export const BoxAdjustFoodItem = ({ item }: { item: IFoodItem }) => {
       <Button
         onClick={() => {
           if (quantity === 0) return;
-          dispatch(removeItemFromCart({ ...foodItem, quantity: 1 }));
+          dispatch(removeItemFromCart(item));
         }}
       >
         -
@@ -48,7 +37,7 @@ export const BoxAdjustFoodItem = ({ item }: { item: IFoodItem }) => {
       </Button>
       <Button
         onClick={() => {
-          dispatch(addItemToCart({ ...foodItem, quantity: 1 }));
+          dispatch(addItemToCart(item));
         }}
       >
         +

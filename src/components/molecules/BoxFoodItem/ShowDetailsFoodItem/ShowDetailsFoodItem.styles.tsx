@@ -12,7 +12,6 @@ export const ButtonViewMorest = styled('button')(({ theme }) => ({
   cursor: 'pointer',
   userSelect: 'none',
   textAlign: 'center',
-
   fontSize: 14,
   fontWeight: 400,
   color: theme.color.secondary,
@@ -30,6 +29,7 @@ export const CloseButtonSt = styled('div')(({ theme }) => ({
   display: 'flex',
   width: 'fit-content',
   borderRadius: '50%',
+
   '&:hover': {
     cursor: 'pointer',
   },

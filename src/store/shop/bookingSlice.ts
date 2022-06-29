@@ -1,15 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { StaticQuery } from 'gatsby';
 
-import {
-  IBookingState,
-  IBooking,
-  TCustomerInfo,
-  IInfoUserProps,
-  IFoodItem,
-  TCartItems,
-  IFoodItemModal,
-} from './shop.types';
+import { IBookingState, IInfoUserProps, IFoodItem } from './shop.types';
 import {
   addToCart,
   handleReduceCartItem,
@@ -28,7 +19,7 @@ const bookingSlice = createSlice({
       }) as IFoodItem[];
       state.cartItems = newCartItems;
 
-      state.foodItemModal = action.payload;
+      state.foodItemModal.quantity = state.foodItemModal.quantity + 1;
     },
     removeItemFromCart: (
       state: IBookingState,
@@ -40,7 +31,7 @@ const bookingSlice = createSlice({
       }) as IFoodItem[];
 
       state.cartItems = newCartItems;
-      state.foodItemModal = initialFoodItemModal;
+      state.foodItemModal.quantity = state.foodItemModal.quantity - 1;
     },
     openFoodItemModal: (
       state: IBookingState,
@@ -50,6 +41,12 @@ const bookingSlice = createSlice({
     },
     closeFoodItemModal: (state: IBookingState) => {
       state.foodItemModal = initialFoodItemModal;
+    },
+    openViewCartModal: (state: IBookingState) => {
+      state.isViewCartModal = true;
+    },
+    closeViewCartModal: (state: IBookingState) => {
+      state.isViewCartModal = false;
     },
     setNumberOfCustomer: (
       state: IBookingState,
@@ -98,6 +95,8 @@ export const {
   removeItemFromCart,
   openFoodItemModal,
   closeFoodItemModal,
+  openViewCartModal,
+  closeViewCartModal,
 } = bookingSlice.actions;
 
 export default bookingSlice.reducer;
