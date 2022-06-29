@@ -6,4 +6,6 @@ export const BoxViewCartFoodItemSt = styled('div')(({ theme }) => ({
 
 export const QuantityFoodItemSt = styled('div')(({ theme }) => ({
   position: 'absolute',
+  top: 0,
+  left: 0,
 }));

@@ -47,6 +47,8 @@ export const ShopOnline = ({ restaurantMenu, CATEGORY }: IShopOnlineProps) => {
     }
   }, [activeMenu]);
 
+  useEffect(() => {}, []);
+
   return (
     <ShopOnlineSt>
       <ShopOnlineInfoSt>

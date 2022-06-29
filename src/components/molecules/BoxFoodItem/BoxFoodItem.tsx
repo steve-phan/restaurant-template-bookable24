@@ -47,6 +47,7 @@ export const BoxFoodItem = ({ item }: { item: IFoodItemFromContentFul }) => {
     foodId,
     foodName,
     priceOfFood,
+    descriptionAboutFood,
     quantity: 1,
   };
 
@@ -86,20 +87,18 @@ export const BoxFoodItem = ({ item }: { item: IFoodItemFromContentFul }) => {
       </Grid>
       <FoodItemOderQtyst
         onClick={() => {
-          dispatch(addItemToCart(foodItem));
+          dispatch(addItemToCart({ ...foodItem, foodImage: image }));
         }}
       >
         {currentQuantity}
       </FoodItemOderQtyst>
-      {/* <ShowDetailsFoodItem item={item} /> */}
       <FoodItemViewMorest
         onClick={() => {
           dispatch(
             openFoodItemModal({
-              ...item,
+              ...foodItem,
               isOpenModal: true,
-              quantity:
-                typeof currentQuantity === 'number' ? currentQuantity : 1,
+              foodImage: image,
             })
           );
         }}

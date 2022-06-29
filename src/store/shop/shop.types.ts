@@ -1,5 +1,4 @@
-import { IFoodItemFromContentFul } from '@bookable24/RESTAURANT.CONFIG/restaurant.types';
-import { ImageDataLike } from 'gatsby-plugin-image';
+import { IGatsbyImageData } from 'gatsby-plugin-image';
 
 export interface IShopInfo {
   city: string;
@@ -102,8 +101,11 @@ export interface IFoodItem {
   foodName: string;
   foodId: string;
   priceOfFood: number;
+  descriptionAboutFood: string;
   quantity: number;
   require?: string;
+  foodImage?: IGatsbyImageData;
+  isOpenModal?: boolean;
 }
 
 export interface ICustomerInfos {
@@ -120,11 +122,11 @@ export interface IBookingState extends IBooking {
 
   customerInfo: ICustomerInfos;
   cartItems: TCartItems;
-  foodItemModal: IFoodItemModal;
+  foodItemModal: IFoodItem;
 }
 
-export interface IFoodItemModal
-  extends Omit<IFoodItemFromContentFul, 'category'> {
+export interface IFoodItemModal {
+  foodItemModalId: string;
   isOpenModal: boolean;
-  quantity: number;
+  foodImage?: IGatsbyImageData;
 }

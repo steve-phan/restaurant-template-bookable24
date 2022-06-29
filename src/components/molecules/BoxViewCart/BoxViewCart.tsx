@@ -19,6 +19,7 @@ import { useAppDispatch, useAppSelector } from '@bookable24/store/hooks';
 import {
   BoxViewCartst,
   FoodListItemSt,
+  FoodListSt,
   SumQuantitiesSt,
 } from './BoxViewCart.styles';
 import { TCartItems } from '@bookable24/store/shop/shop.types';
@@ -85,7 +86,7 @@ export const BoxViewCart = () => {
           variant='body1'
           component='div'
         >
-          {`Basket (${sumPrices} €)`}
+          {`Basket (${sumPrices.toFixed(2)} €)`}
         </Typography>
       </Toolbar>
       <Dialog
@@ -115,13 +116,13 @@ export const BoxViewCart = () => {
             </IconButton>
           </Toolbar>
         </AppBar>
-        <List>
-          {cartItems.map((item) => (
-            <FoodListItemSt>
+        <FoodListSt>
+          {cartItems.map((item, index) => (
+            <FoodListItemSt key={index}>
               <BoxViewCartFoodItem item={item} />
             </FoodListItemSt>
           ))}
-        </List>
+        </FoodListSt>
       </Dialog>
     </BoxViewCartst>
   );

@@ -21,6 +21,8 @@ import {
   FoodItemViewMorest,
 } from './ShowDetailsFoodItem.styles';
 import { AddFoodItemToCart } from '../AddFoodItemToCart/AddFoodItemToCart';
+import { existingCartItem } from '@bookable24/store/shop/utils';
+import { IFoodItem } from '@bookable24/store/shop/shop.types';
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -34,18 +36,20 @@ const Transition = React.forwardRef(function Transition(
 export const ShowDetailsFoodItem = () => {
   const dispatch = useAppDispatch();
   const {
+    cartItems,
     foodItemModal: {
+      isOpenModal,
+      foodImage,
+      quantity,
       foodId,
       foodName,
-      quantity,
-      foodImage,
-      isOpenModal,
       descriptionAboutFood,
-      priceOfFood,
     },
   } = useAppSelector((state) => state.booking);
 
   const image = getImage(foodImage as ImageDataLike) as IGatsbyImageData;
+  // const { quantity, foodId, foodName, descriptionAboutFood } =
+  //   foodItem as IFoodItem;
 
   const handleClose = () => {
     dispatch(closeFoodItemModal());
@@ -57,9 +61,8 @@ export const ShowDetailsFoodItem = () => {
 
   return (
     <FoodItemViewMorest>
-      {/* <ButtonViewMorest onClick={handleClickOpen}>View more</ButtonViewMorest> */}
       <Dialog
-        open={isOpenModal}
+        open={isOpenModal as boolean}
         TransitionComponent={Transition}
         keepMounted
         onClose={handleClose}

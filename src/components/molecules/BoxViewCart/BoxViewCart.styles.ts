@@ -34,6 +34,12 @@ export const SumQuantitiesSt = styled('span')(({ theme }) => ({
   background: theme.color.primary,
 }));
 
+export const FoodListSt = styled('ul')(({ theme }) => ({
+  listStyle: 'none',
+  margin: 0,
+  padding: 16,
+}));
+
 export const FoodListItemSt = styled('li')(({ theme }) => ({
   color: 'white',
   background: theme.color.primary,

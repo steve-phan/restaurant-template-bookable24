@@ -15,6 +15,7 @@ import {
   FoodItemPriceSt,
   SumFoodItemPriceSt,
 } from './AddFoodItemToCart.styles';
+import { BoxAdjustFoodItem } from '../../BoxAdjustFoodItem/BoxAdjustFoodItem';
 
 export const AddFoodItemToCart = () => {
   const dispatch = useAppDispatch();
@@ -30,37 +31,13 @@ export const AddFoodItemToCart = () => {
     priceOfFood,
   };
 
+  const item = { foodId, foodName, quantity, priceOfFood };
+
   return (
     <AddFoodItemToCartSt>
       <Grid container spacing={2} columns={16} justifyContent='space-between'>
         <Grid item xs={6}>
-          <ButtonGroup
-            sx={{
-              width: '100%',
-              fontWeight: 600,
-            }}
-            variant='outlined'
-            aria-label='outlined button group'
-          >
-            <Button
-              onClick={() => {
-                if (quantity === 0) return;
-                dispatch(removeItemFromCart({ ...foodItem, quantity: 1 }));
-              }}
-            >
-              -
-            </Button>
-            <Button color='primary' disabled>
-              <FoodItemPriceSt>{quantity}</FoodItemPriceSt>
-            </Button>
-            <Button
-              onClick={() => {
-                dispatch(addItemToCart({ ...foodItem, quantity: 1 }));
-              }}
-            >
-              +
-            </Button>
-          </ButtonGroup>
+          <BoxAdjustFoodItem item={item} />
         </Grid>
         <Grid item xs={9}>
           <Button
