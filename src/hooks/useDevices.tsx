@@ -10,8 +10,7 @@ export const breakpoints = {
 type TBreakPoint = 'small' | 'medium' | 'large' | 'extraLarge';
 
 export const useDevices = (): TBreakPoint => {
-  const [currentWidth, setCurrentWidth] = useState(window.innerWidth);
-  const width = window.innerWidth;
+  const [currentWidth, setCurrentWidth] = useState(typeof window !== 'undefined' && window?.innerWidth);
   const { medium, large, extraLarge } = breakpoints;
 
   const handleChangeWidth = () => {
@@ -25,10 +24,10 @@ export const useDevices = (): TBreakPoint => {
     };
   }, []);
 
-  if (currentWidth >= medium && width < large) {
+  if (currentWidth >= medium && currentWidth < large) {
     return 'medium';
   }
-  if (currentWidth >= large && width < extraLarge) {
+  if (currentWidth >= large && currentWidth < extraLarge) {
     return 'large';
   }
   if (currentWidth >= extraLarge) {
