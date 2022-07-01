@@ -17,3 +17,8 @@ export const BoxAdjustFoodItemSt = styled('div')(({ theme }) => ({
 
   paddingTop: 8,
 }));
+
+export const FoodNameSt = styled('span')(({ theme }) => ({
+  fontFamily: 'Work Sans,sans-serif',
+  fontWeight: 700,
+}));

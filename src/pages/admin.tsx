@@ -16,11 +16,15 @@ const Adminpage = () => {
         action='submit'
         onSubmit={async (e) => {
           e.preventDefault();
-          const res = await axios.post('/.netlify/functions/sendEmail', {
-            name,
-            email,
-          });
-          console.log({ res });
+          try {
+            const res = await axios.post('/.netlify/functions/sendEmail', {
+              name,
+              email,
+            });
+            console.log({ res });
+          } catch (error) {
+            console.log({ error });
+          }
         }}
       >
         <input type='text' value={name} placeholder='name' onChange={(e) => setName(e.target.value)} />

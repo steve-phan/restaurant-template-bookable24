@@ -31,7 +31,6 @@ export const handler: Handler = async (event, context) => {
       }),
     };
   } catch (error) {
-    console.log({ error });
     return {
       statusCode: 500,
       body: JSON.stringify({

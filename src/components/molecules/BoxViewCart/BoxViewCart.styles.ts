@@ -50,19 +50,3 @@ export const SumQuantitiesSt = styled('span')(({ theme }) => ({
   color: 'white',
   background: theme.color.primary,
 }));
-
-export const FoodListSt = styled('ul')(({ theme }) => ({
-  listStyle: 'none',
-  margin: 0,
-  padding: 16,
-}));
-
-export const FoodListItemSt = styled('li')(({ theme }) => ({
-  // color: 'white',
-  // background: theme.color.primary,
-  padding: '8px 0',
-  borderBottom: `1px solid ${theme.color.borderColor}`,
-  width: '100%',
-  maxWidth: 700,
-  margin: '0 auto',
-}));

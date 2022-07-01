@@ -1,7 +1,37 @@
 import { styled } from '@mui/material/styles';
 
 export const ShopOnlineSt = styled('div')(({ theme }) => ({
-  // padding: 16,
+  display: 'flex',
+  // WebkitBoxFlex: 1,
+  // flex: '1 0 auto',
+  // flexGrow: 1,
+  // flexShrink: 0,
+  // flexBasis: 'auto',
+  // flexFlow: 'row nowrap',
+  width: '100%',
+}));
+
+export const ShopOnlineMenuListSt = styled('div')(({ theme }) => ({
+  width: '100%',
+  maxWidth: 800,
+  margin: '0 auto',
+
+  [theme.breakpoints.up('md')]: {
+    width: 'calc(100% - 350px)',
+  },
+}));
+
+export const ShopOnlineBasketSt = styled('div')(({ theme }) => ({
+  width: 350,
+  position: 'relative',
+  flexShrink: 0,
+  boxShadow: '0px 2px 8px 0px #cecece',
+  zIndex: 1050,
+  // [theme.breakpoints.down('md')]: {},
+}));
+export const ShopOnlineBasketDesktopSt = styled('div')(({ theme }) => ({
+  width: 350,
+  position: 'relative',
 }));
 
 export const ShopOnlineInfoSt = styled('div')(({ theme }) => ({
@@ -53,31 +83,25 @@ export const CategoryMenuSt = styled('div')(({ theme }) => ({
   zIndex: 1000,
 }));
 
-export const CategoryItemSt = styled('div')<{ active?: 'active' | 'normal' }>(
-  ({ theme, active }) => ({
-    position: 'relative',
-    cursor: 'pointer',
-    padding: '8px 10px',
-    maxWidth: '40vh',
-    margin: '0 auto',
-    lineHeight: 1.4,
-    whiteSpace: 'nowrap',
-    // flexShrink: 0,
-    width: 'auto',
-    zIndex: 3,
-    textAlign: 'center',
-    fontFamily: 'Mukta, sans-serif',
+export const CategoryItemSt = styled('div')<{ active?: 'active' | 'normal' }>(({ theme, active }) => ({
+  position: 'relative',
+  cursor: 'pointer',
+  padding: '8px 10px',
+  maxWidth: '40vh',
+  margin: '0 auto',
+  lineHeight: 1.4,
+  whiteSpace: 'nowrap',
+  // flexShrink: 0,
+  width: 'auto',
+  zIndex: 3,
+  textAlign: 'center',
+  fontFamily: 'Mukta, sans-serif',
 
-    color: active === 'active' ? theme.color.secondary : 'black',
-    backgroundColor:
-      active === 'active' ? theme.color.secondaryBackground : 'white',
-    borderRadius: 6,
-    border:
-      active === 'active'
-        ? `1px solid ${theme.color.secondaryBackground}`
-        : `0 solid white`,
-  })
-);
+  color: active === 'active' ? theme.color.secondary : 'black',
+  backgroundColor: active === 'active' ? theme.color.secondaryBackground : 'white',
+  borderRadius: 6,
+  border: active === 'active' ? `1px solid ${theme.color.secondaryBackground}` : `0 solid white`,
+}));
 
 export const HeadingSectionSt = styled('h2')(({ theme }) => ({
   maxWidth: 700,

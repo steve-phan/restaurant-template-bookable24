@@ -1,7 +1,4 @@
-import {
-  IFoodItemFromContentFul,
-  TCategory,
-} from '@bookable24/RESTAURANT.CONFIG/restaurant.types';
+import { IFoodItemFromContentFul, TCategory } from '@bookable24/RESTAURANT.CONFIG/restaurant.types';
 
 export interface IShopOnlineProps {
   restaurantMenu: IFoodItemFromContentFul[];

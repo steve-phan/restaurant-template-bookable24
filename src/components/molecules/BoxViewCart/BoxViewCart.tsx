@@ -8,20 +8,15 @@ import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
 import { TransitionProps } from '@mui/material/transitions';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
+import { useI18next } from 'gatsby-plugin-react-i18next';
 
 import { useAppDispatch, useAppSelector } from '@bookable24/store/hooks';
 import { closeViewCartModal } from '@bookable24/store/shop/bookingSlice';
-import { TCartItems } from '@bookable24/store/shop/shop.types';
+import { useSumDetailsCartItem } from '@bookable24/hooks/useSumDetailsCartItem';
 
-import {
-  BoxViewCartst,
-  FoodListItemSt,
-  FoodListSt,
-  SumQuantitiesSt,
-  WrapperBoxViewCartst,
-} from './BoxViewCart.styles';
-import { BoxViewCartFoodItem } from './BoxViewCartFoodItem/BoxViewCartFoodItem';
-import { useI18next } from 'gatsby-plugin-react-i18next';
+import { BoxViewCartst, SumQuantitiesSt, WrapperBoxViewCartst } from './BoxViewCart.styles';
+import { ViewCartFoodList } from '../ViewCartFoodList/ViewCartFoodList';
+import { HeadingBox } from '../ui/Heading/HeadingBox';
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -32,32 +27,12 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction='up' ref={ref} {...props} />;
 });
 
-const getSumDetailsCartItem = (cartItems: TCartItems) => {
-  return cartItems.reduce(
-    (acc, curItem) => {
-      const sumQty = acc.sumQuantities + curItem.quantity;
-      const sumPrice = acc.sumPrices + curItem.quantity * curItem.priceOfFood;
-
-      return {
-        sumQuantities: sumQty,
-        sumPrices: sumPrice,
-      };
-    },
-    {
-      sumQuantities: 0,
-      sumPrices: 0,
-    }
-  );
-};
-
 export const BoxViewCart = () => {
   const [open, setOpen] = useState(false);
   const dispatch = useAppDispatch();
-  const { cartItems, isViewCartModal } = useAppSelector(
-    (state) => state.booking
-  );
+  const { cartItems, isViewCartModal } = useAppSelector((state) => state.booking);
   const { navigate } = useI18next();
-  const { sumPrices, sumQuantities } = getSumDetailsCartItem(cartItems);
+  const { sumPrices, sumQuantities } = useSumDetailsCartItem(cartItems);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -88,22 +63,13 @@ export const BoxViewCart = () => {
             <ShoppingBagIcon />
             <SumQuantitiesSt>{sumQuantities}</SumQuantitiesSt>
           </IconButton>
-          <Typography
-            sx={{ ml: 2, flex: 1, textAlign: 'center', color: 'white' }}
-            variant='body1'
-            component='div'
-          >
+          <Typography sx={{ ml: 2, flex: 1, textAlign: 'center', color: 'white' }} variant='body1' component='div'>
             {`Basket (${sumPrices.toFixed(2)} €)`}
           </Typography>
         </Toolbar>
         <WrapperBoxViewCartst>
           <BoxViewCartst>
-            <Dialog
-              fullScreen
-              open={open}
-              onClose={handleClose}
-              TransitionComponent={Transition}
-            >
+            <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
               <AppBar
                 sx={{
                   position: 'relative',
@@ -117,38 +83,17 @@ export const BoxViewCart = () => {
                     color: 'black',
                   }}
                 >
-                  <Typography
-                    sx={{ ml: 2, flex: 1 }}
-                    variant='body1'
-                    component='div'
-                  >
-                    Basket
-                  </Typography>
-
-                  <IconButton
-                    edge='end'
-                    color='inherit'
-                    onClick={handleClose}
-                    aria-label='close'
-                  >
+                  <HeadingBox title='Basket' />
+                  <IconButton edge='end' color='inherit' onClick={handleClose} aria-label='close'>
                     <CloseIcon />
                   </IconButton>
                 </Toolbar>
               </AppBar>
-              <FoodListSt>
-                {cartItems.map((item, index) => (
-                  <FoodListItemSt key={index}>
-                    <BoxViewCartFoodItem item={item} />
-                  </FoodListItemSt>
-                ))}
-              </FoodListSt>
+              <ViewCartFoodList cartItems={cartItems} />
+
               <WrapperBoxViewCartst>
                 <BoxViewCartst>
-                  <AppBar
-                    position='relative'
-                    color='primary'
-                    sx={{ top: 'auto', bottom: 0 }}
-                  >
+                  <AppBar position='relative' color='primary' sx={{ top: 'auto', bottom: 0 }}>
                     <Toolbar
                       onClick={() => {
                         alert('Page is building');

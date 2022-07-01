@@ -3,14 +3,10 @@ import { Box, Grid } from '@mui/material';
 
 import { IFoodItem } from '@bookable24/store/shop/shop.types';
 
-import {
-  BoxAdjustFoodItemSt,
-  BoxViewCartFoodItemSt,
-  QuantityFoodItemSt,
-} from './BoxViewCartFoodItem.styles';
+import { BoxAdjustFoodItemSt, BoxViewCartFoodItemSt, FoodNameSt, QuantityFoodItemSt } from './ViewCartFoodItem.styles';
 import { BoxAdjustFoodItem } from '../../BoxAdjustFoodItem/BoxAdjustFoodItem';
 
-export const BoxViewCartFoodItem = ({ item }: { item: IFoodItem }) => {
+export const ViewCartFoodItem = ({ item }: { item: IFoodItem }) => {
   const { foodName, priceOfFood, quantity } = item;
   return (
     <BoxViewCartFoodItemSt>
@@ -23,7 +19,7 @@ export const BoxViewCartFoodItem = ({ item }: { item: IFoodItem }) => {
       >
         <Grid container>
           <Grid item xs={10}>
-            {foodName}
+            <FoodNameSt>{foodName}</FoodNameSt>
           </Grid>
           <Grid item xs={2} textAlign='end'>
             {(quantity * priceOfFood).toFixed(2)} €

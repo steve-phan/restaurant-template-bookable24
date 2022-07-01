@@ -47,6 +47,7 @@
     "gatsby-source-shopify": "^7.5.1",
     "gatsby-transformer-sharp": "^4.16.0",
     "i18next": "^21.8.10",
+    "netlify-cli": "^10.7.0",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-helmet": "^6.1.0",
