@@ -25,7 +25,7 @@ export const ShopOnlineBasketSt = styled('div')(({ theme }) => ({
   width: 350,
   position: 'relative',
   flexShrink: 0,
-  boxShadow: '0px 2px 8px 0px #cecece',
+  boxShadow: '-2px -1px 1px 0px #cecece',
   zIndex: 1050,
   // [theme.breakpoints.down('md')]: {},
 }));

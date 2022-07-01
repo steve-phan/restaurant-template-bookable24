@@ -17,6 +17,7 @@ import { useSumDetailsCartItem } from '@bookable24/hooks/useSumDetailsCartItem';
 import { BoxViewCartst, SumQuantitiesSt, WrapperBoxViewCartst } from './BoxViewCart.styles';
 import { ViewCartFoodList } from '../ViewCartFoodList/ViewCartFoodList';
 import { HeadingBox } from '../ui/Heading/HeadingBox';
+import { EmptyViewCart } from '../EmptyViewCart/EmptyViewCart';
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -51,22 +52,24 @@ export const BoxViewCart = () => {
   return (
     <WrapperBoxViewCartst>
       <BoxViewCartst>
-        <Toolbar onClick={handleClickOpen}>
-          <IconButton
-            edge='start'
-            sx={{
-              color: 'white',
-            }}
-            onClick={handleClose}
-            aria-label='open'
-          >
-            <ShoppingBagIcon />
-            <SumQuantitiesSt>{sumQuantities}</SumQuantitiesSt>
-          </IconButton>
-          <Typography sx={{ ml: 2, flex: 1, textAlign: 'center', color: 'white' }} variant='body1' component='div'>
-            {`Basket (${sumPrices.toFixed(2)} €)`}
-          </Typography>
-        </Toolbar>
+        {cartItems.length !== 0 ? (
+          <Toolbar onClick={handleClickOpen}>
+            <IconButton
+              edge='start'
+              sx={{
+                color: 'white',
+              }}
+              onClick={handleClose}
+              aria-label='open'
+            >
+              <ShoppingBagIcon />
+              <SumQuantitiesSt>{sumQuantities}</SumQuantitiesSt>
+            </IconButton>
+            <Typography sx={{ ml: 2, flex: 1, textAlign: 'center', color: 'white' }} variant='body1' component='div'>
+              {`Basket (${sumPrices.toFixed(2)} €)`}
+            </Typography>
+          </Toolbar>
+        ) : null}
         <WrapperBoxViewCartst>
           <BoxViewCartst>
             <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
@@ -89,44 +92,50 @@ export const BoxViewCart = () => {
                   </IconButton>
                 </Toolbar>
               </AppBar>
-              <ViewCartFoodList cartItems={cartItems} />
+              {cartItems.length !== 0 ? (
+                <>
+                  <ViewCartFoodList cartItems={cartItems} />
 
-              <WrapperBoxViewCartst>
-                <BoxViewCartst>
-                  <AppBar position='relative' color='primary' sx={{ top: 'auto', bottom: 0 }}>
-                    <Toolbar
-                      onClick={() => {
-                        alert('Page is building');
-                        handleClose();
-                        navigate('/oder');
-                      }}
-                    >
-                      <IconButton
-                        edge='start'
-                        sx={{
-                          color: 'white',
-                        }}
-                        aria-label='icon'
-                      >
-                        <ShoppingBagIcon />
-                        <SumQuantitiesSt>{sumQuantities}</SumQuantitiesSt>
-                      </IconButton>
-                      <Typography
-                        sx={{
-                          ml: 2,
-                          flex: 1,
-                          textAlign: 'center',
-                          color: 'white',
-                        }}
-                        variant='body1'
-                        component='div'
-                      >
-                        {`Checkout (${sumPrices.toFixed(2)} €)`}
-                      </Typography>
-                    </Toolbar>
-                  </AppBar>
-                </BoxViewCartst>
-              </WrapperBoxViewCartst>
+                  <WrapperBoxViewCartst>
+                    <BoxViewCartst>
+                      <AppBar position='relative' color='primary' sx={{ top: 'auto', bottom: 0 }}>
+                        <Toolbar
+                          onClick={() => {
+                            alert('Page is building');
+                            handleClose();
+                            navigate('/oder');
+                          }}
+                        >
+                          <IconButton
+                            edge='start'
+                            sx={{
+                              color: 'white',
+                            }}
+                            aria-label='icon'
+                          >
+                            <ShoppingBagIcon />
+                            <SumQuantitiesSt>{sumQuantities}</SumQuantitiesSt>
+                          </IconButton>
+                          <Typography
+                            sx={{
+                              ml: 2,
+                              flex: 1,
+                              textAlign: 'center',
+                              color: 'white',
+                            }}
+                            variant='body1'
+                            component='div'
+                          >
+                            {`Checkout (${sumPrices.toFixed(2)} €)`}
+                          </Typography>
+                        </Toolbar>
+                      </AppBar>
+                    </BoxViewCartst>
+                  </WrapperBoxViewCartst>
+                </>
+              ) : (
+                <EmptyViewCart />
+              )}
             </Dialog>
           </BoxViewCartst>
         </WrapperBoxViewCartst>
