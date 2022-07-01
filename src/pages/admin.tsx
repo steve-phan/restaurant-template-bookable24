@@ -16,7 +16,7 @@ const Adminpage = () => {
         action='submit'
         onSubmit={async (e) => {
           e.preventDefault();
-          const res = await axios.post('https://europe-west3-shoponline-eu.cloudfunctions.net/api/test', {
+          const res = await axios.post('/.netlify/functions/sendEmail', {
             name,
             email,
           });
