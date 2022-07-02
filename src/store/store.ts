@@ -1,3 +1,4 @@
+import { Provider } from 'react-redux';
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 
 // import shopReducer from "./shop/shopSlice"
@@ -10,9 +11,15 @@ export const store = configureStore({
     booking: bookingReducer,
     account: accountReducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false }),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({ serializableCheck: false }),
 });
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
-export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, Action<string>>;
+export type AppThunk<ReturnType = void> = ThunkAction<
+  ReturnType,
+  RootState,
+  unknown,
+  Action<string>
+>;

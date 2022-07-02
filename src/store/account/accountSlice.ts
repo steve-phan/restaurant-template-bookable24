@@ -1,32 +1,40 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios, { ResponseType, AxiosResponse } from 'axios';
-import { onAuthStateChanged, createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '@bookable24/firebase';
+import {
+  onAuthStateChanged,
+  createUserWithEmailAndPassword,
+  UserCredential,
+} from 'firebase/auth';
 import { async } from '@firebase/util';
 
-interface IAccountprops {
-  email: string;
-  password: string;
-}
-
-interface IAccountSliceStates {
-  isLoading: boolean;
-}
+import { auth } from '@bookable24/firebase';
+import { createAccount, signInAccount } from './account.Thunks';
+import { IAccountSliceStates } from './account.types';
 
 const initialAccountState: IAccountSliceStates = {
   isLoading: false,
+  isUserLogin: false,
+  userInfo: {
+    fullName: '',
+    email: '',
+    phone: '',
+    address: {
+      houseNumber: 0,
+      postCode: 0,
+      street: '',
+      city: '',
+    },
+  },
 };
-
-export const createAccount = createAsyncThunk('account/create', async ({ email, password }: IAccountprops) => {
-  const userRef = await createUserWithEmailAndPassword(auth, email, password);
-  console.log({ userRef });
-  return { userRef };
-});
 
 export const accountSlice = createSlice({
   name: 'account',
   initialState: initialAccountState,
-  reducers: {},
+  reducers: {
+    setUserLogin: (state) => {
+      state.isUserLogin = true;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(createAccount.pending, (state: IAccountSliceStates) => {
@@ -36,13 +44,38 @@ export const accountSlice = createSlice({
         state.isLoading = false;
         console.log({ action });
       })
-      .addCase(createAccount.fulfilled, (state: IAccountSliceStates, action) => {
+      .addCase(
+        createAccount.fulfilled,
+        (
+          state: IAccountSliceStates,
+          action: PayloadAction<{ userRef: UserCredential }>
+        ) => {
+          state.isLoading = false;
+          state.isUserLogin = true;
+          console.log({ action });
+        }
+      )
+      .addCase(signInAccount.pending, (state: IAccountSliceStates) => {
+        state.isLoading = true;
+      })
+      .addCase(signInAccount.rejected, (state: IAccountSliceStates, action) => {
         state.isLoading = false;
         console.log({ action });
-      });
+      })
+      .addCase(
+        signInAccount.fulfilled,
+        (
+          state: IAccountSliceStates,
+          action: PayloadAction<{ userRef: UserCredential }>
+        ) => {
+          state.isLoading = false;
+          state.isUserLogin = true;
+          console.log({ action });
+        }
+      );
   },
 });
 
-export const {} = accountSlice.actions;
+export const { setUserLogin } = accountSlice.actions;
 
 export default accountSlice.reducer;

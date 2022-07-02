@@ -1,15 +1,19 @@
 import React, { useRef, useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-
-// import { useAppDispatch, useAppSelector } from 'src/store/hooks';
-// import { setCustomerInfo, setCustomerValidInfo, setCustomerSubmit } from 'src/store/shop/bookingSlice';
-
-import { WrapColSt, TextFieldSt, TypographySt, AccountHeadingSt } from '../Account.styles';
 import { useI18next } from 'gatsby-plugin-react-i18next';
+
+import { useAppDispatch } from '@bookable24/store/hooks';
+import { signInAccount } from '@bookable24/store/account/account.Thunks';
+
+import {
+  WrapColSt,
+  TextFieldSt,
+  TypographySt,
+  AccountHeadingSt,
+} from '../Account.styles';
 import { getSignSchema } from '../utils';
 import { ButtonSt } from '../Account.styles';
-import { useAppDispatch } from '@bookable24/store/hooks';
 
 interface ISignInProps {
   email: string;
@@ -37,27 +41,8 @@ export const SignIn = () => {
     },
   });
 
-  // useEffect(() => {
-  //   if (isSubmitted === 'pending' || isValidInfo) {
-  //     handleSubmit(onSubmit)();
-  //   }
-  //   return () => {
-  //     dispatch(setCustomerSubmit('fail'));
-  //   };
-  // }, [isSubmitted, isValidInfo]);
-
-  const dirtyLength = Object.keys(dirtyFields).map((field) => !!field).length;
-
-  // useEffect(() => {
-  //   if (isValid || dirtyLength >= 4) {
-  //     handleSubmit(onSubmit)();
-  //     dispatch(setCustomerValidInfo(true));
-  //   }
-  //   // const errorsLength = Object.keys(errors).map(field => !!field).length
-  // }, [watch('email'), watch('firstName'), watch('lastName'), watch('phone'), watch('require'), isValid]);
-
   const onSubmit = (data: ISignInProps) => {
-    // dispatch(setCustomerInfo(data));
+    dispatch(signInAccount({ email: data.email, password: data.password }));
     console.log('submiting');
   };
   return (
@@ -81,12 +66,20 @@ export const SignIn = () => {
           placeholder='Password'
           label='Passwrod*'
           autoComplete='off'
+          type='password'
         />
 
-        <ButtonSt variant='contained' color='primary'>
+        <ButtonSt
+          variant='contained'
+          color='primary'
+          onClick={handleSubmit(onSubmit)}
+        >
           Sign In
         </ButtonSt>
-        <TypographySt>Alle Felder, die mit einem Sternchen (*) gekennzeichnet sind, müssen bei der Anmeldung ausgefüllt werden.</TypographySt>
+        <TypographySt>
+          Alle Felder, die mit einem Sternchen (*) gekennzeichnet sind, müssen
+          bei der Anmeldung ausgefüllt werden.
+        </TypographySt>
       </form>
     </WrapColSt>
   );

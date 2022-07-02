@@ -8,8 +8,14 @@ import { useAppDispatch, useAppSelector } from '@bookable24/store/hooks';
 // import { IInfoUserProps } from 'src/store/shop/shop.types';
 
 import { getSchema } from '../utils';
-import { AccountHeadingSt, ButtonSt, TextFieldSt, TypographySt, WrapColSt } from '../Account.styles';
-import { createAccount } from '@bookable24/store/account/accountSlice';
+import {
+  AccountHeadingSt,
+  ButtonSt,
+  TextFieldSt,
+  TypographySt,
+  WrapColSt,
+} from '../Account.styles';
+import { createAccount } from '@bookable24/store/account/account.Thunks';
 
 interface ISignUpProps {
   fullname: string;
@@ -103,7 +109,10 @@ export const SignUp = () => {
                   if (value === '') {
                     onChangeCustom('');
                   }
-                  const num = !/^\d+$/.test(value) && Number.isNaN(parseFloat(value)) ? null : value;
+                  const num =
+                    !/^\d+$/.test(value) && Number.isNaN(parseFloat(value))
+                      ? null
+                      : value;
                   if (num) onChangeCustom(num);
                 }}
                 error={!!errors.phone}
@@ -126,10 +135,17 @@ export const SignUp = () => {
           autoComplete='off'
           type='password'
         />
-        <ButtonSt variant='contained' color='primary' onClick={handleSubmit(onSubmit)}>
+        <ButtonSt
+          variant='contained'
+          color='primary'
+          onClick={handleSubmit(onSubmit)}
+        >
           Sign Up
         </ButtonSt>
-        <TypographySt>Alle Felder, die mit einem Sternchen (*) gekennzeichnet sind, müssen bei der Anmeldung ausgefüllt werden.</TypographySt>
+        <TypographySt>
+          Alle Felder, die mit einem Sternchen (*) gekennzeichnet sind, müssen
+          bei der Anmeldung ausgefüllt werden.
+        </TypographySt>
       </form>
     </WrapColSt>
   );
