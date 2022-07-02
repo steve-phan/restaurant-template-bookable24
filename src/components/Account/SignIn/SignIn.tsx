@@ -1,9 +1,9 @@
-import React, { useRef, useEffect } from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import React, { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useI18next } from 'gatsby-plugin-react-i18next';
+import { Link, useI18next } from 'gatsby-plugin-react-i18next';
 
-import { useAppDispatch } from '@bookable24/store/hooks';
+import { useAppDispatch, useAppSelector } from '@bookable24/store/hooks';
 import { signInAccount } from '@bookable24/store/account/account.Thunks';
 
 import {
@@ -11,9 +11,11 @@ import {
   TextFieldSt,
   TypographySt,
   AccountHeadingSt,
+  AccountInfoSt,
 } from '../Account.styles';
 import { getSignSchema } from '../utils';
 import { ButtonSt } from '../Account.styles';
+import Loading from '@bookable24/components/molecules/Loading/Loading';
 
 interface ISignInProps {
   email: string;
@@ -21,8 +23,9 @@ interface ISignInProps {
 }
 
 export const SignIn = () => {
-  const { t } = useI18next();
+  const { t, navigate } = useI18next();
   const dispatch = useAppDispatch();
+  const { isUserLogin, isLoading } = useAppSelector((state) => state.account);
 
   const schema = getSignSchema(t);
 
@@ -32,7 +35,7 @@ export const SignIn = () => {
     getValues,
     handleSubmit,
     watch,
-    formState: { errors, isValid, dirtyFields },
+    formState: { errors },
   } = useForm<ISignInProps>({
     resolver: yupResolver(schema),
     defaultValues: {
@@ -41,19 +44,30 @@ export const SignIn = () => {
     },
   });
 
+  useEffect(() => {
+    if (isUserLogin) {
+      navigate('/account');
+    }
+  }, [isUserLogin]);
+
   const onSubmit = (data: ISignInProps) => {
     dispatch(signInAccount({ email: data.email, password: data.password }));
-    console.log('submiting');
   };
   return (
     <WrapColSt>
+      {isLoading && <Loading />}
       <AccountHeadingSt> {t('account.login')} </AccountHeadingSt>
+      <AccountInfoSt>
+        Loggen Sie sich jetzt ein, um alle Vorteile des Kundenkontos
+        wahrzunehmen. Neuer Kunde?
+        <Link to='/account/signup'> {t('account.register')} </Link>
+      </AccountInfoSt>
       <form autoComplete='off' onSubmit={handleSubmit(onSubmit)}>
         <TextFieldSt
           {...register('email')}
           error={!!errors.email}
           helperText={errors?.email?.message}
-          variant='filled'
+          variant='standard'
           placeholder='johndoe@mail.com'
           label='E-Mail*'
           autoComplete='off'
@@ -62,7 +76,7 @@ export const SignIn = () => {
           {...register('password')}
           error={!!errors.password}
           helperText={errors?.password?.message}
-          variant='filled'
+          variant='standard'
           placeholder='Password'
           label='Passwrod*'
           autoComplete='off'

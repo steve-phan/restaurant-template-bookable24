@@ -31,8 +31,15 @@ export const accountSlice = createSlice({
   name: 'account',
   initialState: initialAccountState,
   reducers: {
-    setUserLogin: (state) => {
+    setAccountLoading: (state, action) => {
+      state.isLoading = action.payload;
+    },
+    setUserLogin: (
+      state: IAccountSliceStates,
+      action: PayloadAction<{ email: string; displayName: string }>
+    ) => {
       state.isUserLogin = true;
+      state.isLoading = false;
     },
   },
   extraReducers: (builder) => {
@@ -76,6 +83,6 @@ export const accountSlice = createSlice({
   },
 });
 
-export const { setUserLogin } = accountSlice.actions;
+export const { setUserLogin, setAccountLoading } = accountSlice.actions;
 
 export default accountSlice.reducer;

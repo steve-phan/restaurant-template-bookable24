@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal/Modal';
 
 export const WrapColSt = styled('div')`
+  position: relative;
   padding: 16px 8px;
   margin: 0 auto;
 
@@ -20,7 +21,7 @@ export const AccountHeadingSt = styled('span')(({ theme }) => ({
   fontSize: 20,
   textAlign: 'center',
   fontWeight: 700,
-  marginBottom: 24,
+  marginBottom: 16,
   marginTop: 16,
 }));
 
@@ -28,7 +29,7 @@ export const TextFieldSt = styled(TextField)(({ theme }) => ({
   marginBottom: 24,
   width: '100%',
   maxWidth: '500px',
-  backgroundColor: theme.color.background,
+  backgroundColor: theme.color.white,
 
   '& label.Mui-focused': {
     color: theme.color.primary,
@@ -43,6 +44,19 @@ export const TypographySt = styled(Typography)(({ theme }) => ({
   paddingLeft: 10,
   color: '#333',
   borderLeft: `2px solid red`,
+}));
+
+export const AccountInfoSt = styled(Typography)(({ theme }) => ({
+  fontSize: 12,
+  fontWeight: 600,
+  color: theme.color.gray,
+  textAlign: 'center',
+  fontFamily: 'Work Sans,sans-serif',
+  padding: '8px 24px 20px 24px',
+
+  a: {
+    color: theme.color.secondary,
+  },
 }));
 
 export const ButtonSt = styled(Button)`

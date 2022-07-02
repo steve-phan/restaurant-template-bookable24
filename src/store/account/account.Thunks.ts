@@ -11,18 +11,22 @@ import { auth } from '@bookable24/firebase';
 
 import { AppThunk } from '../store';
 import { ICreateAccount } from './account.types';
-import { setUserLogin } from './accountSlice';
+import { setAccountLoading, setUserLogin } from './accountSlice';
+import { async } from '@firebase/util';
 
 export const checkUserAuth = (): AppThunk => {
   return (dispatch, getState) => {
     if (typeof window !== 'undefined') {
-      onAuthStateChanged(auth, (user) => {
-        console.log('haha thunk', user);
-        if (user?.email) {
-          dispatch(setUserLogin());
-          // User is signed in, see docs for a list of available properties
-          // https://firebase.google.com/docs/reference/js/firebase.User
-          // const uid = user.uid
+      dispatch(setAccountLoading(true));
+      onAuthStateChanged(auth, async (user) => {
+        if (user) {
+          const { email, displayName } = user as {
+            email: string;
+            displayName: string;
+          };
+          dispatch(setUserLogin({ email, displayName }));
+        } else {
+          dispatch(setAccountLoading(false));
         }
       });
     }
@@ -32,20 +36,17 @@ export const createAccount = createAsyncThunk(
   'account/create',
   async ({ email, password, phone, fullName }: ICreateAccount) => {
     const userRef = await createUserWithEmailAndPassword(auth, email, password);
-    // auth.currentUser?.displayName = fullName;
-
-    // auth.currentUser?.providerData[0].displayName = fullName
-    await updateProfile(userRef.user, {
-      displayName: fullName,
-    });
-    console.log({ newUser: userRef.user });
+    if (auth.currentUser)
+      await updateProfile(auth.currentUser, {
+        displayName: fullName,
+      });
     return { userRef };
   }
 );
 
 export const signInAccount = createAsyncThunk(
   'account/signIn',
-  async ({ email, password }: ICreateAccount) => {
+  async ({ email, password }: { email: string; password: string }) => {
     const userRef = await signInWithEmailAndPassword(auth, email, password);
     // const {} = userRef.user
     console.log({ user: userRef.user });

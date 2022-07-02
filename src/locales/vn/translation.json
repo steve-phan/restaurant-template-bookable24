@@ -73,7 +73,7 @@
         "lastName": "Bitte Nachnamen eingeben",
         "phone": "Bitte geben Sie eine gültige Phone Nummer ein.",
         "email": "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
-        "fullname": "Bitte Vollnamen eingeben",
+        "fullName": "Bitte Vollnamen eingeben",
         "password": "Bitte Passwort eingeben, mindestens 6 Zeichen"
       }
     }

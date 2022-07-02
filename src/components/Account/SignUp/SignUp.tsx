@@ -1,33 +1,33 @@
 import React, { useRef, useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useI18next } from 'gatsby-plugin-react-i18next';
+import { Link, useI18next } from 'gatsby-plugin-react-i18next';
 
 import { useAppDispatch, useAppSelector } from '@bookable24/store/hooks';
-// import { setCustomerInfo, setCustomerValidInfo, setCustomerSubmit } from 'src/store/shop/bookingSlice';
-// import { IInfoUserProps } from 'src/store/shop/shop.types';
+import { createAccount } from '@bookable24/store/account/account.Thunks';
 
 import { getSchema } from '../utils';
 import {
   AccountHeadingSt,
+  AccountInfoSt,
   ButtonSt,
   TextFieldSt,
   TypographySt,
   WrapColSt,
 } from '../Account.styles';
-import { createAccount } from '@bookable24/store/account/account.Thunks';
+import Loading from '@bookable24/components/molecules/Loading/Loading';
 
 interface ISignUpProps {
-  fullname: string;
+  fullName: string;
   email: string;
   password: string;
   phone: string;
 }
 
 export const SignUp = () => {
-  const { t } = useI18next();
+  const { t, navigate } = useI18next();
   const dispatch = useAppDispatch();
-  // const { isValidInfo, isSubmitted, firstName, lastName, phone, email, require } = useAppSelector((state) => state.booking);
+  const { isUserLogin, isLoading } = useAppSelector((state) => state.account);
 
   const schema = getSchema(t);
 
@@ -37,11 +37,11 @@ export const SignUp = () => {
     getValues,
     handleSubmit,
     watch,
-    formState: { errors, isValid, dirtyFields },
+    formState: { errors },
   } = useForm<ISignUpProps>({
     resolver: yupResolver(schema),
     defaultValues: {
-      fullname: '',
+      fullName: '',
       password: '',
       email: '',
       phone: '',
@@ -49,37 +49,35 @@ export const SignUp = () => {
   });
 
   // useEffect(() => {
-  //   if (isSubmitted === 'pending' || isValidInfo) {
-  //     handleSubmit(onSubmit)();
+  //   if (isUserLogin) {
+  //     navigate('/account');
   //   }
-  //   return () => {
-  //     dispatch(setCustomerSubmit('fail'));
-  //   };
-  // }, [isSubmitted, isValidInfo]);
+  // }, []);
 
-  const dirtyLength = Object.keys(dirtyFields).map((field) => !!field).length;
-
-  // useEffect(() => {
-  //   if (isValid || dirtyLength >= 4) {
-  //     handleSubmit(onSubmit)();
-  //     dispatch(setCustomerValidInfo(true));
-  //   }
-  //   // const errorsLength = Object.keys(errors).map(field => !!field).length
-  // }, [watch('email'), watch('firstName'), watch('lastName'), watch('phone'), watch('require'), isValid]);
   const onSubmit = (data: ISignUpProps) => {
-    // dispatch(setCustomerInfo(data));
-    console.log('submiting', data);
-    dispatch(createAccount({ email: data.email, password: data.password }));
+    const { email, password, phone, fullName } = data;
+    dispatch(createAccount({ email, password, phone, fullName }));
   };
   return (
     <WrapColSt>
+      {isLoading && <Loading />}
+
       <AccountHeadingSt> {t('account.register')} </AccountHeadingSt>
+
+      <AccountInfoSt>
+        Erstellen Sie sich jetzt ein Kundenkonto für ein persönlicheres .
+        Bereits Kunde?
+        <Link to='/account/signin' className='siteLink'>
+          {' '}
+          Zur Anmeldung
+        </Link>
+      </AccountInfoSt>
       <form onSubmit={handleSubmit(onSubmit)}>
         <TextFieldSt
-          {...register('fullname')}
-          error={!!errors.fullname}
-          helperText={errors?.fullname?.message}
-          variant='filled'
+          {...register('fullName')}
+          error={!!errors.fullName}
+          helperText={errors?.fullName?.message}
+          variant='standard'
           placeholder='VollName'
           label='Vollname*'
           autoComplete='off'
@@ -89,7 +87,7 @@ export const SignUp = () => {
           {...register('email')}
           error={!!errors.email}
           helperText={errors?.email?.message}
-          variant='filled'
+          variant='standard'
           placeholder='johndoe@mail.com'
           label='E-Mail*'
           autoComplete='off'
@@ -118,7 +116,7 @@ export const SignUp = () => {
                 error={!!errors.phone}
                 helperText={errors?.phone?.message}
                 type='tel'
-                variant='filled'
+                variant='standard'
                 placeholder='01723567890'
                 label='Telefonnummer*'
               />
@@ -129,7 +127,7 @@ export const SignUp = () => {
           {...register('password')}
           error={!!errors.password}
           helperText={errors?.password?.message}
-          variant='filled'
+          variant='standard'
           placeholder='password'
           label='Password*'
           autoComplete='off'

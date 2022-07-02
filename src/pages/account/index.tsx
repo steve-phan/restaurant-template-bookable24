@@ -1,17 +1,29 @@
-import { graphql } from "gatsby"
-import React from "react"
+import { Account } from '@bookable24/components/Account/Account';
+import Layout from '@bookable24/components/Layout/Layout';
+import { useAppDispatch, useAppSelector } from '@bookable24/store/hooks';
+import { graphql } from 'gatsby';
+import { useI18next } from 'gatsby-plugin-react-i18next';
+import React from 'react';
 
-type Tmode = "resetPassword" | "recoverEmail" | "verifyEmail"
+type Tmode = 'resetPassword' | 'recoverEmail' | 'verifyEmail';
 
-const Account = () => {
+const AccountPage = () => {
+  // const { navigate } = useI18next();
+  // const dispatch = useAppDispatch();
+  // const { isUserLogin } = useAppSelector((state) => state.account);
+
+  // if (!isUserLogin) {
+  //   navigate('./account/login');
+  // }
+
   return (
-    <div>
-      <h1>Account Page</h1>
-    </div>
-  )
-}
+    <Layout>
+      <Account />
+    </Layout>
+  );
+};
 
-export default Account
+export default AccountPage;
 
 export const query = graphql`
   query ($language: String!) {
@@ -25,4 +37,4 @@ export const query = graphql`
       }
     }
   }
-`
+`;

@@ -113,9 +113,20 @@ export const validatePhone = (phoneNumber: string) => {
 
 export const getSchema = (t: TFunction<string | string[], undefined>) => {
   return yup.object({
-    fullname: yup.string().trim().required(t('booking.validation.error.fullname')),
-    email: yup.string().trim().email(t('booking.validation.error.email')).required(t('booking.validation.error.email')),
-    password: yup.string().trim().min(5, t('booking.validation.error.password')).required(t('booking.validation.error.password')),
+    fullName: yup
+      .string()
+      .trim()
+      .required(t('booking.validation.error.fullName')),
+    email: yup
+      .string()
+      .trim()
+      .email(t('booking.validation.error.email'))
+      .required(t('booking.validation.error.email')),
+    password: yup
+      .string()
+      .trim()
+      .min(5, t('booking.validation.error.password'))
+      .required(t('booking.validation.error.password')),
     phone: yup
       .string()
       .trim()
@@ -128,7 +139,14 @@ export const getSchema = (t: TFunction<string | string[], undefined>) => {
 
 export const getSignSchema = (t: TFunction<string | string[], undefined>) => {
   return yup.object({
-    email: yup.string().trim().email(t('booking.validation.error.email')).required(t('booking.validation.error.email')),
-    password: yup.string().trim().required(t('booking.validation.error.password')),
+    email: yup
+      .string()
+      .trim()
+      .email(t('booking.validation.error.email'))
+      .required(t('booking.validation.error.email')),
+    password: yup
+      .string()
+      .trim()
+      .required(t('booking.validation.error.password')),
   });
 };
