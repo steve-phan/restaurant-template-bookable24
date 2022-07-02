@@ -113,9 +113,9 @@ export const validatePhone = (phoneNumber: string) => {
 
 export const getSchema = (t: TFunction<string | string[], undefined>) => {
   return yup.object({
-    firstName: yup.string().trim().required(t('booking.validation.error.fistName')),
-    lastName: yup.string().trim().required(t('booking.validation.error.lastName')),
+    fullname: yup.string().trim().required(t('booking.validation.error.fullname')),
     email: yup.string().trim().email(t('booking.validation.error.email')).required(t('booking.validation.error.email')),
+    password: yup.string().trim().min(5, t('booking.validation.error.password')).required(t('booking.validation.error.password')),
     phone: yup
       .string()
       .trim()
@@ -123,8 +123,6 @@ export const getSchema = (t: TFunction<string | string[], undefined>) => {
         return validatePhone(tel as string);
       })
       .required(t('booking.validation.error.phone')),
-
-    require: yup.string().nullable(),
   });
 };
 

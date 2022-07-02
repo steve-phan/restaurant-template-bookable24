@@ -5,7 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 // import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 // import { setCustomerInfo, setCustomerValidInfo, setCustomerSubmit } from 'src/store/shop/bookingSlice';
 
-import { WrapColSt, TextFieldSt, TypographySt } from '../Account.styles';
+import { WrapColSt, TextFieldSt, TypographySt, AccountHeadingSt } from '../Account.styles';
 import { useI18next } from 'gatsby-plugin-react-i18next';
 import { getSignSchema } from '../utils';
 import { ButtonSt } from '../Account.styles';
@@ -62,6 +62,7 @@ export const SignIn = () => {
   };
   return (
     <WrapColSt>
+      <AccountHeadingSt> {t('account.login')} </AccountHeadingSt>
       <form autoComplete='off' onSubmit={handleSubmit(onSubmit)}>
         <TextFieldSt
           {...register('email')}

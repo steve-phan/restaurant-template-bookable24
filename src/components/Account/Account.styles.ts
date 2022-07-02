@@ -8,16 +8,26 @@ export const WrapColSt = styled('div')`
   padding: 16px 8px;
   margin: 0 auto;
 
-  max-width: 580px;
+  max-width: 500px;
   border-radius: 4px;
   overflow: hidden;
   width: 100%;
 `;
 
+export const AccountHeadingSt = styled('span')(({ theme }) => ({
+  display: 'block',
+  fontFamily: 'Work Sans,sans-serif',
+  fontSize: 20,
+  textAlign: 'center',
+  fontWeight: 700,
+  marginBottom: 24,
+  marginTop: 16,
+}));
+
 export const TextFieldSt = styled(TextField)(({ theme }) => ({
-  marginBottom: 16,
+  marginBottom: 24,
   width: '100%',
-  maxWidth: '560px',
+  maxWidth: '500px',
   backgroundColor: theme.color.background,
 
   '& label.Mui-focused': {
@@ -36,9 +46,9 @@ export const TypographySt = styled(Typography)(({ theme }) => ({
 }));
 
 export const ButtonSt = styled(Button)`
-  width: 48%;
+  width: 100%;
   height: 40px;
-  /* font-weight: bold; */
+  margin-bottom: 24px;
   background: ${({ theme }) => theme.color.primary};
 
   :hover {

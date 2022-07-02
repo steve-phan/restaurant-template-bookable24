@@ -44,6 +44,7 @@
     "gatsby-plugin-sharp": "^4.16.1",
     "gatsby-plugin-sitemap": "^5.16.0",
     "gatsby-plugin-styled-components": "^5.16.0",
+    "gatsby-plugin-use-query-params": "^1.0.1",
     "gatsby-source-contentful": "^7.15.0",
     "gatsby-source-filesystem": "^4.16.0",
     "gatsby-source-shopify": "^7.5.1",

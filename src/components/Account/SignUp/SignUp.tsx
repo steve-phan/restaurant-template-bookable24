@@ -1,27 +1,27 @@
 import React, { useRef, useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useI18next } from 'gatsby-plugin-react-i18next';
 
+import { useAppDispatch, useAppSelector } from '@bookable24/store/hooks';
 // import { setCustomerInfo, setCustomerValidInfo, setCustomerSubmit } from 'src/store/shop/bookingSlice';
 // import { IInfoUserProps } from 'src/store/shop/shop.types';
 
-import { WrapColSt, TextFieldSt, TypographySt } from './SignUp.styles';
-import { useI18next } from 'gatsby-plugin-react-i18next';
 import { getSchema } from '../utils';
-import { ButtonSt } from '../Account.styles';
-import { useAppDispatch, useAppSelector } from '@bookable24/store/hooks';
+import { AccountHeadingSt, ButtonSt, TextFieldSt, TypographySt, WrapColSt } from '../Account.styles';
+import { createAccount } from '@bookable24/store/account/accountSlice';
 
 interface ISignUpProps {
-  name: string;
+  fullname: string;
   email: string;
   password: string;
-  phone: number;
+  phone: string;
 }
 
 export const SignUp = () => {
   const { t } = useI18next();
   const dispatch = useAppDispatch();
-  const { isValidInfo, isSubmitted, firstName, lastName, phone, email, require } = useAppSelector((state) => state.booking);
+  // const { isValidInfo, isSubmitted, firstName, lastName, phone, email, require } = useAppSelector((state) => state.booking);
 
   const schema = getSchema(t);
 
@@ -35,10 +35,10 @@ export const SignUp = () => {
   } = useForm<ISignUpProps>({
     resolver: yupResolver(schema),
     defaultValues: {
-      name: '',
+      fullname: '',
       password: '',
       email: '',
-      phone: 0,
+      phone: '',
     },
   });
 
@@ -60,15 +60,24 @@ export const SignUp = () => {
   //   }
   //   // const errorsLength = Object.keys(errors).map(field => !!field).length
   // }, [watch('email'), watch('firstName'), watch('lastName'), watch('phone'), watch('require'), isValid]);
-
   const onSubmit = (data: ISignUpProps) => {
     // dispatch(setCustomerInfo(data));
-    console.log('submiting');
+    console.log('submiting', data);
+    dispatch(createAccount({ email: data.email, password: data.password }));
   };
   return (
     <WrapColSt>
-      <form autoComplete='off' onSubmit={handleSubmit(onSubmit)}>
-        <TextFieldSt {...register('name')} error={!!errors.name} helperText={errors?.name?.message} variant='filled' placeholder='VollName' label='Vollname*' autoComplete='off' />
+      <AccountHeadingSt> {t('account.register')} </AccountHeadingSt>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <TextFieldSt
+          {...register('fullname')}
+          error={!!errors.fullname}
+          helperText={errors?.fullname?.message}
+          variant='filled'
+          placeholder='VollName'
+          label='Vollname*'
+          autoComplete='off'
+        />
 
         <TextFieldSt
           {...register('email')}
@@ -88,6 +97,7 @@ export const SignUp = () => {
               <TextFieldSt
                 autoComplete='off'
                 {...field}
+                value={field.value}
                 onChange={(e) => {
                   const value = e.target.value;
                   if (value === '') {
@@ -114,9 +124,9 @@ export const SignUp = () => {
           placeholder='password'
           label='Password*'
           autoComplete='off'
+          type='password'
         />
-
-        <ButtonSt variant='contained' color='primary'>
+        <ButtonSt variant='contained' color='primary' onClick={handleSubmit(onSubmit)}>
           Sign Up
         </ButtonSt>
         <TypographySt>Alle Felder, die mit einem Sternchen (*) gekennzeichnet sind, müssen bei der Anmeldung ausgefüllt werden.</TypographySt>
