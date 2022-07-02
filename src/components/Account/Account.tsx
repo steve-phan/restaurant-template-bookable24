@@ -19,8 +19,10 @@ export const Account = () => {
 
   useEffect(() => {
     if (!isLoading && !isUserLogin) navigate('/account/signin');
-  }, []);
+  }, [isLoading]);
+
   console.log({ isLoading });
+
   return (
     <WrapColSt>
       <button
@@ -30,7 +32,8 @@ export const Account = () => {
       >
         logout
       </button>
-      {isLoading ? <Loading /> : <h1>Account Page Component</h1>}
+      {(isLoading || !isUserLogin) && <Loading />}
+      <h1>Account Page Component</h1>
     </WrapColSt>
   );
 };

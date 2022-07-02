@@ -16,6 +16,10 @@ import {
 import { getSignSchema } from '../utils';
 import { ButtonSt } from '../Account.styles';
 import Loading from '@bookable24/components/molecules/Loading/Loading';
+import {
+  setAccountLoading,
+  setUserLogin,
+} from '@bookable24/store/account/accountSlice';
 
 interface ISignInProps {
   email: string;
@@ -47,8 +51,10 @@ export const SignIn = () => {
   useEffect(() => {
     if (isUserLogin) {
       navigate('/account');
+    } else {
+      dispatch(setAccountLoading(false));
     }
-  }, [isUserLogin]);
+  }, [isLoading, isUserLogin]);
 
   const onSubmit = (data: ISignInProps) => {
     dispatch(signInAccount({ email: data.email, password: data.password }));

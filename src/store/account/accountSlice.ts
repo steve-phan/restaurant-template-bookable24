@@ -12,7 +12,7 @@ import { createAccount, signInAccount } from './account.Thunks';
 import { IAccountSliceStates } from './account.types';
 
 const initialAccountState: IAccountSliceStates = {
-  isLoading: false,
+  isLoading: true,
   isUserLogin: false,
   userInfo: {
     fullName: '',

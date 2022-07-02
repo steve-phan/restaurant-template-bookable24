@@ -17,8 +17,8 @@ import { async } from '@firebase/util';
 export const checkUserAuth = (): AppThunk => {
   return (dispatch, getState) => {
     if (typeof window !== 'undefined') {
-      dispatch(setAccountLoading(true));
       onAuthStateChanged(auth, async (user) => {
+        console.log({ user });
         if (user) {
           const { email, displayName } = user as {
             email: string;
