@@ -20,15 +20,6 @@ export default OderPage;
 
 export const query = graphql`
   query ($language: String!) {
-    locales: allLocale(filter: { language: { eq: $language } }) {
-      edges {
-        node {
-          ns
-          data
-          language
-        }
-      }
-    }
     allContentfulMenu {
       nodes {
         category
@@ -39,6 +30,15 @@ export const query = graphql`
         priceOfFood
         foodId
         descriptionAboutFood
+      }
+    }
+    locales: allLocale(filter: { language: { eq: $language } }) {
+      edges {
+        node {
+          ns
+          data
+          language
+        }
       }
     }
   }
