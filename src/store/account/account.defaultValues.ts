@@ -11,10 +11,11 @@ export const initialAccountState: IAccountSliceStates = {
     email: '',
     phone: '',
     address: {
-      houseNumber: 0,
-      postCode: 0,
+      houseNumber: '',
+      postCode: '',
       street: '',
       city: '',
+      phone: '',
     },
   },
 };

@@ -8,6 +8,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import { menuMapping } from '@bookable24/RESTAURANT.CONFIG/RESTAURANT.MENU';
 import { useScrollSpy } from '@bookable24/hooks/useScrollSpy';
 import { TCategoryMenu } from '@bookable24/RESTAURANT.CONFIG/restaurant.types';
+import { useDevices } from '@bookable24/hooks/useDevices';
 
 import {
   ShopOnlineSt,
@@ -24,19 +25,21 @@ import { BoxFoodItem } from '../molecules/BoxFoodItem/BoxFoodItem';
 import { IShopOnlineProps, menuSlideSettings } from './ShopOnline.utils';
 import { ShowDetailsFoodItem } from '../molecules/BoxFoodItem/ShowDetailsFoodItem/ShowDetailsFoodItem';
 import { BoxViewCart } from '../molecules/BoxViewCart/BoxViewCart';
-import { useDevices } from '@bookable24/hooks/useDevices';
 import { DesktopViewCart } from '../molecules/DesktopViewCart/DesktopViewCart';
 
 export const ShopOnline = ({ restaurantMenu, CATEGORY }: IShopOnlineProps) => {
   const navRef = useRef<HTMLDivElement>(null);
   const slickRef = useRef(null);
-  const { activeMenu, menuList, setActiveMenu, setMenuList } = useScrollSpy(CATEGORY);
+  const { activeMenu, menuList, setActiveMenu, setMenuList } =
+    useScrollSpy(CATEGORY);
   const { navigate } = useI18next();
 
   const categoryMenu = Object.entries(menuMapping(restaurantMenu));
 
   const sortingCategoryMenu = CATEGORY.map((category) => {
-    const foundMenu = categoryMenu.find(([categoryName, foodArr]) => categoryName === category) as TCategoryMenu;
+    const foundMenu = categoryMenu.find(
+      ([categoryName, foodArr]) => categoryName === category
+    ) as TCategoryMenu;
     return [category, { foodItems: foundMenu[1].foodItems }];
   }) as TCategoryMenu[];
 
@@ -48,8 +51,7 @@ export const ShopOnline = ({ restaurantMenu, CATEGORY }: IShopOnlineProps) => {
     }
   }, [activeMenu]);
   const device = useDevices();
-  // useEffect(() => {}, []);
-  console.log({ device });
+
   return (
     <ShopOnlineSt>
       <ShopOnlineMenuListSt>

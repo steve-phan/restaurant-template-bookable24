@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link, useI18next } from 'gatsby-plugin-react-i18next';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
@@ -94,7 +95,7 @@ export const Account = () => {
         </Modal>
       </AccountNoticeSt>
       <AccountNoticeSt>
-        <InfoOutlinedIcon fontSize='small' />
+        <ExitToAppOutlinedIcon fontSize='small' />
         <Button
           size='small'
           style={{
@@ -104,7 +105,7 @@ export const Account = () => {
             dispatch(signOutAccount());
           }}
         >
-          Sign-Out Account
+          Almelden
         </Button>
       </AccountNoticeSt>
       <UserInfo />

@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import {
   createUserWithEmailAndPassword,
@@ -13,7 +14,7 @@ import { auth } from '@bookable24/firebase';
 import { AppThunk } from '../store';
 import { ICreateAccount } from './account.types';
 import { setAccountLoading, setUserLogin } from './accountSlice';
-import axios from 'axios';
+import { localStorageGetItem, localStorageSetItem } from '../localStore';
 
 export const checkAuthAccount = (): AppThunk => {
   return (dispatch, getState) => {
@@ -37,11 +38,18 @@ export const createAccount = createAsyncThunk(
   'account/create',
   async ({ email, password, phone, fullName }: ICreateAccount) => {
     const userRef = await createUserWithEmailAndPassword(auth, email, password);
-    if (auth.currentUser)
-      await updateProfile(auth.currentUser, {
-        displayName: fullName,
-      });
-    return { userRef };
+    localStorageSetItem('userInfo', JSON.stringify({ email, fullName, phone }));
+    await axios.post('/.netlify/functions/setUserInfo', {
+      uid: userRef.user.uid,
+      email,
+      fullName,
+      phone,
+    });
+
+    await updateProfile(userRef.user, {
+      displayName: fullName,
+    });
+    return { email, fullName, phone };
   }
 );
 
@@ -49,7 +57,23 @@ export const signInAccount = createAsyncThunk(
   'account/signIn',
   async ({ email, password }: { email: string; password: string }) => {
     const userRef = await signInWithEmailAndPassword(auth, email, password);
-    return { userRef };
+    const uid = userRef.user.uid;
+    const data = localStorageGetItem('userInfo') || '';
+    let userInfo: any = null;
+    if (!data) {
+      const res = await axios.post('/.netlify/functions/getUserInfo', {
+        uid,
+      });
+      console.log({ res });
+      userInfo = res?.data?.userInfo;
+      if (userInfo) {
+        localStorageSetItem('userInfo', JSON.stringify(userInfo));
+      }
+    } else {
+      userInfo = JSON.parse(data);
+    }
+
+    return { userRef, userInfo };
   }
 );
 
@@ -68,8 +92,9 @@ export const userChangePassword = createAsyncThunk(
 export const updateUserInfo = createAsyncThunk(
   'account/updateUserInfo',
   async (data: {}) => {
+    localStorageSetItem('userInfo', JSON.stringify(data));
     const uid = auth.currentUser?.uid;
-    console.log({ user: uid });
+
     const res = await axios.post('/.netlify/functions/updateUserInfo', {
       ...data,
       uid,
@@ -79,7 +104,13 @@ export const updateUserInfo = createAsyncThunk(
 
 export const getUserInfo = createAsyncThunk('account/getUserInfo', async () => {
   const uid = auth.currentUser?.uid;
-  console.log({ user: uid });
+  const data = localStorageGetItem('userInfo');
+  if (data) {
+    const userInfo = JSON.parse(data);
+    return {
+      userInfo,
+    };
+  }
   const res = await axios.post('/.netlify/functions/getUserInfo', {
     uid,
   });

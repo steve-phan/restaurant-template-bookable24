@@ -1,15 +1,22 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Link, useI18next } from 'gatsby-plugin-react-i18next';
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 
-import { useAppDispatch } from '@bookable24/store/hooks';
+import { useAppDispatch, useAppSelector } from '@bookable24/store/hooks';
 import {
   updateUserInfo,
   userChangePassword,
 } from '@bookable24/store/account/account.Thunks';
 
-import { WrapColSt, TextFieldSt, AccountHeadingSt } from '../Account.styles';
+import {
+  WrapColSt,
+  TextFieldSt,
+  AccountHeadingSt,
+  AccountInfoSt,
+  AccountBodyTextRightSt,
+} from '../Account.styles';
 import { getAddressSchema } from '../utils';
 import { ButtonSt } from '../Account.styles';
 import { IAddress } from '@bookable24/store/account/account.types';
@@ -22,7 +29,12 @@ interface IChangePasswordProps {
 export const UserInfo = () => {
   const { t, navigate } = useI18next();
   const dispatch = useAppDispatch();
+  const [edit, setEdit] = useState(false);
+  const {
+    userInfo: { address },
+  } = useAppSelector((state) => state.account);
 
+  const { phone, street, houseNumber, city, postCode } = address;
   const schema = getAddressSchema(t);
 
   const {
@@ -33,35 +45,30 @@ export const UserInfo = () => {
   } = useForm<IAddress>({
     resolver: yupResolver(schema),
     defaultValues: {
-      street: '',
-      city: '',
-      // houseNumber: 0,
-      // postCode: 0,
-      // phone: 0,
+      street,
+      city,
+      houseNumber,
+      postCode,
+      phone,
     },
   });
 
-  //   useEffect(() => {
-  //     if (
-  //       dirtyFields.confirmpassword &&
-  //       getValues()?.confirmpassword?.length <= 2
-  //     ) {
-  //       handleSubmit(onSubmit)();
-  //     }
-  //   }, [
-  //     dirtyFields.confirmpassword,
-  //     getValues().password,
-  //     getValues().confirmpassword,
-  //   ]);
-
   const onSubmit = (data: IAddress) => {
-    console.log('submit addresser');
     dispatch(updateUserInfo(data));
   };
 
   return (
     <WrapColSt>
       <AccountHeadingSt>Lieferadresse</AccountHeadingSt>
+      <AccountBodyTextRightSt>
+        Verändern Lieferadresse?
+        <EditOutlinedIcon
+          style={{
+            cursor: 'pointer',
+          }}
+          onClick={() => setEdit(!edit)}
+        />
+      </AccountBodyTextRightSt>
       <form onSubmit={handleSubmit(onSubmit)}>
         <TextFieldSt
           {...register('phone')}
@@ -72,6 +79,7 @@ export const UserInfo = () => {
           label='Phone*'
           autoComplete='off'
           type='text'
+          disabled={!edit}
         />
         <TextFieldSt
           {...register('street')}
@@ -82,6 +90,7 @@ export const UserInfo = () => {
           label='Street*'
           autoComplete='off'
           type='text'
+          disabled={!edit}
         />
         <TextFieldSt
           {...register('houseNumber')}
@@ -92,6 +101,7 @@ export const UserInfo = () => {
           label='House Number*'
           autoComplete='off'
           type='text'
+          disabled={!edit}
         />
         <TextFieldSt
           {...register('postCode')}
@@ -102,6 +112,7 @@ export const UserInfo = () => {
           label='Post Code*'
           autoComplete='off'
           type='text'
+          disabled={!edit}
         />
         <TextFieldSt
           {...register('city')}
@@ -112,9 +123,15 @@ export const UserInfo = () => {
           label='City*'
           autoComplete='off'
           type='text'
+          disabled={!edit}
         />
 
-        <ButtonSt variant='contained' color='primary' type='submit'>
+        <ButtonSt
+          disabled={!edit}
+          variant='contained'
+          color='primary'
+          type='submit'
+        >
           Submit
         </ButtonSt>
       </form>

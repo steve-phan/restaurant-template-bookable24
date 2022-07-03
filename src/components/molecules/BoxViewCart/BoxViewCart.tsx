@@ -14,10 +14,15 @@ import { useAppDispatch, useAppSelector } from '@bookable24/store/hooks';
 import { closeViewCartModal } from '@bookable24/store/shop/bookingSlice';
 import { useSumDetailsCartItem } from '@bookable24/hooks/useSumDetailsCartItem';
 
-import { BoxViewCartst, SumQuantitiesSt, WrapperBoxViewCartst } from './BoxViewCart.styles';
+import {
+  BoxViewCartst,
+  SumQuantitiesSt,
+  WrapperBoxViewCartst,
+} from './BoxViewCart.styles';
 import { ViewCartFoodList } from '../ViewCartFoodList/ViewCartFoodList';
 import { HeadingBox } from '../ui/Heading/HeadingBox';
 import { EmptyViewCart } from '../EmptyViewCart/EmptyViewCart';
+import { CheckoutButton } from '../ui/CheckoutButton/CheckoutButton';
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -31,7 +36,10 @@ const Transition = React.forwardRef(function Transition(
 export const BoxViewCart = () => {
   const [open, setOpen] = useState(false);
   const dispatch = useAppDispatch();
-  const { cartItems, isViewCartModal } = useAppSelector((state) => state.booking);
+  const { cartItems, isViewCartModal } = useAppSelector(
+    (state) => state.booking
+  );
+  const { isUserLogin } = useAppSelector((state) => state.account);
   const { navigate } = useI18next();
   const { sumPrices, sumQuantities } = useSumDetailsCartItem(cartItems);
 
@@ -65,14 +73,23 @@ export const BoxViewCart = () => {
               <ShoppingBagIcon />
               <SumQuantitiesSt>{sumQuantities}</SumQuantitiesSt>
             </IconButton>
-            <Typography sx={{ ml: 2, flex: 1, textAlign: 'center', color: 'white' }} variant='body1' component='div'>
+            <Typography
+              sx={{ ml: 2, flex: 1, textAlign: 'center', color: 'white' }}
+              variant='body1'
+              component='div'
+            >
               {`Basket (${sumPrices.toFixed(2)} €)`}
             </Typography>
           </Toolbar>
         ) : null}
         <WrapperBoxViewCartst>
           <BoxViewCartst>
-            <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
+            <Dialog
+              fullScreen
+              open={open}
+              onClose={handleClose}
+              TransitionComponent={Transition}
+            >
               <AppBar
                 sx={{
                   position: 'relative',
@@ -87,7 +104,12 @@ export const BoxViewCart = () => {
                   }}
                 >
                   <HeadingBox title='Basket' />
-                  <IconButton edge='end' color='inherit' onClick={handleClose} aria-label='close'>
+                  <IconButton
+                    edge='end'
+                    color='inherit'
+                    onClick={handleClose}
+                    aria-label='close'
+                  >
                     <CloseIcon />
                   </IconButton>
                 </Toolbar>
@@ -95,43 +117,7 @@ export const BoxViewCart = () => {
               {cartItems.length !== 0 ? (
                 <>
                   <ViewCartFoodList cartItems={cartItems} />
-
-                  <WrapperBoxViewCartst>
-                    <BoxViewCartst>
-                      <AppBar position='relative' color='primary' sx={{ top: 'auto', bottom: 0 }}>
-                        <Toolbar
-                          onClick={() => {
-                            alert('Page is building');
-                            handleClose();
-                            navigate('/oder');
-                          }}
-                        >
-                          <IconButton
-                            edge='start'
-                            sx={{
-                              color: 'white',
-                            }}
-                            aria-label='icon'
-                          >
-                            <ShoppingBagIcon />
-                            <SumQuantitiesSt>{sumQuantities}</SumQuantitiesSt>
-                          </IconButton>
-                          <Typography
-                            sx={{
-                              ml: 2,
-                              flex: 1,
-                              textAlign: 'center',
-                              color: 'white',
-                            }}
-                            variant='body1'
-                            component='div'
-                          >
-                            {`Checkout (${sumPrices.toFixed(2)} €)`}
-                          </Typography>
-                        </Toolbar>
-                      </AppBar>
-                    </BoxViewCartst>
-                  </WrapperBoxViewCartst>
+                  <CheckoutButton />
                 </>
               ) : (
                 <EmptyViewCart />

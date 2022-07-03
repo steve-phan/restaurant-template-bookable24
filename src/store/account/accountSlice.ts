@@ -47,10 +47,18 @@ export const accountSlice = createSlice({
         createAccount.fulfilled,
         (
           state: IAccountSliceStates,
-          action: PayloadAction<{ userRef: UserCredential }>
+          action: PayloadAction<{
+            email: string;
+            fullName: string;
+            phone: string;
+          }>
         ) => {
           state.isLoading = false;
           state.isUserLogin = true;
+          state.userInfo.phone = action.payload.phone;
+          state.userInfo.email = action.payload.email;
+          state.userInfo.fullName = action.payload.fullName;
+          state.userInfo.address.phone = action.payload.phone;
         }
       )
       .addCase(signInAccount.pending, (state: IAccountSliceStates) => {
@@ -65,11 +73,14 @@ export const accountSlice = createSlice({
         signInAccount.fulfilled,
         (
           state: IAccountSliceStates,
-          action: PayloadAction<{ userRef: UserCredential }>
+          action: PayloadAction<{ userRef: UserCredential; userInfo: IAddress }>
         ) => {
           state.isLoading = false;
           state.isUserLogin = true;
           state.isLoginFail = false;
+          state.userInfo.address = action.payload.userInfo
+            ? action.payload.userInfo
+            : state.userInfo.address;
         }
       )
       .addCase(signOutAccount.pending, (state: IAccountSliceStates) => {

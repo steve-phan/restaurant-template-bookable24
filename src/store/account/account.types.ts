@@ -6,11 +6,11 @@ export interface ICreateAccount {
 }
 
 export interface IAddress {
-  houseNumber: number;
-  postCode: number;
+  houseNumber: string;
+  postCode: string;
   street: string;
   city: string;
-  phone?: number;
+  phone?: string;
   option?: string;
 }
 export interface IAccount {

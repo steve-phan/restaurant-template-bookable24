@@ -25,6 +25,15 @@ export const AccountHeadingSt = styled('span')(({ theme }) => ({
   marginTop: 16,
 }));
 
+export const AccountBodyTextRightSt = styled('span')(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'flex-end',
+  fontFamily: 'Work Sans,sans-serif',
+  fontSize: 14,
+  textAlign: 'center',
+}));
+
 export const TextFieldSt = styled(TextField)(({ theme }) => ({
   marginBottom: 24,
   width: '100%',

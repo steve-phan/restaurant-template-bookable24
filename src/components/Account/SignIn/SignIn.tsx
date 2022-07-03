@@ -59,6 +59,7 @@ export const SignIn = () => {
   }, [isLoading, isUserLogin, isLoginFail]);
 
   const onSubmit = (data: ISignInProps) => {
+    dispatch(setAccountLoading(true));
     dispatch(signInAccount({ email: data.email, password: data.password }));
   };
   return (

@@ -32,7 +32,10 @@ interface ICheckoutButtonProps {
 
 export const CheckoutButton = ({ handleClose }: ICheckoutButtonProps) => {
   const dispatch = useAppDispatch();
-  const { cartItems, isViewCartModal } = useAppSelector((state) => state.booking);
+  const { cartItems, isViewCartModal } = useAppSelector(
+    (state) => state.booking
+  );
+  const { isUserLogin } = useAppSelector((state) => state.account);
 
   const { sumPrices, sumQuantities } = useSumDetailsCartItem(cartItems);
   const { navigate } = useI18next();
@@ -42,6 +45,7 @@ export const CheckoutButton = ({ handleClose }: ICheckoutButtonProps) => {
     <AppBar position='relative' color='primary' sx={{ top: 'auto', bottom: 0 }}>
       <Toolbar
         onClick={() => {
+          console.log('go to checkout');
           if (!!handleClose) {
             handleClose();
           }
