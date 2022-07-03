@@ -9,12 +9,12 @@ import { CenterSectionComponent } from '@bookable24/components/SectionsComponent
 import { OneSideSectionComponent } from '@bookable24/components/SectionsComponent/OneSideSectionComponent/OneSideSectionComponent';
 import { GoogleMap } from '@bookable24/components/SectionsComponent/GoogleMap/GoogleMap';
 
-interface IDataIndexPage {
+export interface IDataIndexPage {
   locale: { nodes: any[] };
   sectionImg: { nodes: any[] };
 }
 
-const mappingDataImages = (dataImgs: Record<string, any>[]) =>
+export const mappingDataImages = (dataImgs: Record<string, any>[]) =>
   dataImgs
     .map((item) => {
       const section = item.childImageSharp.gatsbyImageData.images.fallback.src

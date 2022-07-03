@@ -6,10 +6,17 @@ import { TRoures } from '../routes';
 import background from './background.jpg';
 import { NavLinks } from './NavLinks';
 import {
+  NavbarMenuSt,
   DrawerSt,
   BackgroundImgSt,
   WrapCloseIconSt,
+  NavbarMenuHeaderSt,
+  NavbarMenuBodyrSt,
+  AccountButtonGroupSt,
 } from './NavBarMenu.styles';
+import { AccountLinks } from './AccountLinks/AccountLinks';
+import { CTAButton } from '@bookable24/components/molecules/CTAButton/CTAButton';
+import { useTranslation } from 'gatsby-plugin-react-i18next';
 
 export interface INavbarMenuprops {
   open?: boolean;
@@ -22,6 +29,8 @@ export const NavbarMenu = ({
   handleDrawerToggle,
   routes,
 }: INavbarMenuprops) => {
+  const { t } = useTranslation();
+
   return (
     <>
       <DrawerSt
@@ -33,18 +42,29 @@ export const NavbarMenu = ({
           keepMounted: true, // Better open performance on mobile.
         }}
       >
-        <WrapCloseIconSt>
-          <IconButton color='inherit' edge='end' onClick={handleDrawerToggle}>
-            <CloseIcon
-              style={{
-                color: 'white',
-                fontSize: 30,
-              }}
-            />
-          </IconButton>
-        </WrapCloseIconSt>
-        <BackgroundImgSt src={background} alt='Bookable24' />
-        <NavLinks routes={routes} handleDrawerToggle={handleDrawerToggle} />
+        <NavbarMenuSt id='navbar-menu-wrapper'>
+          <BackgroundImgSt src={background} alt='Bookable24' />
+          <NavbarMenuHeaderSt>
+            <AccountLinks handleDrawerToggle={handleDrawerToggle} />
+            <WrapCloseIconSt>
+              <IconButton
+                color='inherit'
+                edge='end'
+                onClick={handleDrawerToggle}
+              >
+                <CloseIcon
+                  style={{
+                    color: 'black',
+                    fontSize: 30,
+                  }}
+                />
+              </IconButton>
+            </WrapCloseIconSt>
+          </NavbarMenuHeaderSt>
+          <NavbarMenuBodyrSt>
+            <NavLinks routes={routes} handleDrawerToggle={handleDrawerToggle} />
+          </NavbarMenuBodyrSt>
+        </NavbarMenuSt>
       </DrawerSt>
     </>
   );

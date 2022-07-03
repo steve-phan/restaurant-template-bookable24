@@ -89,10 +89,12 @@ export const SignIn = () => {
         <ButtonSt variant='contained' color='primary' type='submit'>
           Sign In
         </ButtonSt>
+
         <TypographySt>
           Alle Felder, die mit einem Sternchen (*) gekennzeichnet sind, müssen
           bei der Anmeldung ausgefüllt werden.
         </TypographySt>
+        <Link to='/account/recover'> {t('account.forgot')} </Link>
       </form>
     </WrapColSt>
   );

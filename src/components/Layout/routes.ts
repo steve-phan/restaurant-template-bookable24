@@ -10,15 +10,20 @@ const routes = [
     name: 'Home',
     icon: HomeWorkTwoToneIcon,
   },
-  {
-    path: '/account',
-    name: 'Login',
-    icon: AccountCircleSharpIcon,
-  },
+  // {
+  //   path: '/account',
+  //   name: 'Login',
+  //   icon: AccountCircleSharpIcon,
+  // },
   {
     path: '/oder',
     name: 'Oder',
     icon: MenuIcon,
+  },
+  {
+    path: '/about',
+    name: 'About',
+    icon: AboutIcon,
   },
 
   {

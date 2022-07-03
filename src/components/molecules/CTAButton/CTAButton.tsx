@@ -20,7 +20,7 @@ export const CTAButton = ({
       sx={{
         backgroundColor: bgColor,
         color,
-        width: '100%',
+        width: 'fit-content',
         maxWidth: 260,
         margin: '0 auto',
         fontFamily: 'Mukta, sans-serif',
