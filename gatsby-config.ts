@@ -68,6 +68,7 @@ const config: GatsbyConfig = {
       __key: 'pages',
     },
     `gatsby-plugin-material-ui`,
+    `gatsby-plugin-use-query-params`,
     {
       resolve: `gatsby-source-contentful`,
       options: {

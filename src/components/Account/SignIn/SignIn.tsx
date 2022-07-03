@@ -5,6 +5,8 @@ import { Link, useI18next } from 'gatsby-plugin-react-i18next';
 
 import { useAppDispatch, useAppSelector } from '@bookable24/store/hooks';
 import { signInAccount } from '@bookable24/store/account/account.Thunks';
+import Loading from '@bookable24/components/molecules/Loading/Loading';
+import { setAccountLoading } from '@bookable24/store/account/accountSlice';
 
 import {
   WrapColSt,
@@ -15,11 +17,6 @@ import {
 } from '../Account.styles';
 import { getSignSchema } from '../utils';
 import { ButtonSt } from '../Account.styles';
-import Loading from '@bookable24/components/molecules/Loading/Loading';
-import {
-  setAccountLoading,
-  setUserLogin,
-} from '@bookable24/store/account/accountSlice';
 
 interface ISignInProps {
   email: string;
@@ -34,11 +31,8 @@ export const SignIn = () => {
   const schema = getSignSchema(t);
 
   const {
-    control,
     register,
-    getValues,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<ISignInProps>({
     resolver: yupResolver(schema),
@@ -88,12 +82,7 @@ export const SignIn = () => {
           autoComplete='off'
           type='password'
         />
-
-        <ButtonSt
-          variant='contained'
-          color='primary'
-          onClick={handleSubmit(onSubmit)}
-        >
+        <ButtonSt variant='contained' color='primary' type='submit'>
           Sign In
         </ButtonSt>
         <TypographySt>

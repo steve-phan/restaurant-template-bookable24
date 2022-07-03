@@ -1,31 +1,9 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import axios, { ResponseType, AxiosResponse } from 'axios';
-import {
-  onAuthStateChanged,
-  createUserWithEmailAndPassword,
-  UserCredential,
-} from 'firebase/auth';
-import { async } from '@firebase/util';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { UserCredential } from 'firebase/auth';
+import { initialAccountState } from './account.defaultValues';
 
-import { auth } from '@bookable24/firebase';
-import { createAccount, signInAccount } from './account.Thunks';
+import { createAccount, signInAccount, signOutAccount } from './account.Thunks';
 import { IAccountSliceStates } from './account.types';
-
-const initialAccountState: IAccountSliceStates = {
-  isLoading: true,
-  isUserLogin: false,
-  userInfo: {
-    fullName: '',
-    email: '',
-    phone: '',
-    address: {
-      houseNumber: 0,
-      postCode: 0,
-      street: '',
-      city: '',
-    },
-  },
-};
 
 export const accountSlice = createSlice({
   name: 'account',
@@ -40,6 +18,11 @@ export const accountSlice = createSlice({
     ) => {
       state.isUserLogin = true;
       state.isLoading = false;
+      state.userInfo.email = action.payload.email;
+      state.userInfo.fullName = action.payload.displayName;
+    },
+    setUserLogOut: (state: IAccountSliceStates) => {
+      state.isUserLogin = false;
     },
   },
   extraReducers: (builder) => {
@@ -49,7 +32,6 @@ export const accountSlice = createSlice({
       })
       .addCase(createAccount.rejected, (state: IAccountSliceStates, action) => {
         state.isLoading = false;
-        console.log({ action });
       })
       .addCase(
         createAccount.fulfilled,
@@ -59,7 +41,6 @@ export const accountSlice = createSlice({
         ) => {
           state.isLoading = false;
           state.isUserLogin = true;
-          console.log({ action });
         }
       )
       .addCase(signInAccount.pending, (state: IAccountSliceStates) => {
@@ -67,7 +48,6 @@ export const accountSlice = createSlice({
       })
       .addCase(signInAccount.rejected, (state: IAccountSliceStates, action) => {
         state.isLoading = false;
-        console.log({ action });
       })
       .addCase(
         signInAccount.fulfilled,
@@ -77,9 +57,18 @@ export const accountSlice = createSlice({
         ) => {
           state.isLoading = false;
           state.isUserLogin = true;
-          console.log({ action });
         }
-      );
+      )
+      .addCase(signOutAccount.pending, (state: IAccountSliceStates) => {
+        state.isLoading = true;
+      })
+      .addCase(signOutAccount.rejected, (state: IAccountSliceStates) => {
+        state.isLoading = false;
+      })
+      .addCase(signOutAccount.fulfilled, (state: IAccountSliceStates) => {
+        state.isLoading = false;
+        state.isUserLogin = true;
+      });
   },
 });
 

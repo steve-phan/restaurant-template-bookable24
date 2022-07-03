@@ -18,7 +18,7 @@ export const WrapColSt = styled('div')`
 export const AccountHeadingSt = styled('span')(({ theme }) => ({
   display: 'block',
   fontFamily: 'Work Sans,sans-serif',
-  fontSize: 20,
+  fontSize: 22,
   textAlign: 'center',
   fontWeight: 700,
   marginBottom: 16,
@@ -42,6 +42,7 @@ export const TextFieldSt = styled(TextField)(({ theme }) => ({
 export const TypographySt = styled(Typography)(({ theme }) => ({
   fontSize: 14.5,
   paddingLeft: 10,
+  marginBottom: 8,
   color: '#333',
   borderLeft: `2px solid red`,
 }));
@@ -56,6 +57,20 @@ export const AccountInfoSt = styled(Typography)(({ theme }) => ({
 
   a: {
     color: theme.color.secondary,
+  },
+}));
+
+export const AccountNoticeSt = styled(Typography)(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  fontSize: 12,
+  fontWeight: 600,
+  color: theme.color.gray,
+  fontFamily: 'Work Sans,sans-serif',
+
+  a: {
+    color: theme.color.secondary,
+    marginLeft: 8,
   },
 }));
 

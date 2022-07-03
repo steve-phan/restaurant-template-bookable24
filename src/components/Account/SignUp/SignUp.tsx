@@ -5,6 +5,8 @@ import { Link, useI18next } from 'gatsby-plugin-react-i18next';
 
 import { useAppDispatch, useAppSelector } from '@bookable24/store/hooks';
 import { createAccount } from '@bookable24/store/account/account.Thunks';
+import Loading from '@bookable24/components/molecules/Loading/Loading';
+import { setAccountLoading } from '@bookable24/store/account/accountSlice';
 
 import { getSchema } from '../utils';
 import {
@@ -15,7 +17,6 @@ import {
   TypographySt,
   WrapColSt,
 } from '../Account.styles';
-import Loading from '@bookable24/components/molecules/Loading/Loading';
 
 interface ISignUpProps {
   fullName: string;
@@ -34,9 +35,7 @@ export const SignUp = () => {
   const {
     control,
     register,
-    getValues,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<ISignUpProps>({
     resolver: yupResolver(schema),
@@ -48,11 +47,13 @@ export const SignUp = () => {
     },
   });
 
-  // useEffect(() => {
-  //   if (isUserLogin) {
-  //     navigate('/account');
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (isUserLogin) {
+      navigate('/account');
+    } else {
+      dispatch(setAccountLoading(false));
+    }
+  }, [isUserLogin, isLoading]);
 
   const onSubmit = (data: ISignUpProps) => {
     const { email, password, phone, fullName } = data;
@@ -61,9 +62,7 @@ export const SignUp = () => {
   return (
     <WrapColSt>
       {isLoading && <Loading />}
-
       <AccountHeadingSt> {t('account.register')} </AccountHeadingSt>
-
       <AccountInfoSt>
         Erstellen Sie sich jetzt ein Kundenkonto für ein persönlicheres .
         Bereits Kunde?
@@ -133,11 +132,7 @@ export const SignUp = () => {
           autoComplete='off'
           type='password'
         />
-        <ButtonSt
-          variant='contained'
-          color='primary'
-          onClick={handleSubmit(onSubmit)}
-        >
+        <ButtonSt variant='contained' color='primary' type='submit'>
           Sign Up
         </ButtonSt>
         <TypographySt>
