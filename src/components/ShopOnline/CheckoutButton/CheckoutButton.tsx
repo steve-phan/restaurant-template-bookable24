@@ -15,7 +15,8 @@ import { closeViewCartModal } from '@bookable24/store/shop/bookingSlice';
 import { useSumDetailsCartItem } from '@bookable24/hooks/useSumDetailsCartItem';
 
 import { TCartItems } from '@bookable24/store/shop/shop.types';
-import { SumQuantitiesSt } from '../../BoxViewCart/BoxViewCart.styles';
+import { SumQuantitiesSt } from '../../molecules/BoxViewCart/BoxViewCart.styles';
+import { localStorageSetItem } from '@bookable24/store/localStore';
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -39,6 +40,11 @@ export const CheckoutButton = ({ handleClose }: ICheckoutButtonProps) => {
 
   const { sumPrices, sumQuantities } = useSumDetailsCartItem(cartItems);
   const { navigate } = useI18next();
+
+  useEffect(() => {
+    localStorageSetItem('cartItems', JSON.stringify(cartItems));
+  }, [cartItems]);
+
   return (
     // <WrapperBoxViewCartst>
     //   <BoxViewCartst>
@@ -49,7 +55,12 @@ export const CheckoutButton = ({ handleClose }: ICheckoutButtonProps) => {
           if (!!handleClose) {
             handleClose();
           }
-          navigate('/oder');
+          if (!isUserLogin) {
+            alert('You need SignIn first');
+            navigate('/account/signin');
+          } else {
+            navigate('/checkout');
+          }
         }}
       >
         <IconButton

@@ -21,6 +21,7 @@ export const DesktopViewCartHeadingSt = styled('div')(({ theme }) => ({
   fontWeight: 700,
   borderBottom: `1px solid ${theme.color.borderColor}`,
 }));
+
 export const DesktopViewCartFoodListSt = styled('div')(({ theme }) => ({
   flexGrow: 0,
 

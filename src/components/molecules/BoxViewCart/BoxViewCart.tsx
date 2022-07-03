@@ -22,7 +22,7 @@ import {
 import { ViewCartFoodList } from '../ViewCartFoodList/ViewCartFoodList';
 import { HeadingBox } from '../ui/Heading/HeadingBox';
 import { EmptyViewCart } from '../EmptyViewCart/EmptyViewCart';
-import { CheckoutButton } from '../ui/CheckoutButton/CheckoutButton';
+import { CheckoutButton } from '../../ShopOnline/CheckoutButton/CheckoutButton';
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -117,7 +117,7 @@ export const BoxViewCart = () => {
               {cartItems.length !== 0 ? (
                 <>
                   <ViewCartFoodList cartItems={cartItems} />
-                  <CheckoutButton />
+                  <CheckoutButton handleClose={handleClose} />
                 </>
               ) : (
                 <EmptyViewCart />

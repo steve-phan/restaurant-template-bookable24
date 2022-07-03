@@ -1,4 +1,5 @@
-import { IBookingState, IBooking, IFoodItem } from './shop.types';
+import { localStorageGetItem } from '../localStore';
+import { IBookingState, IBooking, IFoodItem, TCartItems } from './shop.types';
 
 export const intialBooking: IBooking = {
   person: 1,
@@ -22,13 +23,21 @@ export const initialFoodItemModal = {
   isOpenModal: false,
 };
 
+export const getDefaultCartItems = (): TCartItems => {
+  const data = localStorageGetItem('cartItems');
+  if (!data) {
+    return [];
+  }
+  return JSON.parse(data);
+};
+
 export const initialBookingState: IBookingState = {
   ...intialBooking,
   isValidInfo: false,
   isSubmitted: false,
 
   customerInfo: null,
-  cartItems: [],
+  cartItems: getDefaultCartItems(),
   foodItemModal: initialFoodItemModal,
   isViewCartModal: false,
 };
@@ -95,7 +104,7 @@ export const handleReduceCartItem = ({
     prevCartItems,
     cartItemToReduce?.foodId
   );
-  console.log({ cartItemExists: cartItemExists });
+
   if (!cartItemExists || !prevCartItems) {
     return prevCartItems;
   }

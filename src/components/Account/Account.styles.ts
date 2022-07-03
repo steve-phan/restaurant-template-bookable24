@@ -53,7 +53,7 @@ export const TypographySt = styled(Typography)(({ theme }) => ({
   paddingLeft: 10,
   marginBottom: 8,
   color: '#333',
-  borderLeft: `2px solid red`,
+  borderLeft: `2px solid ${theme.color.primary}`,
 }));
 
 export const AccountInfoSt = styled(Typography)(({ theme }) => ({
