@@ -2,8 +2,6 @@ import React from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton/IconButton';
 
-import { IMobileToggle } from '@bookable24/components/DasBoadLayout/Header/Header.types';
-
 import { TRoures } from '../routes';
 import background from './background.jpg';
 import { NavLinks } from './NavLinks';
@@ -12,12 +10,6 @@ import {
   BackgroundImgSt,
   WrapCloseIconSt,
 } from './NavBarMenu.styles';
-
-export interface IMobileMenu extends IMobileToggle {
-  isDesktop?: boolean;
-  routes?: TRoures;
-  isShop?: boolean;
-}
 
 export interface INavbarMenuprops {
   open?: boolean;

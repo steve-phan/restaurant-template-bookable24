@@ -8,7 +8,7 @@ import { useTranslation } from 'gatsby-plugin-react-i18next';
 import { routes } from '../routes';
 import Logo from '../../molecules/Logo';
 import LangSelect from '../LangSelect';
-import { NavbarMenu } from '../NavLinks/NavBarMenu';
+import { NavbarMenu } from '../NavBarMenu/NavBarMenu';
 import { heightNavbar } from '@bookable24/components/config';
 
 interface IHeaderProps {
