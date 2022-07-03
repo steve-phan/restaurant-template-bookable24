@@ -6,7 +6,10 @@ import { Link, useI18next } from 'gatsby-plugin-react-i18next';
 import { useAppDispatch, useAppSelector } from '@bookable24/store/hooks';
 import { signInAccount } from '@bookable24/store/account/account.Thunks';
 import Loading from '@bookable24/components/molecules/Loading/Loading';
-import { setAccountLoading } from '@bookable24/store/account/accountSlice';
+import {
+  setAccountLoading,
+  setOpenNavbarMenu,
+} from '@bookable24/store/account/accountSlice';
 
 import {
   WrapColSt,
@@ -48,7 +51,8 @@ export const SignIn = () => {
     if (isLoginFail) {
       alert('Your Email or Password is wrong...');
     } else if (isUserLogin) {
-      navigate('/account');
+      dispatch(setOpenNavbarMenu());
+      navigate('/oder');
     } else {
       dispatch(setAccountLoading(false));
     }

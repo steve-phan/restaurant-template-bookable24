@@ -4,16 +4,21 @@ import { initialAccountState } from './account.defaultValues';
 
 import {
   createAccount,
+  getUserInfo,
   signInAccount,
   signOutAccount,
+  updateUserInfo,
   userChangePassword,
 } from './account.Thunks';
-import { IAccountSliceStates } from './account.types';
+import { IAccount, IAccountSliceStates, IAddress } from './account.types';
 
 export const accountSlice = createSlice({
   name: 'account',
   initialState: initialAccountState,
   reducers: {
+    setOpenNavbarMenu: (state) => {
+      state.isOpenNavbarMenu = !state.isOpenNavbarMenu;
+    },
     setAccountLoading: (state, action) => {
       state.isLoading = action.payload;
     },
@@ -89,10 +94,40 @@ export const accountSlice = createSlice({
         state.isLoading = false;
         state.isUserLogin = false;
         state.isUserChangePasswordSuccess = true;
-      });
+      })
+      .addCase(updateUserInfo.pending, (state: IAccountSliceStates) => {
+        state.isLoading = true;
+      })
+      .addCase(updateUserInfo.rejected, (state: IAccountSliceStates) => {
+        state.isLoading = false;
+      })
+      .addCase(updateUserInfo.fulfilled, (state: IAccountSliceStates) => {
+        state.isLoading = false;
+      })
+      .addCase(getUserInfo.pending, (state: IAccountSliceStates) => {
+        state.isLoading = true;
+      })
+      .addCase(getUserInfo.rejected, (state: IAccountSliceStates) => {
+        state.isLoading = false;
+      })
+      .addCase(
+        getUserInfo.fulfilled,
+        (
+          state: IAccountSliceStates,
+          action: PayloadAction<{ userInfo: IAddress }>
+        ) => {
+          state.isLoading = false;
+          state.userInfo.address = action.payload.userInfo;
+        }
+      );
   },
 });
 
-export const { setUserLogin, setAccountLoading } = accountSlice.actions;
+export const {
+  setUserLogin,
+  setAccountLoading,
+  setOpenNavbarMenu,
+  setUserLogOut,
+} = accountSlice.actions;
 
 export default accountSlice.reducer;

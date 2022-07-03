@@ -11,8 +11,7 @@ import {
   AccountInfoWrapperSt,
   AccountLinksSt,
   ButtonAccountSt,
-  SignInButtonAccountSt,
-  SignUpButtonAccountSt,
+  FullNamefoWrapperSt,
 } from './AccountLinks.styles';
 import {
   AccountHeadingSt,
@@ -42,18 +41,25 @@ export const AccountLinks = ({
 
   return (
     <AccountLinksSt>
-      <AccountInfoWrapperSt>
-        {!!fullName ? (
-          <>
-            <AccountCircleOutlinedIcon />
-            {fullName}
-            <Link to='/account' onClick={handleDrawerToggle}>
+      <>
+        {!!isUserLogin ? (
+          <AccountInfoWrapperSt>
+            <FullNamefoWrapperSt>
+              <AccountCircleOutlinedIcon />
+              {fullName}
+            </FullNamefoWrapperSt>
+            <Link
+              to='/account'
+              onClick={() => {
+                handleDrawerToggle();
+              }}
+            >
               Persönliche Informationen anzeigen
             </Link>
-          </>
+          </AccountInfoWrapperSt>
         ) : (
           <AccountButtonGroupSt>
-            <SignUpButtonAccountSt
+            <ButtonAccountSt
               onClick={() => {
                 handleDrawerToggle();
 
@@ -61,18 +67,18 @@ export const AccountLinks = ({
               }}
             >
               {t('account.register')}
-            </SignUpButtonAccountSt>
-            <SignInButtonAccountSt
+            </ButtonAccountSt>
+            <ButtonAccountSt
               onClick={() => {
                 handleDrawerToggle();
                 navigate('/account/signin');
               }}
             >
               {t('account.login')}
-            </SignInButtonAccountSt>
+            </ButtonAccountSt>
           </AccountButtonGroupSt>
         )}
-      </AccountInfoWrapperSt>
+      </>
     </AccountLinksSt>
   );
 };

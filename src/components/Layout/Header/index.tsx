@@ -10,6 +10,8 @@ import Logo from '../../molecules/Logo';
 import LangSelect from '../LangSelect';
 import { NavbarMenu } from '../NavBarMenu/NavBarMenu';
 import { heightNavbar } from '@bookable24/components/config';
+import { useAppDispatch, useAppSelector } from '@bookable24/store/hooks';
+import { setOpenNavbarMenu } from '@bookable24/store/account/accountSlice';
 
 interface IHeaderProps {
   isShopLogin?: boolean | undefined;
@@ -18,10 +20,13 @@ interface IHeaderProps {
 }
 
 const Header: React.FC<IHeaderProps> = ({ isShopLogin, location, isShop }) => {
-  const [open, setOpen] = React.useState(false);
+  // const [open, setOpen] = React.useState(false);
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
+  const { isOpenNavbarMenu } = useAppSelector((state) => state.account);
   const handleDrawerToggle = () => {
-    setOpen(!open);
+    // setOpen(!open);
+    dispatch(setOpenNavbarMenu());
   };
   return (
     <AppBar position='fixed' color='default'>
@@ -38,7 +43,7 @@ const Header: React.FC<IHeaderProps> = ({ isShopLogin, location, isShop }) => {
         </IconButton>
         <NavbarMenu
           handleDrawerToggle={handleDrawerToggle}
-          open={open}
+          open={isOpenNavbarMenu}
           routes={routes}
         />
       </Toolbar>

@@ -1,12 +1,13 @@
 import { Link } from 'gatsby-plugin-react-i18next';
 import { styled } from '@mui/material/styles';
+import { minHeight } from '@mui/system';
 
 export const NavLinksSt = styled('div')(({ theme }) => ({
-  width: 40,
-  height: 40,
-  position: 'absolute',
-  top: 20,
-  right: 20,
+  width: '100%',
+  minHeight: `calc(100vh - 65px)`,
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
 }));
 
 export const LinkItemSt = styled(Link)(({ theme }) => ({

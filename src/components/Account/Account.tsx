@@ -20,6 +20,7 @@ import {
 } from './Account.styles';
 import { ChangePassword } from './ChangePassword/ChangePassword';
 import { signOutAccount } from '@bookable24/store/account/account.Thunks';
+import { UserInfo } from './UserInfo/UserInfo';
 
 type Tmode = 'resetPassword' | 'recoverEmail' | 'verifyEmail';
 
@@ -106,6 +107,7 @@ export const Account = () => {
           Sign-Out Account
         </Button>
       </AccountNoticeSt>
+      <UserInfo />
     </WrapColSt>
   );
 };

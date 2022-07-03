@@ -10,6 +10,8 @@ export interface IAddress {
   postCode: number;
   street: string;
   city: string;
+  phone?: number;
+  option?: string;
 }
 export interface IAccount {
   fullName: string;
@@ -21,6 +23,7 @@ export interface IAccountSliceStates {
   isLoading: boolean;
   isUserLogin: boolean;
   isLoginFail: boolean;
+  isOpenNavbarMenu: boolean;
   isUserChangePasswordSuccess: boolean;
   userInfo: IAccount;
 }

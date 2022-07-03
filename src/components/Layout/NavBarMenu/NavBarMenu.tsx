@@ -52,12 +52,7 @@ export const NavbarMenu = ({
                 edge='end'
                 onClick={handleDrawerToggle}
               >
-                <CloseIcon
-                  style={{
-                    color: 'black',
-                    fontSize: 30,
-                  }}
-                />
+                <CloseIcon />
               </IconButton>
             </WrapCloseIconSt>
           </NavbarMenuHeaderSt>

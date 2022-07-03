@@ -36,6 +36,10 @@ export const WrapCloseIconSt = styled('div')(({ theme }) => ({
   // position: 'absolute',
   // top: 20,
   // right: 20,
+  svg: {
+    color: theme.color.primary,
+    fontSize: 30,
+  },
 }));
 
 export const BackgroundImgSt = styled('img')(({ theme }) => ({
@@ -53,7 +57,6 @@ export const NavbarMenuBodyrSt = styled('div')(({ theme }) => ({
   maxWidth: 500,
   // display: 'flex',
   margin: '0 auto',
-  paddingTop: '40px',
 }));
 
 export const AccountButtonGroupSt = styled('div')(({ theme }) => ({

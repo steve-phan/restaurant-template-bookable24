@@ -3,17 +3,17 @@ import { styled } from '@mui/material/styles';
 
 export const AccountLinksSt = styled('div')(({ theme }) => ({
   display: 'flex',
-  alignItems: 'center',
+  alignItems: 'start',
+  flexDirection: 'column',
 
   svg: {
-    color: 'white',
-    fontSize: 60,
+    color: theme.color.primary,
+    fontSize: 30,
   },
 }));
+
 export const ButtonAccountSt = styled(Button)(({ theme }) => ({
-  //   backgroundColor: bgColor,
-  color: 'black',
-  //   width: 'fit-content',
+  color: theme.color.primary,
   maxWidth: 260,
   margin: '0 auto',
   fontFamily: 'Mukta, sans-serif',
@@ -22,39 +22,36 @@ export const ButtonAccountSt = styled(Button)(({ theme }) => ({
   fontWeight: 700,
   marginLeft: 8,
   textDecoration: 'underline',
-  //   border: `1px solid ${theme.color.greyBackground}`,
-
   '&:hover': {
     color: theme.color.primary,
-    // backgroundColor: 'white',
   },
-}));
-
-export const SignInButtonAccountSt = styled(ButtonAccountSt)(({ theme }) => ({
-  //   background: 'white',
-  //   color: theme.color.primary,
-}));
-
-export const SignUpButtonAccountSt = styled(ButtonAccountSt)(({ theme }) => ({
-  //   background: 'white',
-  //   color: '#125fca',
-  //   border: `1px solid white`,
-  //   fontWeight: 700,
 }));
 
 export const AccountInfoWrapperSt = styled('div')(({ theme }) => ({
-  display: 'block',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'start',
   fontFamily: 'Work Sans,sans-serif',
   fontSize: 22,
   fontWeight: 700,
-  color: 'white',
+  color: theme.color.primary,
   textAlign: 'left',
   lineHeight: 1.2,
-  paddingLeft: 12,
   a: {
     display: 'block',
-    color: 'white',
+    color: theme.color.primary,
     fontSize: 12,
     textDecoration: 'underline',
   },
+}));
+
+export const FullNamefoWrapperSt = styled('div')(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  fontFamily: 'Work Sans,sans-serif',
+  fontSize: 22,
+  fontWeight: 700,
+  color: theme.color.primary,
+  textAlign: 'left',
+  lineHeight: 1.2,
 }));

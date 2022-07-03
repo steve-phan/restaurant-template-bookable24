@@ -13,6 +13,7 @@ import { auth } from '@bookable24/firebase';
 import { AppThunk } from '../store';
 import { ICreateAccount } from './account.types';
 import { setAccountLoading, setUserLogin } from './accountSlice';
+import axios from 'axios';
 
 export const checkAuthAccount = (): AppThunk => {
   return (dispatch, getState) => {
@@ -63,3 +64,24 @@ export const userChangePassword = createAsyncThunk(
     await updatePassword(user, newPassword);
   }
 );
+
+export const updateUserInfo = createAsyncThunk(
+  'account/updateUserInfo',
+  async (data: {}) => {
+    const uid = auth.currentUser?.uid;
+    console.log({ user: uid });
+    const res = await axios.post('/.netlify/functions/updateUserInfo', {
+      ...data,
+      uid,
+    });
+  }
+);
+
+export const getUserInfo = createAsyncThunk('account/getUserInfo', async () => {
+  const uid = auth.currentUser?.uid;
+  console.log({ user: uid });
+  const res = await axios.post('/.netlify/functions/getUserInfo', {
+    uid,
+  });
+  return { userInfo: res.data };
+});

@@ -5,6 +5,7 @@ export const initialAccountState: IAccountSliceStates = {
   isUserLogin: false,
   isLoginFail: false,
   isUserChangePasswordSuccess: false,
+  isOpenNavbarMenu: false,
   userInfo: {
     fullName: '',
     email: '',

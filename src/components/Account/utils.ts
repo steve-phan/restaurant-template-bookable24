@@ -167,3 +167,40 @@ export const getChangePasswordSchema = (
       .required(t('booking.validation.error.password')),
   });
 };
+
+export const getAddressSchema = (
+  t: TFunction<string | string[], undefined>
+) => {
+  return yup.object({
+    phone: yup
+      .number()
+      .typeError(t('account.error.phone'))
+      .test('valid-phone', t('account.error.phone'), (tel) => {
+        return validatePhone(tel as unknown as string);
+      })
+      .required(t('account.error.phone')),
+    houseNumber: yup
+      .string()
+      .typeError(t('account.error.houseNumber'))
+      .required(t('account.error.houseNumber')),
+    postCode: yup
+      .number()
+      .typeError('darf nur Nummer enthalten..')
+      .test(
+        'postCode',
+        'Muss genau 5 Zeichen lang sein',
+        (val) => val?.toString().length === 5
+      )
+      .required(t('account.error.postCode')),
+    street: yup
+      .string()
+      .matches(/[a-zA-Z]/, 'darf nur Buchstaben enthalten..')
+      .trim()
+      .required(t('account.error.street')),
+    city: yup
+      .string()
+      .matches(/[a-zA-Z]/, 'darf nur Buchstaben enthalten..')
+      .trim()
+      .required(t('account.error.city')),
+  });
+};

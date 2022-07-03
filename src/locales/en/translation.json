@@ -31,7 +31,18 @@
     "login": "Login",
     "logout": "Logout",
     "registration": "Registration",
-    "forgot": "Forgot password"
+    "forgot": "Forgot password",
+    "error": {
+      "fistName": "Bitte Vornamen eingeben",
+      "lastName": "Bitte Nachnamen eingeben",
+      "fullName": "Bitte Vollnamen eingeben",
+      "phone": "Bitte geben Sie eine gültige Phone Nummer ein.",
+      "email": "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
+      "postCode": "Postleitzahl erforderlich",
+      "street": "Straßenname ist erforderlich",
+      "city": "Name der Stadt erforderlich",
+      "houseNumber": "Hausnummer ist erforderlich"
+    }
   },
   "hero": {
     "item1": {

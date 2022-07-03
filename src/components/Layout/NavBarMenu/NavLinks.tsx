@@ -3,13 +3,13 @@ import { useTheme } from '@mui/material/styles';
 import { ThemeOptions } from '@mui/material';
 import { useTranslation } from 'gatsby-plugin-react-i18next';
 
-import { LinkItemSt } from './NavLinks.styles';
+import { LinkItemSt, NavLinksSt } from './NavLinks.styles';
 
 export const NavLinks = ({ routes, handleDrawerToggle }: any) => {
   const theme = useTheme<ThemeOptions>();
   const { t } = useTranslation();
   return (
-    <div>
+    <NavLinksSt>
       {routes.map((route: any, i: number) => (
         <LinkItemSt
           onClick={handleDrawerToggle}
@@ -25,6 +25,6 @@ export const NavLinks = ({ routes, handleDrawerToggle }: any) => {
           <route.icon /> {t(`menu.${route.name}`, route.name)}
         </LinkItemSt>
       ))}
-    </div>
+    </NavLinksSt>
   );
 };
