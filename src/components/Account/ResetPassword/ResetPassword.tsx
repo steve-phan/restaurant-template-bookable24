@@ -1,57 +1,30 @@
-import { graphql, Link } from 'gatsby';
-import React, { useEffect, useState } from 'react';
-import { useQueryParam } from 'use-query-params';
-import { verifyPasswordResetCode, confirmPasswordReset } from 'firebase/auth';
-import TextField from '@mui/material/TextField';
+import { useEffect, useState } from 'react';
+import { Link } from 'gatsby';
 import { useI18next } from 'gatsby-plugin-react-i18next';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import { alpha, styled } from '@mui/material/styles';
+import { confirmPasswordReset, verifyPasswordResetCode } from 'firebase/auth';
+import { useQueryParam } from 'use-query-params';
 
 import Layout from '@bookable24/components/Layout/Layout';
 import Loading from '@bookable24/components/molecules/Loading/Loading';
 import { auth } from '@bookable24/firebase';
+import { useAppSelector } from '@bookable24/store/hooks';
 
-export const ColumnCenterBoxSt = styled(Box)`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  width: 100%;
-  height: 60vh;
-`;
-
-export const InfoBoxSt = styled(Box)`
-  max-width: 350px;
-  padding: 16px;
-  text-align: center;
-  margin-bottom: 24px;
-`;
-
-export const ButtonSt = styled(Button)(({ theme }) => ({
-  background: theme.color.primary,
-  fontWeight: 'bold',
-  width: 222,
-  marginTop: 24,
-  marginBottom: 16,
-
-  '&:hover': {
-    background: alpha(theme.color.primary, 0.6),
-  },
-}));
+import { ButtonSt, ColumnCenterBoxSt, InfoBoxSt } from './ResetPassword.styles';
+import { WrapColSt } from '../Account.styles';
 
 const ariaLabel = { 'aria-label': 'description' };
 type ToobCode = string;
 
-const ResetPasswordPage = () => {
+export const ResetPasswordPage = () => {
   const { navigate } = useI18next();
   const mode = useQueryParam('mode');
   const oobCode = useQueryParam('oobCode') as unknown as ToobCode;
   const [loading, setLoading] = useState(true);
   const [success, setSccess] = useState(false);
   const [newPassowrd, setNewpassword] = useState('');
+  const { isUserLogin, isLoading } = useAppSelector((state) => state.account);
 
   useEffect(() => {
     mode[0] === 'resetPassword' && handleResetPassword();
@@ -87,7 +60,8 @@ const ResetPasswordPage = () => {
     }
   };
   return (
-    <Layout>
+    <WrapColSt>
+      {isLoading && <Loading />}
       {loading ? (
         <Loading />
       ) : !success ? (
@@ -124,22 +98,6 @@ const ResetPasswordPage = () => {
           </InfoBoxSt>
         </ColumnCenterBoxSt>
       )}
-    </Layout>
+    </WrapColSt>
   );
 };
-
-export default ResetPasswordPage;
-
-export const query = graphql`
-  query ($language: String!) {
-    locales: allLocale(filter: { language: { eq: $language } }) {
-      edges {
-        node {
-          ns
-          data
-          language
-        }
-      }
-    }
-  }
-`;

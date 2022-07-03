@@ -15,7 +15,7 @@ import {
   AccountHeadingSt,
   AccountInfoSt,
 } from '../Account.styles';
-import { getSignSchema } from '../utils';
+import { getSignInSchema } from '../utils';
 import { ButtonSt } from '../Account.styles';
 
 interface ISignInProps {
@@ -28,7 +28,7 @@ export const SignIn = () => {
   const dispatch = useAppDispatch();
   const { isUserLogin, isLoading } = useAppSelector((state) => state.account);
 
-  const schema = getSignSchema(t);
+  const schema = getSignInSchema(t);
 
   const {
     register,

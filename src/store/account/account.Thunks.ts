@@ -4,6 +4,8 @@ import {
   signInWithEmailAndPassword,
   onAuthStateChanged,
   updateProfile,
+  updatePassword,
+  User,
 } from 'firebase/auth';
 
 import { auth } from '@bookable24/firebase';
@@ -53,3 +55,12 @@ export const signInAccount = createAsyncThunk(
 export const signOutAccount = createAsyncThunk('account/singOut', async () => {
   await auth.signOut();
 });
+
+export const userChangePassword = createAsyncThunk(
+  'account/changePassword',
+  async (newPassword: string) => {
+    const user = auth.currentUser as User;
+    console.log({ user });
+    await updatePassword(user, newPassword);
+  }
+);

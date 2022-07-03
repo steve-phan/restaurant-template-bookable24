@@ -111,7 +111,7 @@ export const validatePhone = (phoneNumber: string) => {
 //   return filterBookings(allTermins, day);
 // };
 
-export const getSchema = (t: TFunction<string | string[], undefined>) => {
+export const getSignUpSchema = (t: TFunction<string | string[], undefined>) => {
   return yup.object({
     fullName: yup
       .string()
@@ -125,7 +125,7 @@ export const getSchema = (t: TFunction<string | string[], undefined>) => {
     password: yup
       .string()
       .trim()
-      .min(5, t('booking.validation.error.password'))
+      .min(6, t('booking.validation.error.password'))
       .required(t('booking.validation.error.password')),
     phone: yup
       .string()
@@ -137,7 +137,7 @@ export const getSchema = (t: TFunction<string | string[], undefined>) => {
   });
 };
 
-export const getSignSchema = (t: TFunction<string | string[], undefined>) => {
+export const getSignInSchema = (t: TFunction<string | string[], undefined>) => {
   return yup.object({
     email: yup
       .string()
@@ -147,6 +147,23 @@ export const getSignSchema = (t: TFunction<string | string[], undefined>) => {
     password: yup
       .string()
       .trim()
+      .required(t('booking.validation.error.password')),
+  });
+};
+
+export const getChangePasswordSchema = (
+  t: TFunction<string | string[], undefined>
+) => {
+  return yup.object({
+    password: yup
+      .string()
+      .trim()
+      .min(6, t('booking.validation.error.password'))
+      .required(t('booking.validation.error.password')),
+    confirmpassword: yup
+      .string()
+      .trim()
+      .min(6, t('booking.validation.error.password'))
       .required(t('booking.validation.error.password')),
   });
 };

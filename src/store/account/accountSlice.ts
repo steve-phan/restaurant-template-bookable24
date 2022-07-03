@@ -2,7 +2,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { UserCredential } from 'firebase/auth';
 import { initialAccountState } from './account.defaultValues';
 
-import { createAccount, signInAccount, signOutAccount } from './account.Thunks';
+import {
+  createAccount,
+  signInAccount,
+  signOutAccount,
+  userChangePassword,
+} from './account.Thunks';
 import { IAccountSliceStates } from './account.types';
 
 export const accountSlice = createSlice({
@@ -67,7 +72,17 @@ export const accountSlice = createSlice({
       })
       .addCase(signOutAccount.fulfilled, (state: IAccountSliceStates) => {
         state.isLoading = false;
-        state.isUserLogin = true;
+        state.isUserLogin = false;
+      })
+      .addCase(userChangePassword.pending, (state: IAccountSliceStates) => {
+        state.isLoading = true;
+      })
+      .addCase(userChangePassword.rejected, (state: IAccountSliceStates) => {
+        state.isLoading = false;
+      })
+      .addCase(userChangePassword.fulfilled, (state: IAccountSliceStates) => {
+        state.isLoading = false;
+        state.isUserLogin = false;
       });
   },
 });

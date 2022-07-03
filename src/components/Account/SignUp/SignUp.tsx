@@ -8,7 +8,7 @@ import { createAccount } from '@bookable24/store/account/account.Thunks';
 import Loading from '@bookable24/components/molecules/Loading/Loading';
 import { setAccountLoading } from '@bookable24/store/account/accountSlice';
 
-import { getSchema } from '../utils';
+import { getSignUpSchema } from '../utils';
 import {
   AccountHeadingSt,
   AccountInfoSt,
@@ -30,7 +30,7 @@ export const SignUp = () => {
   const dispatch = useAppDispatch();
   const { isUserLogin, isLoading } = useAppSelector((state) => state.account);
 
-  const schema = getSchema(t);
+  const schema = getSignUpSchema(t);
 
   const {
     control,
