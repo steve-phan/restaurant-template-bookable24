@@ -3,21 +3,10 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Link, useI18next } from 'gatsby-plugin-react-i18next';
 
-import { useAppDispatch, useAppSelector } from '@bookable24/store/hooks';
-import {
-  signInAccount,
-  userChangePassword,
-} from '@bookable24/store/account/account.Thunks';
-import Loading from '@bookable24/components/molecules/Loading/Loading';
-import { setAccountLoading } from '@bookable24/store/account/accountSlice';
+import { useAppDispatch } from '@bookable24/store/hooks';
+import { userChangePassword } from '@bookable24/store/account/account.Thunks';
 
-import {
-  WrapColSt,
-  TextFieldSt,
-  TypographySt,
-  AccountHeadingSt,
-  AccountInfoSt,
-} from '../Account.styles';
+import { WrapColSt, TextFieldSt, AccountHeadingSt } from '../Account.styles';
 import { getChangePasswordSchema } from '../utils';
 import { ButtonSt } from '../Account.styles';
 
@@ -46,8 +35,10 @@ export const ChangePassword = () => {
   });
 
   useEffect(() => {
-    if (dirtyFields.confirmpassword && !getValues().confirmpassword) {
-      console.log('password ---- ===');
+    if (
+      dirtyFields.confirmpassword &&
+      getValues()?.confirmpassword?.length <= 2
+    ) {
       handleSubmit(onSubmit)();
     }
   }, [
@@ -59,11 +50,10 @@ export const ChangePassword = () => {
   const onSubmit = (data: IChangePasswordProps) => {
     const { password, confirmpassword } = data;
     if (password !== confirmpassword) {
-      console.log('Submit Change Password');
+      alert('Your Confirm password does not match');
       return;
     }
     dispatch(userChangePassword(data.password));
-    // dispatch(signInAccount({ email: data.email, password: data.password }));
   };
 
   return (
@@ -91,15 +81,7 @@ export const ChangePassword = () => {
           type='password'
         />
 
-        <ButtonSt
-          variant='contained'
-          color='primary'
-          type='submit'
-          // onClick={() => {
-          //   console.log('is clicking');
-          //   handleSubmit(onSubmit)();
-          // }}
-        >
+        <ButtonSt variant='contained' color='primary' type='submit'>
           Submit
         </ButtonSt>
       </form>

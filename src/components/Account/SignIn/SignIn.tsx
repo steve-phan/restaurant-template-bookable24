@@ -26,7 +26,9 @@ interface ISignInProps {
 export const SignIn = () => {
   const { t, navigate } = useI18next();
   const dispatch = useAppDispatch();
-  const { isUserLogin, isLoading } = useAppSelector((state) => state.account);
+  const { isUserLogin, isLoading, isLoginFail } = useAppSelector(
+    (state) => state.account
+  );
 
   const schema = getSignInSchema(t);
 
@@ -43,12 +45,14 @@ export const SignIn = () => {
   });
 
   useEffect(() => {
-    if (isUserLogin) {
+    if (isLoginFail) {
+      alert('Your Email or Password is wrong...');
+    } else if (isUserLogin) {
       navigate('/account');
     } else {
       dispatch(setAccountLoading(false));
     }
-  }, [isLoading, isUserLogin]);
+  }, [isLoading, isUserLogin, isLoginFail]);
 
   const onSubmit = (data: ISignInProps) => {
     dispatch(signInAccount({ email: data.email, password: data.password }));

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'gatsby';
 import { useI18next } from 'gatsby-plugin-react-i18next';
 import TextField from '@mui/material/TextField';
@@ -17,7 +17,7 @@ import { WrapColSt } from '../Account.styles';
 const ariaLabel = { 'aria-label': 'description' };
 type ToobCode = string;
 
-export const ResetPasswordPage = () => {
+export const ResetPassword = () => {
   const { navigate } = useI18next();
   const mode = useQueryParam('mode');
   const oobCode = useQueryParam('oobCode') as unknown as ToobCode;
@@ -62,9 +62,7 @@ export const ResetPasswordPage = () => {
   return (
     <WrapColSt>
       {isLoading && <Loading />}
-      {loading ? (
-        <Loading />
-      ) : !success ? (
+      {!success ? (
         <ColumnCenterBoxSt>
           <InfoBoxSt>
             <Typography variant='h5'>Passwort ändern</Typography>
@@ -91,7 +89,7 @@ export const ResetPasswordPage = () => {
               Herzlichen Glückwunsch, Ihr Passwort wurde erfolgreich geändert.
               Klicken Sie
               <strong>
-                <Link to='/login'>hier</Link>
+                <Link to='/account/signin'>hier</Link>
               </strong>
               , um sich einzuloggen
             </Typography>

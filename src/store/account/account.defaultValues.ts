@@ -3,6 +3,8 @@ import { IAccountSliceStates } from './account.types';
 export const initialAccountState: IAccountSliceStates = {
   isLoading: true,
   isUserLogin: false,
+  isLoginFail: false,
+  isUserChangePasswordSuccess: false,
   userInfo: {
     fullName: '',
     email: '',

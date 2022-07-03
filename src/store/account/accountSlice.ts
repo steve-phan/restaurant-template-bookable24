@@ -50,9 +50,11 @@ export const accountSlice = createSlice({
       )
       .addCase(signInAccount.pending, (state: IAccountSliceStates) => {
         state.isLoading = true;
+        state.isLoginFail = false;
       })
       .addCase(signInAccount.rejected, (state: IAccountSliceStates, action) => {
         state.isLoading = false;
+        state.isLoginFail = true;
       })
       .addCase(
         signInAccount.fulfilled,
@@ -62,6 +64,7 @@ export const accountSlice = createSlice({
         ) => {
           state.isLoading = false;
           state.isUserLogin = true;
+          state.isLoginFail = false;
         }
       )
       .addCase(signOutAccount.pending, (state: IAccountSliceStates) => {
@@ -76,13 +79,16 @@ export const accountSlice = createSlice({
       })
       .addCase(userChangePassword.pending, (state: IAccountSliceStates) => {
         state.isLoading = true;
+        state.isUserChangePasswordSuccess = false;
       })
       .addCase(userChangePassword.rejected, (state: IAccountSliceStates) => {
         state.isLoading = false;
+        state.isUserChangePasswordSuccess = false;
       })
       .addCase(userChangePassword.fulfilled, (state: IAccountSliceStates) => {
         state.isLoading = false;
         state.isUserLogin = false;
+        state.isUserChangePasswordSuccess = true;
       });
   },
 });

@@ -20,7 +20,7 @@ export const NavLinks = ({ routes }: any) => {
             }}
             to={route.path}
           >
-            {t(`menu.${route.name}`)}
+            {t(`menu.${route.name}`, route.name)}
           </PageLinkSt>
         </React.Fragment>
       ))}

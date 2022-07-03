@@ -20,5 +20,7 @@ export interface IAccount {
 export interface IAccountSliceStates {
   isLoading: boolean;
   isUserLogin: boolean;
+  isLoginFail: boolean;
+  isUserChangePasswordSuccess: boolean;
   userInfo: IAccount;
 }

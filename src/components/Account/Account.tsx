@@ -48,12 +48,19 @@ export const Account = () => {
   const {
     isUserLogin,
     isLoading,
+    isUserChangePasswordSuccess,
     userInfo: { email, fullName },
   } = useAppSelector((state) => state.account);
 
   useEffect(() => {
-    if (!isLoading && !isUserLogin) navigate('/account/signin');
-  }, [isLoading, isUserLogin]);
+    if (isUserChangePasswordSuccess) {
+      alert('Your Password was changed');
+      navigate('/account/signin');
+    }
+    if (!isLoading && !isUserLogin && !isUserChangePasswordSuccess) {
+      navigate('/account/signin');
+    }
+  }, [isLoading, isUserLogin, isUserChangePasswordSuccess]);
 
   return (
     <WrapColSt>

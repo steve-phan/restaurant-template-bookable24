@@ -3,7 +3,13 @@ import { Typography } from '@mui/material';
 import { sendPasswordResetEmail } from 'firebase/auth';
 import { Link } from 'gatsby-plugin-react-i18next';
 
-import { ButtonSt, TextFieldSt, TypographySt, WrapColSt } from '../Account.styles';
+import {
+  AccountHeadingSt,
+  ButtonSt,
+  TextFieldSt,
+  TypographySt,
+  WrapColSt,
+} from '../Account.styles';
 import AccountModal from '../AccountModal/AccountModal';
 import { auth } from '@bookable24/firebase';
 
@@ -19,11 +25,15 @@ export const Recover = () => {
     modalText: '',
     open: false,
   });
-  const handleChange = (prop: keyof IloginStates) => (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValues({ ...values, [prop]: event.target.value });
-  };
+  const handleChange =
+    (prop: keyof IloginStates) =>
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setValues({ ...values, [prop]: event.target.value });
+    };
 
-  const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleMouseDownPassword = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
     event.preventDefault();
   };
   const handleShopRecover = async () => {
@@ -54,9 +64,18 @@ export const Recover = () => {
   };
   return (
     <WrapColSt>
-      <AccountModal handleOpen={handleOpen} handleClose={handleClose} open={values.open} modalText={values.modalText} />
-      <h1>Passwort vergessen?</h1>
-      <TypographySt>Geben Sie Ihre E-Mail-Adresse ein, mit der Sie sich bei BookAble24 registriert haben. Wir senden Ihnen einen Link zum Zurücksetzen des Passworts.</TypographySt>
+      <AccountModal
+        handleOpen={handleOpen}
+        handleClose={handleClose}
+        open={values.open}
+        modalText={values.modalText}
+      />
+      <AccountHeadingSt>Passwort vergessen?</AccountHeadingSt>
+      <TypographySt>
+        Geben Sie Ihre E-Mail-Adresse ein, mit der Sie sich bei BookAble24
+        registriert haben. Wir senden Ihnen einen Link zum Zurücksetzen des
+        Passworts.
+      </TypographySt>
       <TextFieldSt
         fullWidth
         value={values.email}
@@ -65,15 +84,25 @@ export const Recover = () => {
         placeholder='johndoe@mail.com'
         label='Email*'
         error={values.email.length === 0}
-        helperText={values.email.length === 0 ? <> "Geben sie eine gültige E-Mail-Adresse an" </> : null}
+        helperText={
+          values.email.length === 0 ? (
+            <> "Geben sie eine gültige E-Mail-Adresse an" </>
+          ) : null
+        }
         onChange={handleChange('email')}
       />
 
-      <ButtonSt size='large' variant='contained' onClick={handleShopRecover} type='submit' disabled={values.email.length === 0}>
+      <ButtonSt
+        size='large'
+        variant='contained'
+        onClick={handleShopRecover}
+        type='submit'
+        disabled={values.email.length === 0}
+      >
         Passwort zurücksetzen
       </ButtonSt>
       <Typography>
-        <Link to='/login' className='siteLink'>
+        <Link to='/account/signin' className='siteLink'>
           Zurück zum Login
         </Link>
       </Typography>

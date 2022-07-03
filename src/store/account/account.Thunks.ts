@@ -60,7 +60,6 @@ export const userChangePassword = createAsyncThunk(
   'account/changePassword',
   async (newPassword: string) => {
     const user = auth.currentUser as User;
-    console.log({ user });
     await updatePassword(user, newPassword);
   }
 );
