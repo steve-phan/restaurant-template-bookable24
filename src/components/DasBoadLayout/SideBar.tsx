@@ -5,7 +5,7 @@ import Hidden from '@mui/material/Hidden';
 import { routes } from './routes';
 import { WrapSideBarSt } from './dashboard.styles';
 import { IMobileToggle } from './Header/Header.types';
-import MobileMenu from '../Layout/NavLinks/MobileMenu';
+import MobileMenu from '../Layout/NavLinks/NavBarMenu';
 
 const SideBar = ({ mobileOpen, handleDrawerToggle }: IMobileToggle) => {
   return (

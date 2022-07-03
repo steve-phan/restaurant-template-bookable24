@@ -34,4 +34,5 @@ const routes = [
   // },
 ];
 
-export { routes };
+type TRoures = typeof routes;
+export { routes, TRoures };
