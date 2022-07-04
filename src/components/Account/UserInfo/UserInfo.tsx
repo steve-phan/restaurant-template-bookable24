@@ -54,6 +54,7 @@ export const UserInfo = () => {
   });
 
   const onSubmit = (data: IAddress) => {
+    setEdit(!edit);
     dispatch(updateUserInfo(data));
   };
 

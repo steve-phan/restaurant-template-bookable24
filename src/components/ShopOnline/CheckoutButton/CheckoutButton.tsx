@@ -46,8 +46,6 @@ export const CheckoutButton = ({ handleClose }: ICheckoutButtonProps) => {
   }, [cartItems]);
 
   return (
-    // <WrapperBoxViewCartst>
-    //   <BoxViewCartst>
     <AppBar position='relative' color='primary' sx={{ top: 'auto', bottom: 0 }}>
       <Toolbar
         onClick={() => {
@@ -87,7 +85,5 @@ export const CheckoutButton = ({ handleClose }: ICheckoutButtonProps) => {
         </Typography>
       </Toolbar>
     </AppBar>
-    //   </BoxViewCartst>
-    // </WrapperBoxViewCartst>
   );
 };

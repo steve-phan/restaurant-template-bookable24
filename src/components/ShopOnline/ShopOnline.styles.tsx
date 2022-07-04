@@ -75,7 +75,9 @@ export const CategoryMenuSt = styled('div')(({ theme }) => ({
   left: 'calc(50vw - 358px)',
   right: 'calc(50vw - 358px)',
   display: 'inline-block',
-  maxWidth: 700,
+  fontSize: 14,
+  fontWeight: 700,
+  // maxWidth: 700,
   margin: '0 auto',
   transform: 'translateZ(0)',
   background: 'transparent',
@@ -83,25 +85,31 @@ export const CategoryMenuSt = styled('div')(({ theme }) => ({
   zIndex: 1000,
 }));
 
-export const CategoryItemSt = styled('div')<{ active?: 'active' | 'normal' }>(({ theme, active }) => ({
-  position: 'relative',
-  cursor: 'pointer',
-  padding: '8px 10px',
-  maxWidth: '40vh',
-  margin: '0 auto',
-  lineHeight: 1.4,
-  whiteSpace: 'nowrap',
-  // flexShrink: 0,
-  width: 'auto',
-  zIndex: 3,
-  textAlign: 'center',
-  fontFamily: 'Mukta, sans-serif',
+export const CategoryItemSt = styled('div')<{ active?: 'active' | 'normal' }>(
+  ({ theme, active }) => ({
+    position: 'relative',
+    cursor: 'pointer',
+    padding: '8px 6px',
+    // maxWidth: '40vh',
+    // margin: '0 auto',
+    lineHeight: 1.4,
+    whiteSpace: 'nowrap',
+    // flexShrink: 0,
+    // width: 'fit-content !important',
+    zIndex: 3,
+    textAlign: 'center',
+    fontFamily: 'Mukta, sans-serif',
 
-  color: active === 'active' ? theme.color.secondary : 'black',
-  backgroundColor: active === 'active' ? theme.color.secondaryBackground : 'white',
-  borderRadius: 6,
-  border: active === 'active' ? `1px solid ${theme.color.secondaryBackground}` : `0 solid white`,
-}));
+    color: active === 'active' ? theme.color.secondary : 'black',
+    backgroundColor:
+      active === 'active' ? theme.color.secondaryBackground : 'white',
+    borderRadius: 6,
+    border:
+      active === 'active'
+        ? `1px solid ${theme.color.secondaryBackground}`
+        : `0 solid white`,
+  })
+);
 
 export const HeadingSectionSt = styled('h2')(({ theme }) => ({
   maxWidth: 700,

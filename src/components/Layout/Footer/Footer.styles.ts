@@ -1,9 +1,9 @@
-import { styled } from "@mui/material/styles"
+import { styled } from '@mui/material/styles';
 
-export const FooterSt = styled("footer")`
+export const FooterSt = styled('footer')`
   width: 100%;
   float: left;
   text-align: center;
   padding: 16px;
-  background: ${({ theme }) => theme.color.background};
-`
+  background: ${({ theme }) => theme.color.secondaryBackground};
+`;

@@ -6,7 +6,7 @@ export const GoogleMapSt = styled('div')(({ theme }) => ({
   paddingLeft: 18,
   paddingRight: 18,
   width: '100%',
-  background: '#f8f5f2',
+  background: theme.color.secondaryBackground,
   [theme.breakpoints.up('md')]: {
     paddingLeft: 8,
     paddingRight: 8,

@@ -4,6 +4,7 @@ import { IBookingState, IInfoUserProps, IFoodItem } from './shop.types';
 import {
   addToCart,
   handleReduceCartItem,
+  IAddNotes,
   initialBookingState,
   initialFoodItemModal,
 } from './utils';
@@ -21,6 +22,16 @@ const bookingSlice = createSlice({
 
       state.foodItemModal.quantity = state.foodItemModal.quantity + 1;
     },
+    addRequireItemToCart: (
+      state: IBookingState,
+      action: PayloadAction<{ addNotes: IAddNotes }>
+    ) => {
+      const newCartItems = addToCart({
+        prevCartItems: state.cartItems,
+        addNotes: action.payload.addNotes,
+      }) as IFoodItem[];
+      state.cartItems = newCartItems;
+    },
     removeItemFromCart: (
       state: IBookingState,
       action: PayloadAction<IFoodItem>
@@ -32,6 +43,18 @@ const bookingSlice = createSlice({
 
       state.cartItems = newCartItems;
       state.foodItemModal.quantity = state.foodItemModal.quantity - 1;
+    },
+    removeRequireItemFromCart: (
+      state: IBookingState,
+      action: PayloadAction<{ addNotes: IAddNotes }>
+    ) => {
+      const newCartItems = handleReduceCartItem({
+        prevCartItems: state.cartItems,
+        addNotes: action.payload.addNotes,
+      }) as IFoodItem[];
+      state.cartItems = newCartItems;
+
+      state.foodItemModal.quantity = state.foodItemModal.quantity + 1;
     },
     openFoodItemModal: (
       state: IBookingState,
@@ -90,13 +113,19 @@ export const {
   setCustomerInfo,
   setCustomerValidInfo,
 
-  // NEW PROJECT :
+  // Adjust Item
   addItemToCart,
   removeItemFromCart,
+
+  // ShopOnline Modal
   openFoodItemModal,
   closeFoodItemModal,
   openViewCartModal,
   closeViewCartModal,
+
+  // AddNotes actions
+  addRequireItemToCart,
+  removeRequireItemFromCart,
 } = bookingSlice.actions;
 
 export default bookingSlice.reducer;

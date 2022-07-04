@@ -1,13 +1,31 @@
-import React from 'react';
-import { Box, Grid } from '@mui/material';
+import React, { useState } from 'react';
+import { Box, Grid, TextareaAutosize } from '@mui/material';
 
 import { IFoodItem } from '@bookable24/store/shop/shop.types';
 
-import { BoxAdjustFoodItemSt, BoxViewCartFoodItemSt, FoodNameSt, QuantityFoodItemSt } from './ViewCartFoodItem.styles';
+import {
+  AddNotesActionsSt,
+  AddNotesBodySt,
+  AddNotesButtonSt,
+  BoxAdjustFoodItemSt,
+  BoxViewCartFoodItemSt,
+  FoodNameSt,
+  QuantityFoodItemSt,
+} from './ViewCartFoodItem.styles';
 import { BoxAdjustFoodItem } from '../../BoxAdjustFoodItem/BoxAdjustFoodItem';
+import { useAppDispatch, useAppSelector } from '@bookable24/store/hooks';
+import {
+  addRequireItemToCart,
+  removeRequireItemFromCart,
+} from '@bookable24/store/shop/bookingSlice';
 
 export const ViewCartFoodItem = ({ item }: { item: IFoodItem }) => {
-  const { foodName, priceOfFood, quantity } = item;
+  const [openNotes, setOpenNotes] = useState(false);
+  const { foodName, priceOfFood, quantity, foodId, require } = item;
+  const [notes, setNotes] = useState(require || '');
+  const dispatch = useAppDispatch();
+  const {} = useAppSelector((state) => state.booking);
+
   return (
     <BoxViewCartFoodItemSt>
       <QuantityFoodItemSt>{quantity}</QuantityFoodItemSt>
@@ -26,9 +44,56 @@ export const ViewCartFoodItem = ({ item }: { item: IFoodItem }) => {
           </Grid>
         </Grid>
         <BoxAdjustFoodItemSt>
+          <AddNotesButtonSt onClick={() => setOpenNotes(!openNotes)}>
+            Anmerkung hinzufügen
+          </AddNotesButtonSt>
           <BoxAdjustFoodItem item={item} />
         </BoxAdjustFoodItemSt>
       </Box>
+      {openNotes && (
+        <AddNotesBodySt>
+          <TextareaAutosize
+            value={notes}
+            minRows={3}
+            aria-label='empty textarea'
+            style={{ width: '100%', maxWidth: '100%' }}
+            onChange={(e) => setNotes(e.target.value)}
+          />
+          <AddNotesActionsSt>
+            <AddNotesButtonSt
+              onClick={() => {
+                setOpenNotes(!openNotes);
+                dispatch(
+                  removeRequireItemFromCart({
+                    addNotes: {
+                      foodId,
+                      require: '',
+                    },
+                  })
+                );
+              }}
+            >
+              Löschen
+            </AddNotesButtonSt>
+            <AddNotesButtonSt
+              onClick={() => {
+                setOpenNotes(!openNotes);
+
+                dispatch(
+                  addRequireItemToCart({
+                    addNotes: {
+                      foodId,
+                      require: notes,
+                    },
+                  })
+                );
+              }}
+            >
+              Speichern
+            </AddNotesButtonSt>
+          </AddNotesActionsSt>
+        </AddNotesBodySt>
+      )}
     </BoxViewCartFoodItemSt>
   );
 };

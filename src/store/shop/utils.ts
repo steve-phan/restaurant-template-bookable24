@@ -63,22 +63,43 @@ export const getCurrentQuantity = (cartItems: IFoodItem[], foodId: string) => {
 
   return currentQuantity;
 };
+
+export interface IAddNotes {
+  foodId: string;
+  require: string;
+}
+
 interface IAddToCartProps {
   prevCartItems?: IFoodItem[];
   nextCartItem?: IFoodItem;
   cartItemToReduce?: IFoodItem;
+  addNotes?: IAddNotes;
 }
-export const addToCart = ({ prevCartItems, nextCartItem }: IAddToCartProps) => {
-  let newCarItems = prevCartItems ? prevCartItems : [];
-  const cartItemExists = existingCartItem(prevCartItems, nextCartItem?.foodId);
-
-  if (!nextCartItem) {
-    return prevCartItems;
-  }
+export const addToCart = ({
+  prevCartItems,
+  nextCartItem,
+  addNotes,
+}: IAddToCartProps) => {
+  let newCarItems = !!prevCartItems ? prevCartItems : [];
+  const cartItemExists = existingCartItem(
+    prevCartItems,
+    nextCartItem?.foodId || addNotes?.foodId
+  );
 
   if (!!cartItemExists) {
+    if (addNotes) {
+      return newCarItems.map((cartItem) =>
+        cartItem.foodId === addNotes.foodId
+          ? {
+              ...cartItem,
+              require: addNotes?.require,
+            }
+          : cartItem
+      );
+    }
+
     return newCarItems.map((cartItem) =>
-      cartItem.foodId === nextCartItem.foodId
+      cartItem.foodId === nextCartItem?.foodId
         ? {
             ...cartItem,
             quantity: cartItem.quantity + 1,
@@ -99,23 +120,35 @@ export const addToCart = ({ prevCartItems, nextCartItem }: IAddToCartProps) => {
 export const handleReduceCartItem = ({
   prevCartItems,
   cartItemToReduce,
+  addNotes,
 }: IAddToCartProps) => {
   const cartItemExists = existingCartItem(
     prevCartItems,
-    cartItemToReduce?.foodId
+    cartItemToReduce?.foodId || addNotes?.foodId
   );
 
-  if (!cartItemExists || !prevCartItems) {
+  if (!cartItemExists) {
     return prevCartItems;
   }
 
+  if (addNotes) {
+    return prevCartItems?.map((cartItem) =>
+      cartItem.foodId === addNotes.foodId
+        ? {
+            ...cartItem,
+            require: addNotes?.require,
+          }
+        : cartItem
+    );
+  }
+
   if (!!cartItemExists && cartItemExists.quantity === 1) {
-    return prevCartItems.filter(
+    return prevCartItems?.filter(
       (cartItem) => cartItem.foodId !== cartItemExists.foodId
     );
   }
 
-  return prevCartItems.map((cartItem) =>
+  return prevCartItems?.map((cartItem) =>
     cartItem.foodId === cartItemExists?.foodId
       ? {
           ...cartItem,

@@ -69,6 +69,11 @@ export const Checkout = () => {
       <CTAButtonFull
         onClick={() => {
           if (!phone || !postCode || !houseNumber || !street) {
+            window.scrollTo({
+              top: 0,
+              left: 0,
+              behavior: 'smooth',
+            });
             alert('You need update your address first');
           } else {
             alert('We are on track :)');
