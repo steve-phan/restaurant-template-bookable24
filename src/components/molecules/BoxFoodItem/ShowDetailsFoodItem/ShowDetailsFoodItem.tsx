@@ -21,8 +21,6 @@ import {
   FoodItemViewMorest,
 } from './ShowDetailsFoodItem.styles';
 import { AddFoodItemToCart } from '../AddFoodItemToCart/AddFoodItemToCart';
-import { existingCartItem } from '@bookable24/store/shop/utils';
-import { IFoodItem } from '@bookable24/store/shop/shop.types';
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {

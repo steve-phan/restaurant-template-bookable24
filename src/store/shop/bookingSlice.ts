@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { confirmOderEmail } from './booking.Thunks';
 
 import { IBookingState, IInfoUserProps, IFoodItem } from './shop.types';
 import {
@@ -104,6 +105,21 @@ const bookingSlice = createSlice({
         state.isSubmitted = false;
       }
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(confirmOderEmail.pending, (state: IBookingState) => {
+        // state.isLoading = true;
+      })
+      .addCase(confirmOderEmail.rejected, (state: IBookingState) => {
+        // state.isLoading = false;
+        // state.isLoading = true;
+      })
+      .addCase(confirmOderEmail.fulfilled, (state: IBookingState) => {
+        // state.isLoading = true;
+        // state.isLoading = false;
+        // state.isUserLogin = false;
+      });
   },
 });
 export const {

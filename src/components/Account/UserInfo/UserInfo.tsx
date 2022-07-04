@@ -31,10 +31,12 @@ export const UserInfo = () => {
   const dispatch = useAppDispatch();
   const [edit, setEdit] = useState(false);
   const {
-    userInfo: { address },
+    userInfo: {
+      address: { phone, street, houseNumber, city, postCode },
+    },
   } = useAppSelector((state) => state.account);
 
-  const { phone, street, houseNumber, city, postCode } = address;
+  // const { phone, street, houseNumber, city, postCode } = address;
   const schema = getAddressSchema(t);
 
   const {

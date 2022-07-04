@@ -25,6 +25,7 @@ import { OderSummary } from '../OderSummary/OderSummary';
 import { TextWarningSt } from '@bookable24/components/molecules/ui/TextWarning/TextWarning';
 import { CTAButton } from '@bookable24/components/molecules/CTAButton/CTAButton';
 import { CTAButtonFull } from '@bookable24/components/molecules/ui/Button/Buttons';
+import { confirmOderEmail } from '@bookable24/store/shop/booking.Thunks';
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -41,8 +42,7 @@ export const Checkout = () => {
     (state) => state.booking
   );
   const {
-    isUserLogin,
-    userInfo: { address },
+    userInfo: { email, fullName, address },
   } = useAppSelector((state) => state.account);
 
   const { phone, postCode, houseNumber, street } = address;
@@ -76,6 +76,14 @@ export const Checkout = () => {
             });
             alert('You need update your address first');
           } else {
+            const dataToSend = {
+              cartItems,
+              email,
+              phone,
+              ...address,
+            };
+            dispatch(confirmOderEmail(dataToSend));
+
             alert('We are on track :)');
           }
         }}

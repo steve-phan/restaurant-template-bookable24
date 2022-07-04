@@ -25,7 +25,15 @@ export const checkAuthAccount = (): AppThunk => {
             email: string;
             displayName: string;
           };
-          dispatch(setUserLogin({ email, displayName }));
+
+          await dispatch(getUserInfo()).then(() => {
+            dispatch(
+              setUserLogin({
+                email: email as string,
+                displayName: displayName as string,
+              })
+            );
+          });
         } else {
           dispatch(setAccountLoading(false));
         }
@@ -64,7 +72,7 @@ export const signInAccount = createAsyncThunk(
       const res = await axios.post('/.netlify/functions/getUserInfo', {
         uid,
       });
-      console.log({ res });
+
       userInfo = res?.data?.userInfo;
       if (userInfo) {
         localStorageSetItem('userInfo', JSON.stringify(userInfo));
@@ -102,17 +110,33 @@ export const updateUserInfo = createAsyncThunk(
   }
 );
 
-export const getUserInfo = createAsyncThunk('account/getUserInfo', async () => {
-  const uid = auth.currentUser?.uid;
-  const data = localStorageGetItem('userInfo');
-  if (data) {
-    const userInfo = JSON.parse(data);
-    return {
-      userInfo,
-    };
+export const getUserInfo = createAsyncThunk(
+  'account/getUserInfo',
+  async (_, thunkAPI) => {
+    let userInfo: any = null;
+    const { uid, email, displayName } = auth.currentUser as User;
+    console.log({ user: auth.currentUser });
+    const data = localStorageGetItem('userInfo');
+    if (data) {
+      userInfo = JSON.parse(data);
+      return {
+        userInfo,
+      };
+    }
+    const res = await axios.post('/.netlify/functions/getUserInfo', {
+      uid,
+    });
+    userInfo = res?.data?.userInfo;
+
+    if (userInfo) {
+      localStorageSetItem('userInfo', JSON.stringify(userInfo));
+    }
+    // thunkAPI.dispatch(
+    //   setUserLogin({
+    //     email: email as string,
+    //     displayName: displayName as string,
+    //   })
+    // );
+    return { userInfo };
   }
-  const res = await axios.post('/.netlify/functions/getUserInfo', {
-    uid,
-  });
-  return { userInfo: res.data };
-});
+);
