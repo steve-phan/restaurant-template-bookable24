@@ -26,6 +26,8 @@ import { TextWarningSt } from '@bookable24/components/molecules/ui/TextWarning/T
 import { CTAButton } from '@bookable24/components/molecules/CTAButton/CTAButton';
 import { CTAButtonFull } from '@bookable24/components/molecules/ui/Button/Buttons';
 import { confirmOderEmail } from '@bookable24/store/shop/booking.Thunks';
+import { RestaurantName } from '@bookable24/RESTAURANT.CONFIG/RESTAURANT.CONFIG';
+import axios from 'axios';
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -67,7 +69,7 @@ export const Checkout = () => {
       </TextWarningSt>
 
       <CTAButtonFull
-        onClick={() => {
+        onClick={async () => {
           if (!phone || !postCode || !houseNumber || !street) {
             window.scrollTo({
               top: 0,
@@ -77,14 +79,38 @@ export const Checkout = () => {
             alert('You need update your address first');
           } else {
             const dataToSend = {
-              cartItems,
+              restaurantName: RestaurantName,
+              cartItems: cartItems.map((item) => {
+                const { foodId, foodName, quantity, priceOfFood, require } =
+                  item;
+                return {
+                  foodId,
+                  foodName,
+                  quantity,
+                  priceOfFood,
+                  require,
+                  payAmount: (item.priceOfFood * item.quantity).toFixed(2),
+                };
+              }),
               email,
               phone,
+              sumPrices,
+              sumQuantities,
               ...address,
             };
-            dispatch(confirmOderEmail(dataToSend));
-
-            alert('We are on track :)');
+            const res = await axios.post(
+              '/.netlify/functions/sendOderConfirmEmail',
+              dataToSend
+            );
+            if (res?.data?.message === 'SUCCESS') {
+              alert(
+                "Oder successfully, we'll send a confirm email in a fews minutes"
+              );
+              navigate('/');
+            } else {
+              alert('Ops.. Somethings gone wrong.. try again please');
+            }
+            // dispatch(confirmOderEmail(dataToSend));
           }
         }}
       >
