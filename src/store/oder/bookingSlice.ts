@@ -11,7 +11,7 @@ import {
 } from './utils';
 
 const bookingSlice = createSlice({
-  name: 'booking',
+  name: 'oder',
   initialState: initialBookingState,
   reducers: {
     addItemToCart: (state: IBookingState, action: PayloadAction<IFoodItem>) => {

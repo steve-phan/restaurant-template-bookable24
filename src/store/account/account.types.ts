@@ -3,7 +3,7 @@ export interface ISignUpProps {
   email: string;
   password: string;
   phone: string;
-  postCode: number;
+  postCode: string;
   street: string;
   city: string;
   houseNumber: string;

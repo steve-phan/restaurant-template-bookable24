@@ -2,12 +2,14 @@ import { Provider } from 'react-redux';
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 
 // import shopReducer from "./shop/shopSlice"
-import bookingReducer from './shop/bookingSlice';
+import bookingReducer from './oder/bookingSlice';
 import accountReducer from './account/accountSlice';
+import appReducer from './app/appSlice';
 
 export const store = configureStore({
   reducer: {
     // shop: shopReducer,
+    app: appReducer,
     booking: bookingReducer,
     account: accountReducer,
   },

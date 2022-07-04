@@ -49,12 +49,12 @@ export const SignIn = () => {
 
   useEffect(() => {
     if (isLoginFail) {
-      alert('Your Email or Password is wrong...');
-    } else if (isUserLogin) {
+      return alert('Your Email or Password is wrong...');
+    }
+    if (isUserLogin) {
       dispatch(setOpenNavbarMenu());
       navigate('/oder');
-    } else {
-      dispatch(setAccountLoading(false));
+      return;
     }
   }, [isLoading, isUserLogin, isLoginFail]);
 
@@ -62,6 +62,7 @@ export const SignIn = () => {
     dispatch(setAccountLoading(true));
     dispatch(signInAccount({ email: data.email, password: data.password }));
   };
+  console.log({ isLoading });
   return (
     <WrapColSt>
       {isLoading && <Loading />}

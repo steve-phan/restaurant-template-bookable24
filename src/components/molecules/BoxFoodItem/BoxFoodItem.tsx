@@ -13,7 +13,7 @@ import { useAppDispatch, useAppSelector } from '@bookable24/store/hooks';
 import {
   addItemToCart,
   openFoodItemModal,
-} from '@bookable24/store/shop/bookingSlice';
+} from '@bookable24/store/oder/bookingSlice';
 
 import {
   BoxFoodItemSt,

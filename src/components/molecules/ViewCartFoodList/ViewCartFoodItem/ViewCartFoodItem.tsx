@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Grid, TextareaAutosize } from '@mui/material';
 
-import { IFoodItem } from '@bookable24/store/shop/shop.types';
+import { IFoodItem } from '@bookable24/store/oder/shop.types';
 
 import {
   AddNotesActionsSt,
@@ -17,7 +17,7 @@ import { useAppDispatch, useAppSelector } from '@bookable24/store/hooks';
 import {
   addRequireItemToCart,
   removeRequireItemFromCart,
-} from '@bookable24/store/shop/bookingSlice';
+} from '@bookable24/store/oder/bookingSlice';
 
 export const ViewCartFoodItem = ({ item }: { item: IFoodItem }) => {
   const [openNotes, setOpenNotes] = useState(false);

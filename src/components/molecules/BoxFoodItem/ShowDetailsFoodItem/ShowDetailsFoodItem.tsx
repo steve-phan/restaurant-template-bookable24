@@ -14,7 +14,7 @@ import { TransitionProps } from '@mui/material/transitions';
 import CloseIcon from '@mui/icons-material/Close';
 
 import { useAppDispatch, useAppSelector } from '@bookable24/store/hooks';
-import { closeFoodItemModal } from '@bookable24/store/shop/bookingSlice';
+import { closeFoodItemModal } from '@bookable24/store/oder/bookingSlice';
 
 import {
   CloseButtonSt,

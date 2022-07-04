@@ -54,12 +54,27 @@ export const accountSlice = createSlice({
           state: IAccountSliceStates,
           action: PayloadAction<Omit<ISignUpProps, 'password'>>
         ) => {
-          // state.isLoading = false;
-          // state.isUserLogin = true;
-          // state.userInfo.phone = action.payload.phone;
-          // state.userInfo.email = action.payload.email;
-          // state.userInfo.fullName = action.payload.fullName;
-          // state.userInfo.address.phone = action.payload.phone;
+          const {
+            email,
+            phone,
+            fullName,
+            street,
+            houseNumber,
+            postCode,
+            city,
+          } = action.payload;
+          state.isLoading = false;
+          state.isUserLogin = true;
+          state.userInfo.phone = phone;
+          state.userInfo.email = email;
+          state.userInfo.fullName = fullName;
+          state.userInfo.address = {
+            phone,
+            street,
+            houseNumber,
+            postCode,
+            city,
+          };
         }
       )
       .addCase(signInAccount.pending, (state: IAccountSliceStates) => {

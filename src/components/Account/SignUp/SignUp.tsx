@@ -48,10 +48,12 @@ export const SignUp = () => {
     if (isUserLogin) {
       dispatch(setOpenNavbarMenu());
       navigate('/oder');
-    } else {
-      dispatch(setAccountLoading(false));
     }
   }, [isUserLogin]);
+
+  useEffect(() => {
+    if (!isUserLogin) dispatch(setAccountLoading(false));
+  }, []);
 
   const onSubmit = (data: ISignUpProps) => {
     // const { email, password, phone, fullName } = data;

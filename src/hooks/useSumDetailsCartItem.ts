@@ -1,4 +1,4 @@
-import { TCartItems } from '@bookable24/store/shop/shop.types';
+import { TCartItems } from '@bookable24/store/oder/shop.types';
 
 export const useSumDetailsCartItem = (cartItems: TCartItems) => {
   return cartItems.reduce(

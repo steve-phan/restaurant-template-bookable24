@@ -12,6 +12,7 @@ export const CTAButtonFull = styled(Button)(({ theme }) => ({
   fontWeight: 700,
   textTransform: 'none',
   marginTop: 8,
+  cursor: 'pointer',
   '&:hover': {
     color: theme.color.primary,
     backgroundColor: 'white',

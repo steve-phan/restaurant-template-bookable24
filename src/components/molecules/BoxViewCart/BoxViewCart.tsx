@@ -11,7 +11,7 @@ import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import { useI18next } from 'gatsby-plugin-react-i18next';
 
 import { useAppDispatch, useAppSelector } from '@bookable24/store/hooks';
-import { closeViewCartModal } from '@bookable24/store/shop/bookingSlice';
+import { closeViewCartModal } from '@bookable24/store/oder/bookingSlice';
 import { useSumDetailsCartItem } from '@bookable24/hooks/useSumDetailsCartItem';
 
 import {

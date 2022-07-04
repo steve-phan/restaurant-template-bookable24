@@ -139,9 +139,8 @@ export const getSignUpSchema = (t: TFunction<string | string[], undefined>) => {
       .typeError('darf nur Nummer enthalten..')
       .test(
         'postCode',
-        'Muss genau 4 bis 6 Zeichen lang sein',
-        (val) =>
-          !!val && val?.toString().length >= 4 && val?.toString().length <= 6
+        'Muss genau 5 Zeichen lang sein',
+        (val) => !!val && val?.toString().length === 5
       )
       .required(t('account.error.postCode')),
     street: yup

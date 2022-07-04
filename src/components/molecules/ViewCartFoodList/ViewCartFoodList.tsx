@@ -1,8 +1,11 @@
 import React from 'react';
 
-import { TCartItems } from '@bookable24/store/shop/shop.types';
+import { TCartItems } from '@bookable24/store/oder/shop.types';
 
-import { ViewCartFoodItemSt, ViewCartFoodListSt } from './ViewCartFoodList.styles';
+import {
+  ViewCartFoodItemSt,
+  ViewCartFoodListSt,
+} from './ViewCartFoodList.styles';
 import { ViewCartFoodItem } from './ViewCartFoodItem/ViewCartFoodItem';
 
 export const ViewCartFoodList = ({ cartItems }: { cartItems: TCartItems }) => {

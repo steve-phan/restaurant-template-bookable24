@@ -11,10 +11,10 @@ import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import { useI18next } from 'gatsby-plugin-react-i18next';
 
 import { useAppDispatch, useAppSelector } from '@bookable24/store/hooks';
-import { closeViewCartModal } from '@bookable24/store/shop/bookingSlice';
+import { closeViewCartModal } from '@bookable24/store/oder/bookingSlice';
 import { useSumDetailsCartItem } from '@bookable24/hooks/useSumDetailsCartItem';
 
-import { TCartItems } from '@bookable24/store/shop/shop.types';
+import { TCartItems } from '@bookable24/store/oder/shop.types';
 import { SumQuantitiesSt } from '../../molecules/BoxViewCart/BoxViewCart.styles';
 import { localStorageSetItem } from '@bookable24/store/localStore';
 
@@ -46,7 +46,11 @@ export const CheckoutButton = ({ handleClose }: ICheckoutButtonProps) => {
   }, [cartItems]);
 
   return (
-    <AppBar position='relative' color='primary' sx={{ top: 'auto', bottom: 0 }}>
+    <AppBar
+      position='relative'
+      color='primary'
+      sx={{ top: 'auto', bottom: 0, cursor: 'pointer' }}
+    >
       <Toolbar
         onClick={() => {
           console.log('go to checkout');

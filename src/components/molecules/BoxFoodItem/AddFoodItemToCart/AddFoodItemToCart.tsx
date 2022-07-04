@@ -5,7 +5,7 @@ import Button from '@mui/material/Button/Button';
 import {
   openViewCartModal,
   closeFoodItemModal,
-} from '@bookable24/store/shop/bookingSlice';
+} from '@bookable24/store/oder/bookingSlice';
 import { useAppDispatch, useAppSelector } from '@bookable24/store/hooks';
 
 import { AddFoodItemToCartSt } from './AddFoodItemToCart.styles';

@@ -11,10 +11,10 @@ import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import { useI18next } from 'gatsby-plugin-react-i18next';
 
 import { useAppDispatch, useAppSelector } from '@bookable24/store/hooks';
-import { closeViewCartModal } from '@bookable24/store/shop/bookingSlice';
+import { closeViewCartModal } from '@bookable24/store/oder/bookingSlice';
 import { useSumDetailsCartItem } from '@bookable24/hooks/useSumDetailsCartItem';
 
-import { TCartItems } from '@bookable24/store/shop/shop.types';
+import { TCartItems } from '@bookable24/store/oder/shop.types';
 import { localStorageSetItem } from '@bookable24/store/localStore';
 import { ContainerSt } from '@bookable24/components/molecules/ui/Container/Container';
 import { HeadingCenter } from '@bookable24/components/molecules/ui/Heading/HeadingCenter';
@@ -25,9 +25,10 @@ import { OderSummary } from '../OderSummary/OderSummary';
 import { TextWarningSt } from '@bookable24/components/molecules/ui/TextWarning/TextWarning';
 import { CTAButton } from '@bookable24/components/molecules/CTAButton/CTAButton';
 import { CTAButtonFull } from '@bookable24/components/molecules/ui/Button/Buttons';
-import { confirmOderEmail } from '@bookable24/store/shop/booking.Thunks';
+import { confirmOderEmail } from '@bookable24/store/oder/booking.Thunks';
 import { RestaurantName } from '@bookable24/RESTAURANT.CONFIG/RESTAURANT.CONFIG';
 import axios from 'axios';
+import { setAccountLoading } from '@bookable24/store/account/accountSlice';
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -70,6 +71,7 @@ export const Checkout = () => {
 
       <CTAButtonFull
         onClick={async () => {
+          dispatch(setAccountLoading(true));
           if (!phone || !postCode || !houseNumber || !street) {
             window.scrollTo({
               top: 0,
@@ -92,6 +94,7 @@ export const Checkout = () => {
                   payAmount: (item.priceOfFood * item.quantity).toFixed(2),
                 };
               }),
+              fullName,
               email,
               phone,
               sumPrices,
@@ -102,6 +105,7 @@ export const Checkout = () => {
               '/.netlify/functions/sendOderConfirmEmail',
               dataToSend
             );
+            dispatch(setAccountLoading(true));
             if (res?.data?.message === 'SUCCESS') {
               alert(
                 "Oder successfully, we'll send a confirm email in a fews minutes"
@@ -111,6 +115,7 @@ export const Checkout = () => {
               alert('Ops.. Somethings gone wrong.. try again please');
             }
             // dispatch(confirmOderEmail(dataToSend));
+            dispatch(setAccountLoading(false));
           }
         }}
       >

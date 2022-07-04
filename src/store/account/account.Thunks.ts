@@ -14,7 +14,11 @@ import { auth } from '@bookable24/firebase';
 import { AppThunk } from '../store';
 import { ICreateAccount, ISignUpProps } from './account.types';
 import { setAccountLoading, setUserLogin } from './accountSlice';
-import { localStorageGetItem, localStorageSetItem } from '../localStore';
+import {
+  localStorageGetItem,
+  localStorageRemoveItem,
+  localStorageSetItem,
+} from '../localStore';
 
 export const checkAuthAccount = (): AppThunk => {
   return (dispatch, getState) => {
@@ -44,16 +48,20 @@ export const checkAuthAccount = (): AppThunk => {
 
 export const createAccount = createAsyncThunk(
   'account/create',
-  async ({
-    email,
-    password,
-    phone,
-    fullName,
-    street,
-    houseNumber,
-    postCode,
-    city,
-  }: ISignUpProps) => {
+  async (
+    {
+      email,
+      password,
+      phone,
+      fullName,
+      street,
+      houseNumber,
+      postCode,
+      city,
+    }: ISignUpProps,
+    { dispatch }
+  ) => {
+    localStorageRemoveItem('userInfo');
     const userRef = await createUserWithEmailAndPassword(auth, email, password);
     localStorageSetItem(
       'userInfo',
@@ -138,8 +146,7 @@ export const getUserInfo = createAsyncThunk(
   'account/getUserInfo',
   async (_, thunkAPI) => {
     let userInfo: any = null;
-    const { uid, email, displayName } = auth.currentUser as User;
-    console.log({ user: auth.currentUser });
+    const { uid } = auth.currentUser as User;
     const data = localStorageGetItem('userInfo');
     if (data) {
       userInfo = JSON.parse(data);
