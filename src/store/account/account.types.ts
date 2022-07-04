@@ -1,3 +1,14 @@
+export interface ISignUpProps {
+  fullName: string;
+  email: string;
+  password: string;
+  phone: string;
+  postCode: number;
+  street: string;
+  city: string;
+  houseNumber: string;
+}
+
 export interface ICreateAccount {
   email: string;
   phone: string;

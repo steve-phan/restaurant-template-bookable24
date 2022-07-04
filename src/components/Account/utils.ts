@@ -134,6 +134,30 @@ export const getSignUpSchema = (t: TFunction<string | string[], undefined>) => {
         return validatePhone(tel as string);
       })
       .required(t('booking.validation.error.phone')),
+    postCode: yup
+      .number()
+      .typeError('darf nur Nummer enthalten..')
+      .test(
+        'postCode',
+        'Muss genau 4 bis 6 Zeichen lang sein',
+        (val) =>
+          !!val && val?.toString().length >= 4 && val?.toString().length <= 6
+      )
+      .required(t('account.error.postCode')),
+    street: yup
+      .string()
+      .matches(/[a-zA-Z]/, 'darf nur Buchstaben enthalten..')
+      .trim()
+      .required(t('account.error.street')),
+    houseNumber: yup
+      .string()
+      .typeError(t('account.error.houseNumber'))
+      .required(t('account.error.houseNumber')),
+    city: yup
+      .string()
+      .matches(/[a-zA-Z]/, 'darf nur Buchstaben enthalten..')
+      .trim()
+      .required(t('account.error.city')),
   });
 };
 
@@ -188,8 +212,9 @@ export const getAddressSchema = (
       .typeError('darf nur Nummer enthalten..')
       .test(
         'postCode',
-        'Muss genau 5 Zeichen lang sein',
-        (val) => val?.toString().length === 5
+        'Muss genau 4 bis 6 Zeichen lang sein',
+        (val) =>
+          !!val && val?.toString().length >= 4 && val?.toString().length <= 6
       )
       .required(t('account.error.postCode')),
     street: yup

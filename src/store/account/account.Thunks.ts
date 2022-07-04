@@ -12,7 +12,7 @@ import {
 import { auth } from '@bookable24/firebase';
 
 import { AppThunk } from '../store';
-import { ICreateAccount } from './account.types';
+import { ICreateAccount, ISignUpProps } from './account.types';
 import { setAccountLoading, setUserLogin } from './accountSlice';
 import { localStorageGetItem, localStorageSetItem } from '../localStore';
 
@@ -44,20 +44,44 @@ export const checkAuthAccount = (): AppThunk => {
 
 export const createAccount = createAsyncThunk(
   'account/create',
-  async ({ email, password, phone, fullName }: ICreateAccount) => {
+  async ({
+    email,
+    password,
+    phone,
+    fullName,
+    street,
+    houseNumber,
+    postCode,
+    city,
+  }: ISignUpProps) => {
     const userRef = await createUserWithEmailAndPassword(auth, email, password);
-    localStorageSetItem('userInfo', JSON.stringify({ email, fullName, phone }));
+    localStorageSetItem(
+      'userInfo',
+      JSON.stringify({
+        email,
+        fullName,
+        phone,
+        street,
+        houseNumber,
+        postCode,
+        city,
+      })
+    );
     await axios.post('/.netlify/functions/setUserInfo', {
       uid: userRef.user.uid,
       email,
       fullName,
       phone,
+      street,
+      houseNumber,
+      postCode,
+      city,
     });
 
     await updateProfile(userRef.user, {
       displayName: fullName,
     });
-    return { email, fullName, phone };
+    return { email, fullName, phone, street, houseNumber, postCode, city };
   }
 );
 

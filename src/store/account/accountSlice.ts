@@ -10,7 +10,12 @@ import {
   updateUserInfo,
   userChangePassword,
 } from './account.Thunks';
-import { IAccount, IAccountSliceStates, IAddress } from './account.types';
+import {
+  IAccount,
+  IAccountSliceStates,
+  IAddress,
+  ISignUpProps,
+} from './account.types';
 
 export const accountSlice = createSlice({
   name: 'account',
@@ -47,18 +52,14 @@ export const accountSlice = createSlice({
         createAccount.fulfilled,
         (
           state: IAccountSliceStates,
-          action: PayloadAction<{
-            email: string;
-            fullName: string;
-            phone: string;
-          }>
+          action: PayloadAction<Omit<ISignUpProps, 'password'>>
         ) => {
-          state.isLoading = false;
-          state.isUserLogin = true;
-          state.userInfo.phone = action.payload.phone;
-          state.userInfo.email = action.payload.email;
-          state.userInfo.fullName = action.payload.fullName;
-          state.userInfo.address.phone = action.payload.phone;
+          // state.isLoading = false;
+          // state.isUserLogin = true;
+          // state.userInfo.phone = action.payload.phone;
+          // state.userInfo.email = action.payload.email;
+          // state.userInfo.fullName = action.payload.fullName;
+          // state.userInfo.address.phone = action.payload.phone;
         }
       )
       .addCase(signInAccount.pending, (state: IAccountSliceStates) => {

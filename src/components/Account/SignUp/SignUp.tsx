@@ -20,13 +20,7 @@ import {
   TypographySt,
   WrapColSt,
 } from '../Account.styles';
-
-interface ISignUpProps {
-  fullName: string;
-  email: string;
-  password: string;
-  phone: string;
-}
+import { ISignUpProps } from '@bookable24/store/account/account.types';
 
 export const SignUp = () => {
   const { t, navigate } = useI18next();
@@ -60,9 +54,9 @@ export const SignUp = () => {
   }, [isUserLogin]);
 
   const onSubmit = (data: ISignUpProps) => {
-    const { email, password, phone, fullName } = data;
+    // const { email, password, phone, fullName } = data;
     dispatch(setAccountLoading(true));
-    dispatch(createAccount({ email, password, phone, fullName }));
+    dispatch(createAccount(data));
   };
   return (
     <WrapColSt>
@@ -126,6 +120,51 @@ export const SignUp = () => {
               />
             );
           }}
+        />
+
+        <TextFieldSt
+          {...register('street')}
+          error={!!errors.street}
+          helperText={errors?.street?.message}
+          variant='standard'
+          placeholder='Street'
+          label='Street*'
+          autoComplete='off'
+          type='text'
+          // disabled={!edit}
+        />
+        <TextFieldSt
+          {...register('houseNumber')}
+          error={!!errors.houseNumber}
+          helperText={errors?.houseNumber?.message}
+          variant='standard'
+          placeholder='House Number'
+          label='House Number*'
+          autoComplete='off'
+          type='text'
+          // disabled={!edit}
+        />
+        <TextFieldSt
+          {...register('postCode')}
+          error={!!errors.postCode}
+          helperText={errors?.postCode?.message}
+          variant='standard'
+          placeholder='Post Code'
+          label='Post Code*'
+          autoComplete='off'
+          type='text'
+          // disabled={!edit}
+        />
+        <TextFieldSt
+          {...register('city')}
+          error={!!errors.city}
+          helperText={errors?.city?.message}
+          variant='standard'
+          placeholder='City'
+          label='City*'
+          autoComplete='off'
+          type='text'
+          // disabled={!edit}
         />
         <TextFieldSt
           {...register('password')}

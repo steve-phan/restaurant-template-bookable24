@@ -105,7 +105,7 @@ export const Account = () => {
             dispatch(signOutAccount());
           }}
         >
-          Almelden
+          Abmelden
         </Button>
       </AccountNoticeSt>
       <UserInfo />
