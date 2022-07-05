@@ -29,6 +29,7 @@ import { confirmOderEmail } from '@bookable24/store/oder/booking.Thunks';
 import { RestaurantName } from '@bookable24/RESTAURANT.CONFIG/RESTAURANT.CONFIG';
 import axios from 'axios';
 import { setAccountLoading } from '@bookable24/store/account/accountSlice';
+import Loading from '@bookable24/components/molecules/Loading/Loading';
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -45,6 +46,7 @@ export const Checkout = () => {
     (state) => state.booking
   );
   const {
+    isLoading,
     userInfo: { email, fullName, address },
   } = useAppSelector((state) => state.account);
 
@@ -59,6 +61,7 @@ export const Checkout = () => {
 
   return (
     <ContainerSt>
+      {isLoading && <Loading />}
       <HeadingCenter title='Please review your Oder and Address' />
       <UserInfo />
       <AccountHeadingSt>Warenkorb</AccountHeadingSt>

@@ -1,120 +1,154 @@
-<div
-  style="
-    margin-top: 0;
-    padding-top: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 16px;
-    color: #212228;
-  "
->
-  <table
-    width="100%"
-    border="0"
-    style="background-color: #e3e3e3; padding-top: 40px"
-  >
-    <tbody>
-      <tr>
-        <td valign="middle">
-          <table
-            width="640"
-            border="0"
-            cellpadding="0"
-            cellspacing="0"
-            align="center"
-            style="background-color: #ffffff; padding: 16px"
-          >
-            <tbody>
-              <tr>
-                <td align="left" style="line-height: 20px; text-align: center">
-                  Hi {{fullName}}
-                </td>
-              </tr>
+<html>
+  <head>
+    <style></style>
+  </head>
+  <body>
+    <div
+      style="
+        margin-top: 0;
+        padding-top: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 16px;
+        color: #212228;
+      "
+    >
+      <table
+        border="0"
+        style="width: 100%; max-width: 650px; border-collapse: collapse"
+      >
+        <tbody>
+          <tr>
+            <td valign="middle">
+              <table
+                width="640"
+                border="0"
+                cellpadding="0"
+                cellspacing="0"
+                align="center"
+                style="
+                  background-color: #ffffff;
+                  padding: 16px;
+                  padding-top: 40px;
+                "
+              >
+                <tbody>
+                  <tr>
+                    <td
+                      align="left"
+                      style="line-height: 20px; text-align: center"
+                    >
+                      Hi {{fullName}}
+                    </td>
+                  </tr>
 
-              <tr>
-                <td
-                  align="left"
-                  style="
-                    text-align: left;
-                    font-size: 14px;
-                    color: rgb(51, 51, 51);
-                    font-weight: normal;
-                    text-align: center;
-                    font-family: Arial, sans-serif;
-                    line-height: 16px;
-                    vertical-align: top;
-                  "
-                >
-                  vielen Dank für Deine Bestellung beim MaiSonTom®
-                  Lieferservice!
-                </td>
-              </tr>
-              <tr>
-                <td align="left" style="line-height: 20px; text-align: center">
-                  Deine Bestellung:
-                </td>
-              </tr>
-              <tr>
-                <td
-                  align="left"
-                  style="padding-top: 20px; color: #292929; font-weight: bold"
-                >
-                  LIEFERANSCHRIFT
-                </td>
-              </tr>
-              <tr>
-                <td
-                  align="left"
-                  style="
-                    padding-top: 6px;
-                    line-height: 24px;
-                    line-height: 1.5em !important;
-                  "
-                >
-                  {{fullName}} {{phone}}<br />
-                  <br />
-                  {{street}} {{houseNumber}} <br />
-                  {{postCode}} {{city}} <br />
-                  <br />
-                </td>
-              </tr>
-              <tr>
-                <td
-                  align="left"
-                  style="padding-top: 20px; color: #292929; font-weight: bold"
-                >
-                  BESTELLDETAILS
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <table width="640">
-                    <tbody>
-                      <tr>
-                        <td align="left" style="padding-top: 20px">
-                          {{#each cartItems}}
-                          <table
-                            key={{@index}}
-                            width="100%"
-                            cellspacing="0"
-                            style="
-                              font-family: Arial, Helvetica, sans-serif;
-                              font-size: 14px;
-                              color: #666666;
-                              line-height: normal;
-                              padding: 16px 0;
-                              border-bottom: 1px solid #cecece;
-                            "
-                          >
-                            <tbody>
+                  <tr>
+                    <td
+                      align="left"
+                      style="
+                        text-align: left;
+                        font-size: 14px;
+                        color: rgb(51, 51, 51);
+                        font-weight: normal;
+                        text-align: center;
+                        font-family: Arial, sans-serif;
+                        line-height: 16px;
+                        vertical-align: top;
+                      "
+                    >
+                      vielen Dank für Deine Bestellung beim MaiSonTom®
+                      Lieferservice!
+                    </td>
+                  </tr>
+                  <tr>
+                    <td
+                      align="left"
+                      style="line-height: 20px; text-align: center"
+                    >
+                      Deine Bestellung:
+                    </td>
+                  </tr>
+                  <tr>
+                    <td
+                      align="left"
+                      style="
+                        padding-top: 20px;
+                        color: #292929;
+                        font-weight: bold;
+                      "
+                    >
+                      LIEFERANSCHRIFT
+                    </td>
+                  </tr>
+                  <tr>
+                    <td
+                      align="left"
+                      style="
+                        padding-top: 6px;
+                        line-height: 24px;
+                        line-height: 1.5em !important;
+                      "
+                    >
+                      {{fullName}} {{phone}}<br />
+                      <br />
+                      {{street}} {{houseNumber}} <br />
+                      {{postCode}} {{city}} <br />
+                      <br />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td
+                      align="left"
+                      style="
+                        padding-top: 20px;
+                        color: #292929;
+                        font-weight: bold;
+                      "
+                    >
+                      BESTELLDETAILS
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <table
+                        border="0"
+                        style="
+                          width: 100%;
+                          max-width: 650px;
+                          border-collapse: collapse;
+                        "
+                      >
+                        <tr>
+                          <td align="left" style="padding-top: 20px">
+                            {{#each cartItems}}
+                            <table
+                              key="{{@index}}"
+                              cellspacing="0"
+                              style="
+                                font-family: Arial, Helvetica, sans-serif;
+                                font-size: 14px;
+                                color: #666666;
+                                line-height: normal;
+                                padding: 16px 0;
+                                border-bottom: 1px solid #cecece;
+                                width: 100%;
+                                max-width: 650px;
+                              "
+                            >
                               <tr>
-                                <td>
+                                <td
+                                  width="70"
+                                  align="left"
+                                  style="text-align: left"
+                                >
                                   <strong style="color: #cc0000"
                                     >{{this.quantity}} x {{this.foodId}}
                                   </strong>
+                                </td>
+                                <td align="left" style="text-align: left">
                                   {{this.foodName}}
                                 </td>
                                 <td
-                                  width="60"
+                                  width="70"
                                   align="right"
                                   style="text-align: right"
                                 >
@@ -123,67 +157,69 @@
                               </tr>
                               {{#if this.require}}
 
-                              <tr
-                                align="left"
-                                style="color: #292929; font-style: italic"
-                              >
-                                <td>Notes: {{this.require}}</td>
+                              <tr>
+                                <span>Notes: {{this.require}}</span>
                               </tr>
-
                               {{/if}}
-                            </tbody>
-                          </table>
+                            </table>
 
-                          {{/each}}
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </td>
-              </tr>
-              <tr>
-                <table
-                 key="summary_all_oder_bookable34"
-                  width="100%"
-                  cellspacing="0"
-                  style="
-                    font-family: Arial, Helvetica, sans-serif;
-                    font-size: 14px;
-                    color: #666666;
-                    line-height: normal;
-                    padding: 16px 0;
-                    border-bottom: 1px solid #cecece;
-                  "
-                >
-                  <tbody>
-                    <tr>
-                      <td
-                        align="left"
+                            {{/each}}
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td
+                      align="left"
+                      style="
+                        width: 100%;
+                        max-width: 650px;
+                        border-collapse: collapse;
+                      "
+                    >
+                      <table
                         style="
-                          color: #292929;
-                          font-weight: bold;
-                          font-size: 14px;
+                          width: 100%;
+                          max-width: 650px;
+                          border-collapse: collapse;
                         "
                       >
-                        GESAMTE BESTELLUNG
-                      </td>
-                      <td align="right" style="text-align: right">
-                        <strong>{{sumPrices}}€</strong>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </tr>
-              <tr>
-                <td align="left" style="padding-top: 20px; color: #292929">
-                  Wir wünschen Dir einen guten Appetit und freuen uns schon auf
-                  Deinen nächsten Besuch auf unserer Webseite
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+                        <tbody>
+                          <tr
+                            style="
+                              width: 100%;
+                              max-width: 650px;
+                              border-collapse: collapse;
+                            "
+                          >
+                            <td align="left" style="text-align: left">
+                              GESAMTE BESTELLUNG
+                            </td>
+                            <td
+                              width="90"
+                              align="right"
+                              style="text-align: right"
+                            >
+                              <strong>{{sumPrices}}€</strong>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left" style="padding-top: 20px; color: #292929">
+                      Wir wünschen Dir einen guten Appetit und freuen uns schon
+                      auf Deinen nächsten Besuch auf unserer Webseite
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
