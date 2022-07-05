@@ -97,7 +97,7 @@ export const Checkout = () => {
               fullName,
               email,
               phone,
-              sumPrices,
+              sumPrices: sumPrices.toFixed(2),
               sumQuantities,
               ...address,
             };

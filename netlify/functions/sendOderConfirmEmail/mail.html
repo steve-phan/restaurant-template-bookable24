@@ -7,11 +7,7 @@
     color: #212228;
   "
 >
-  <table
-    width="100%"
-    border="0"
-    style="background-color: #e3e3e3; padding-top: 40px"
-  >
+  <table width="100%" border="0" style="background-color: #e3e3e3">
     <tbody>
       <tr>
         <td valign="middle">
@@ -21,7 +17,7 @@
             cellpadding="0"
             cellspacing="0"
             align="center"
-            style="background-color: #ffffff; padding: 16px"
+            style="background-color: #ffffff; padding: 16px; padding-top: 40px"
           >
             <tbody>
               <tr>
@@ -93,7 +89,7 @@
                         <td align="left" style="padding-top: 20px">
                           {{#each cartItems}}
                           <table
-                            key={{@index}}
+                            key="{{@index}}"
                             width="100%"
                             cellspacing="0"
                             style="
@@ -107,10 +103,16 @@
                           >
                             <tbody>
                               <tr>
-                                <td>
+                                <td
+                                  align="left"
+                                  width="70"
+                                  style="text-align: left"
+                                >
                                   <strong style="color: #cc0000"
                                     >{{this.quantity}} x {{this.foodId}}
                                   </strong>
+                                </td>
+                                <td align="left" style="text-align: left">
                                   {{this.foodName}}
                                 </td>
                                 <td
@@ -143,8 +145,7 @@
               </tr>
               <tr>
                 <table
-                 key="summary_all_oder_bookable34"
-                  width="100%"
+                  width="640"
                   cellspacing="0"
                   style="
                     font-family: Arial, Helvetica, sans-serif;
@@ -153,6 +154,7 @@
                     line-height: normal;
                     padding: 16px 0;
                     border-bottom: 1px solid #cecece;
+                    width: 100%;
                   "
                 >
                   <tbody>
