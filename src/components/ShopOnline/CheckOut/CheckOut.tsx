@@ -97,7 +97,7 @@ export const Checkout = () => {
               fullName,
               email,
               phone,
-              sumPrices: sumPrices.toFixed(2),
+              sumPrices: Number(sumPrices).toFixed(2),
               sumQuantities,
               ...address,
             };
@@ -114,7 +114,7 @@ export const Checkout = () => {
             } else {
               alert('Ops.. Somethings gone wrong.. try again please');
             }
-            // dispatch(confirmOderEmail(dataToSend));
+
             dispatch(setAccountLoading(false));
           }
         }}
