@@ -15,6 +15,7 @@ import { RootState } from 'src/store/store';
 
 import './reset.css';
 import { RestaurantName } from '@bookable24/RESTAURANT.CONFIG/RESTAURANT.CONFIG';
+import { BackToTop } from './ArrowToTop/ArrowToTop';
 
 export const inputGlobalStyles = <GlobalStyles styles={globalStyles} />;
 
@@ -50,6 +51,7 @@ const Layout = ({ children, location, isShop }: ILayoutProps) => {
           />
           <BodySt>{children}</BodySt>
           <Footer shopName={RestaurantName} />
+          <BackToTop />
         </Container>
       </ThemeProviderSt>
     </ThemeProvider>
