@@ -66,6 +66,10 @@ const bookingSlice = createSlice({
     closeFoodItemModal: (state: IBookingState) => {
       state.foodItemModal = initialFoodItemModal;
     },
+    toggleShowBasketModal: (state: IBookingState) => {
+      state.isShowBasketModal = !state.isShowBasketModal;
+      // state.foodItemModal.isOpenModal = !state.foodItemModal.isOpenModal;
+    },
     openViewCartModal: (state: IBookingState) => {
       state.isViewCartModal = true;
     },
@@ -142,6 +146,9 @@ export const {
   // AddNotes actions
   addRequireItemToCart,
   removeRequireItemFromCart,
+
+  // Show Modal
+  toggleShowBasketModal,
 } = bookingSlice.actions;
 
 export default bookingSlice.reducer;

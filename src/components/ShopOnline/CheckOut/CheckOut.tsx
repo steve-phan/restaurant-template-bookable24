@@ -30,6 +30,7 @@ import { RestaurantName } from '@bookable24/RESTAURANT.CONFIG/RESTAURANT.CONFIG'
 import axios from 'axios';
 import { setAccountLoading } from '@bookable24/store/account/accountSlice';
 import Loading from '@bookable24/components/molecules/Loading/Loading';
+import { EmptyViewCart } from '@bookable24/components/molecules/EmptyViewCart/EmptyViewCart';
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -62,68 +63,74 @@ export const Checkout = () => {
   return (
     <ContainerSt>
       {isLoading && <Loading />}
-      <HeadingCenter title='Please review your Oder and Address' />
-      <UserInfo />
-      <AccountHeadingSt>Warenkorb</AccountHeadingSt>
-      <ViewCartFoodList cartItems={cartItems} />
-      <OderSummary sumPrices={sumPrices} sumQuantities={sumQuantities} />
-      <TextWarningSt>
-        Im Moment akzeptieren wir nur Bargeld ... wir arbeiten an der
-        Online-Zahlung
-      </TextWarningSt>
+      {cartItems.length === 0 ? (
+        <EmptyViewCart />
+      ) : (
+        <>
+          <HeadingCenter title='Please review your Oder and Address' />
+          <UserInfo />
+          <AccountHeadingSt>Warenkorb</AccountHeadingSt>
+          <ViewCartFoodList cartItems={cartItems} />
+          <OderSummary sumPrices={sumPrices} sumQuantities={sumQuantities} />
+          <TextWarningSt>
+            Im Moment akzeptieren wir nur Bargeld ... wir arbeiten an der
+            Online-Zahlung
+          </TextWarningSt>
 
-      <CTAButtonFull
-        onClick={async () => {
-          dispatch(setAccountLoading(true));
-          if (!phone || !postCode || !houseNumber || !street) {
-            window.scrollTo({
-              top: 0,
-              left: 0,
-              behavior: 'smooth',
-            });
-            alert('You need update your address first');
-          } else {
-            const dataToSend = {
-              restaurantName: RestaurantName,
-              cartItems: cartItems.map((item) => {
-                const { foodId, foodName, quantity, priceOfFood, require } =
-                  item;
-                return {
-                  foodId,
-                  foodName,
-                  quantity,
-                  priceOfFood,
-                  require,
-                  payAmount: (item.priceOfFood * item.quantity).toFixed(2),
+          <CTAButtonFull
+            onClick={async () => {
+              dispatch(setAccountLoading(true));
+              if (!phone || !postCode || !houseNumber || !street) {
+                window.scrollTo({
+                  top: 0,
+                  left: 0,
+                  behavior: 'smooth',
+                });
+                alert('You need update your address first');
+              } else {
+                const dataToSend = {
+                  restaurantName: RestaurantName,
+                  cartItems: cartItems.map((item) => {
+                    const { foodId, foodName, quantity, priceOfFood, require } =
+                      item;
+                    return {
+                      foodId,
+                      foodName,
+                      quantity,
+                      priceOfFood,
+                      require,
+                      payAmount: (item.priceOfFood * item.quantity).toFixed(2),
+                    };
+                  }),
+                  fullName,
+                  email,
+                  phone,
+                  sumPrices: Number(sumPrices).toFixed(2),
+                  sumQuantities,
+                  ...address,
                 };
-              }),
-              fullName,
-              email,
-              phone,
-              sumPrices: Number(sumPrices).toFixed(2),
-              sumQuantities,
-              ...address,
-            };
-            const res = await axios.post(
-              '/.netlify/functions/sendOderConfirmEmail',
-              dataToSend
-            );
-            dispatch(setAccountLoading(true));
-            if (res?.data?.message === 'SUCCESS') {
-              alert(
-                "Oder successfully, we'll send a confirm email in a fews minutes"
-              );
-              navigate('/');
-            } else {
-              alert('Ops.. Somethings gone wrong.. try again please');
-            }
+                const res = await axios.post(
+                  '/.netlify/functions/sendOderConfirmEmail',
+                  dataToSend
+                );
+                dispatch(setAccountLoading(true));
+                if (res?.data?.message === 'SUCCESS') {
+                  alert(
+                    "Oder successfully, we'll send a confirm email in a fews minutes"
+                  );
+                  navigate('/');
+                } else {
+                  alert('Ops.. Somethings gone wrong.. try again please');
+                }
 
-            dispatch(setAccountLoading(false));
-          }
-        }}
-      >
-        Submit Oder
-      </CTAButtonFull>
+                dispatch(setAccountLoading(false));
+              }
+            }}
+          >
+            Submit Oder
+          </CTAButtonFull>
+        </>
+      )}
     </ContainerSt>
   );
 };

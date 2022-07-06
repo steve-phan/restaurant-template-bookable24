@@ -1,6 +1,20 @@
 <html>
   <head>
-    <style></style>
+    <style>
+      .onlineshop_bookable24 {
+        width: 450px;
+        max-width: 650px;
+        margin: 0 auto;
+      }
+      #body {
+        font-size: 14px;
+      }
+      @media screen and (min-width: 500px) {
+        .onlineshop_bookable24 {
+          width: 100%;
+        }
+      }
+    </style>
   </head>
   <body>
     <div
@@ -14,22 +28,27 @@
     >
       <table
         border="0"
-        style="width: 100%; max-width: 650px; border-collapse: collapse"
+        style="
+          width: 100%;
+          border-collapse: collapse;
+          background-color: #f9f5f2;
+        "
+        class="onlineshop_bookable24"
       >
         <tbody>
           <tr>
             <td valign="middle">
               <table
-                width="640"
                 border="0"
                 cellpadding="0"
                 cellspacing="0"
                 align="center"
                 style="
-                  background-color: #ffffff;
+                  background-color: #f9f5f2;
                   padding: 16px;
                   padding-top: 40px;
                 "
+                class="onlineshop_bookable24"
               >
                 <tbody>
                   <tr>
@@ -53,18 +72,11 @@
                         font-family: Arial, sans-serif;
                         line-height: 16px;
                         vertical-align: top;
+                        padding: 16px;
                       "
                     >
                       vielen Dank für Deine Bestellung beim MaiSonTom®
                       Lieferservice!
-                    </td>
-                  </tr>
-                  <tr>
-                    <td
-                      align="left"
-                      style="line-height: 20px; text-align: center"
-                    >
-                      Deine Bestellung:
                     </td>
                   </tr>
                   <tr>
@@ -76,7 +88,7 @@
                         font-weight: bold;
                       "
                     >
-                      LIEFERANSCHRIFT
+                      LIEFERANSCHRIFT:
                     </td>
                   </tr>
                   <tr>
@@ -89,22 +101,14 @@
                       "
                     >
                       {{fullName}} {{phone}}<br />
-                      <br />
                       {{street}} {{houseNumber}} <br />
                       {{postCode}} {{city}} <br />
                       <br />
                     </td>
                   </tr>
                   <tr>
-                    <td
-                      align="left"
-                      style="
-                        padding-top: 20px;
-                        color: #292929;
-                        font-weight: bold;
-                      "
-                    >
-                      BESTELLDETAILS
+                    <td align="left" style="color: #292929; font-weight: bold">
+                      BESTELLDETAILS:
                     </td>
                   </tr>
                   <tr>
@@ -123,8 +127,8 @@
                                 line-height: normal;
                                 padding: 16px 0 8px;
                                 border-top: 1px solid #cecece;
-                                width: 650px;
                               "
+                              class="onlineshop_bookable24"
                             >
                               <tr>
                                 <td
@@ -151,12 +155,12 @@
                             {{#if this.require}}
                             <span
                               style="
-                                width: 650px;
                                 font-size: 14px;
                                 font-style: italic;
                                 display: block;
-                                padding-bottom: 8px;
+                                margin-bottom: 20px;
                               "
+                              class="onlineshop_bookable24"
                               >Notes: {{this.require}}</span
                             >
                             {{/if}} {{/each}}
@@ -168,29 +172,24 @@
                   <tr>
                     <td
                       align="left"
-                      style="
-                        width: 100%;
-                        max-width: 650px;
-                        border-collapse: collapse;
-                      "
+                      style="width: 100%; border-collapse: collapse"
+                      class="onlineshop_bookable24"
                     >
                       <table
                         style="
                           width: 100%;
-                          max-width: 650px;
+
                           border-collapse: collapse;
                         "
+                        class="onlineshop_bookable24"
                       >
                         <tbody>
                           <tr
-                            style="
-                              width: 100%;
-                              max-width: 650px;
-                              border-collapse: collapse;
-                            "
+                            style="width: 100%; border-collapse: collapse"
+                            class="onlineshop_bookable24"
                           >
                             <td align="left" style="text-align: left">
-                              GESAMTE BESTELLUNG
+                              <strong>GESAMTE BESTELLUNG:</strong>
                             </td>
                             <td
                               width="90"
@@ -204,14 +203,21 @@
                       </table>
                     </td>
                   </tr>
-                  <tr>
-                    <td align="left" style="padding-top: 20px; color: #292929">
-                      Wir wünschen Dir einen guten Appetit und freuen uns schon
-                      auf Deinen nächsten Besuch auf unserer Webseite
-                    </td>
-                  </tr>
                 </tbody>
               </table>
+              <span
+                style="
+                  display: block;
+                  padding: 16px;
+                  box-sizing: border-box;
+                  text-align: center;
+                  background-color: #f9f5f2;
+                "
+                class="onlineshop_bookable24"
+              >
+                Wir wünschen Dir einen guten Appetit und freuen uns schon auf
+                Deinen nächsten Besuch auf unserer Webseite</span
+              >
             </td>
           </tr>
         </tbody>

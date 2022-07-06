@@ -37,4 +37,5 @@ export interface IAccountSliceStates {
   isOpenNavbarMenu: boolean;
   isUserChangePasswordSuccess: boolean;
   userInfo: IAccount;
+  isShowAccountLinksModal: boolean;
 }

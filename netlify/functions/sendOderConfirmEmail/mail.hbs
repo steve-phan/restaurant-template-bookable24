@@ -109,14 +109,7 @@
                   </tr>
                   <tr>
                     <td>
-                      <table
-                        border="0"
-                        style="
-                          width: 100%;
-                          max-width: 650px;
-                          border-collapse: collapse;
-                        "
-                      >
+                      <table border="0" style="border-collapse: collapse">
                         <tr>
                           <td align="left" style="padding-top: 20px">
                             {{#each cartItems}}
@@ -128,10 +121,9 @@
                                 font-size: 14px;
                                 color: #666666;
                                 line-height: normal;
-                                padding: 16px 0;
-                                border-bottom: 1px solid #cecece;
-                                width: 100%;
-                                max-width: 650px;
+                                padding: 16px 0 8px;
+                                border-top: 1px solid #cecece;
+                                width: 650px;
                               "
                             >
                               <tr>
@@ -155,15 +147,19 @@
                                   <strong>{{this.payAmount}}€</strong>
                                 </td>
                               </tr>
-                              {{#if this.require}}
-
-                              <tr>
-                                <span>Notes: {{this.require}}</span>
-                              </tr>
-                              {{/if}}
                             </table>
-
-                            {{/each}}
+                            {{#if this.require}}
+                            <span
+                              style="
+                                width: 650px;
+                                font-size: 14px;
+                                font-style: italic;
+                                display: block;
+                                padding-bottom: 8px;
+                              "
+                              >Notes: {{this.require}}</span
+                            >
+                            {{/if}} {{/each}}
                           </td>
                         </tr>
                       </table>

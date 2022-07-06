@@ -124,6 +124,7 @@ export interface IBookingState extends IBooking {
   cartItems: TCartItems;
   foodItemModal: IFoodItem;
   isViewCartModal: boolean;
+  isShowBasketModal: boolean;
 }
 
 export interface IFoodItemModal {

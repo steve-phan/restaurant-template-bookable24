@@ -40,6 +40,7 @@ export const initialBookingState: IBookingState = {
   cartItems: getDefaultCartItems(),
   foodItemModal: initialFoodItemModal,
   isViewCartModal: false,
+  isShowBasketModal: false,
 };
 
 export const existingCartItem = (

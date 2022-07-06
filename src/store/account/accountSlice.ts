@@ -27,6 +27,9 @@ export const accountSlice = createSlice({
     setAccountLoading: (state, action) => {
       state.isLoading = action.payload;
     },
+    toggleAccountLinksModal: (state) => {
+      state.isShowAccountLinksModal = !state.isShowAccountLinksModal;
+    },
     setUserLogin: (
       state: IAccountSliceStates,
       action: PayloadAction<{ email: string; displayName: string }>
@@ -155,6 +158,7 @@ export const {
   setAccountLoading,
   setOpenNavbarMenu,
   setUserLogOut,
+  toggleAccountLinksModal,
 } = accountSlice.actions;
 
 export default accountSlice.reducer;
