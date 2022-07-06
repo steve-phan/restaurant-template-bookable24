@@ -8,6 +8,7 @@ export const WrapHeaderButtonst = styled('div')(({ theme }) => ({
 
 export const IconButtonSt = styled(IconButton)(({ theme }) => ({
   marginRight: 8,
+  marginLeft: 8,
   background: theme.color.primary,
   color: 'white',
 }));
@@ -35,29 +36,4 @@ export const WrapLoginSt = styled('div')(({ theme }) => ({
 export const DashBoardButtonSt = styled(CTAButtons)(({ theme }) => ({
   background: theme.color.black,
   color: alpha(theme.color.primary, 0.86),
-}));
-
-// Account Popper
-export const AccountPopperst = styled('div')(({ theme }) => ({
-  padding: 16,
-  display: 'flex',
-  flexDirection: 'column',
-}));
-
-export const PopperSignInButtonSt = styled(CTAButtons)(({ theme }) => ({
-  borderRadius: 2,
-  background: 'black',
-  borderColor: 'black',
-  color: 'white',
-  width: 180,
-  textAlign: 'center',
-  marginBottom: 15,
-}));
-export const PopperSignUpButtonSt = styled(CTAButtons)(({ theme }) => ({
-  borderRadius: 2,
-  background: 'white',
-  border: '1px solid black',
-  color: 'black',
-  width: 180,
-  textAlign: 'center',
 }));
