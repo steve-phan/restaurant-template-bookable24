@@ -9,23 +9,34 @@ import { DynamicImage } from '@bookable24/components/molecules/DynamicImage/Dyna
 import { SectionContext } from '@bookable24/components/molecules/SectionContext/SectionContext';
 import { ImageDataLike } from 'gatsby-plugin-image';
 
+export interface IButtons {
+  text: string;
+  path?: string;
+  externalLink?: string;
+}
+
+export interface IComponentInfoProps {
+  header?: string;
+  subHeader?: string;
+  smallHeader?: string;
+  description: string;
+  CTAButton?: IButtons;
+  buttons?: {
+    buttonLeft: IButtons;
+    buttonRight: IButtons;
+  };
+}
+
 export interface ICenterSectionComponentProps {
   img: ImageDataLike;
-  componentInfo: {
-    header: string;
-    subHeader?: string;
-    description: string;
-    buttonLeft: string;
-    buttonRight: string;
-  };
+  componentInfo: IComponentInfoProps;
 }
 
 export const CenterSectionComponent = ({
   img,
   componentInfo,
 }: ICenterSectionComponentProps) => {
-  const { header, subHeader, description, buttonLeft, buttonRight } =
-    componentInfo;
+  const { header, subHeader, description, buttons } = componentInfo;
 
   return (
     <SectionWrapper>
@@ -58,9 +69,8 @@ export const CenterSectionComponent = ({
             header={header}
             subHeader={subHeader}
             description={description}
-            buttonLeft={buttonLeft}
-            buttonRight={buttonRight}
             background='transparent'
+            buttons={buttons}
           />
         </Grid>
       </Grid>

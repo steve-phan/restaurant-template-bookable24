@@ -23,7 +23,7 @@ import { ViewCartFoodList } from '@bookable24/components/molecules/ViewCartFoodL
 import { AccountHeadingSt } from '@bookable24/components/Account/Account.styles';
 import { OderSummary } from '../OderSummary/OderSummary';
 import { TextWarningSt } from '@bookable24/components/molecules/ui/TextWarning/TextWarning';
-import { CTAButton } from '@bookable24/components/molecules/CTAButton/CTAButton';
+import { CTAButton } from '@bookable24/components/molecules/LinkButtons/InternalLink';
 import { CTAButtonFull } from '@bookable24/components/molecules/ui/Button/Buttons';
 import { confirmOderEmail } from '@bookable24/store/oder/booking.Thunks';
 import { RestaurantName } from '@bookable24/RESTAURANT.CONFIG/RESTAURANT.CONFIG';

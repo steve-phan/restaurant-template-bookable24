@@ -1,5 +1,7 @@
 import React from 'react';
-import { CTAButton } from '../CTAButton/CTAButton';
+
+import { InternalLink } from '../LinkButtons/InternalLink';
+import { ExternalLink } from '../LinkButtons/ExternalLink';
 
 import {
   SectionContextSt,
@@ -11,7 +13,9 @@ import {
 
 interface IButtonProps {
   text: string;
+  path?: string;
   withBg?: boolean;
+  externalLink?: string;
 }
 
 interface ISection {
@@ -19,10 +23,12 @@ interface ISection {
   smallHeader?: string;
   subHeader?: string;
   description?: string;
-  ctaButton?: string;
+  ctaButton?: IButtonProps;
   background: 'transparent' | 'black';
-  buttonLeft?: string;
-  buttonRight?: string;
+  buttons?: {
+    buttonLeft: IButtonProps;
+    buttonRight: IButtonProps;
+  };
 }
 
 export const SectionContext = ({
@@ -32,8 +38,7 @@ export const SectionContext = ({
   description,
   ctaButton,
   background,
-  buttonLeft,
-  buttonRight,
+  buttons,
 }: ISection) => {
   return (
     <SectionContextSt background={background}>
@@ -41,11 +46,43 @@ export const SectionContext = ({
       {!!subHeader && <SubHeaderSt>{subHeader}</SubHeaderSt>}
       {!!smallHeader && <SubHeaderSt>{smallHeader}</SubHeaderSt>}
       {!!description && <DescriptionSt>{description}</DescriptionSt>}
-      {!!ctaButton && <CTAButton hasBackground text={ctaButton} />}
-      {!!buttonLeft && !!buttonRight && (
+      {!!ctaButton && !!ctaButton.path && (
+        <InternalLink
+          hasBackground
+          text={ctaButton.text}
+          target={ctaButton.path}
+        />
+      )}
+      {!!ctaButton && !!ctaButton.externalLink && (
+        <ExternalLink
+          hasBackground
+          text={ctaButton.text}
+          externalLink={ctaButton.externalLink}
+        />
+      )}
+      {!!buttons && (
         <ButtonGroupSt>
-          <CTAButton text={buttonLeft} />
-          <CTAButton hasBackground text={buttonRight} />
+          {buttons.buttonLeft.path && (
+            <InternalLink
+              text={buttons.buttonLeft.text}
+              target={buttons.buttonLeft.path}
+              hasBackground
+            />
+          )}
+
+          {buttons.buttonRight.path && (
+            <InternalLink
+              text={buttons.buttonRight.text}
+              target={buttons.buttonRight.path}
+            />
+          )}
+
+          {buttons.buttonRight.externalLink && (
+            <ExternalLink
+              text={buttons.buttonRight.text}
+              externalLink={buttons.buttonRight.externalLink}
+            />
+          )}
         </ButtonGroupSt>
       )}
     </SectionContextSt>

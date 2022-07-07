@@ -5,15 +5,18 @@ import { Grid } from '@mui/material';
 import { DynamicImage } from '@bookable24/components/molecules/DynamicImage/DynamicImage';
 import { SectionContext } from '@bookable24/components/molecules/SectionContext/SectionContext';
 import { ImageDataLike } from 'gatsby-plugin-image';
+import { IComponentInfoProps } from '../CenterSectionComponent/CenterSectionComponent';
+
+export interface IButtons {
+  text: string;
+  path?: string;
+  externalLink?: string;
+}
 
 export interface TOneSideSectionComponentProps {
   img: ImageDataLike;
   contextPosition: 'left' | 'right';
-  componentInfo: {
-    smallHeader: string;
-    description: string;
-    CTAButton: string;
-  };
+  componentInfo: IComponentInfoProps;
 }
 
 export const OneSideSectionComponent = ({
@@ -57,12 +60,14 @@ export const OneSideSectionComponent = ({
             },
           })}
         >
-          <SectionContext
-            smallHeader={smallHeader}
-            description={description}
-            ctaButton={CTAButton}
-            background='black'
-          />
+          {CTAButton?.text && (
+            <SectionContext
+              smallHeader={smallHeader}
+              description={description}
+              ctaButton={CTAButton}
+              background='black'
+            />
+          )}
         </Grid>
       </Grid>
     </SectionWrapper>

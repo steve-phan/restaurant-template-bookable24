@@ -59,8 +59,9 @@ export const DescriptionSt = styled('p')(({ theme }) => ({
 }));
 
 export const ButtonGroupSt = styled('div')(({ theme }) => ({
-  button: {
+  a: {
     display: 'block',
+    marginTop: 20,
     marginBottom: 20,
     width: 'fit-content',
     paddingRight: 26,
@@ -71,6 +72,11 @@ export const ButtonGroupSt = styled('div')(({ theme }) => ({
     display: 'flex',
     justifyContent: 'space-between',
     // fontSize: 16,
+    a: {
+      marginTop: 0,
+      marginBottom: 0,
+    },
+
     button: {
       marginBottom: 0,
       width: '100%',
