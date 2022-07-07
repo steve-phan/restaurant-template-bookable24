@@ -2,26 +2,28 @@ import React from 'react';
 
 import Layout from '@bookable24/components/Layout/Layout';
 import { graphql, PageProps } from 'gatsby';
-import { useTranslation } from 'gatsby-plugin-react-i18next';
 import { CenterSectionComponent } from '@bookable24/components/SectionsComponent/CenterSectionComponent/CenterSectionComponent';
 import { IDataIndexPage, mappingDataImages } from '.';
 import { homePageData } from '@bookable24/store/restaurant.homepage';
-import { GoogleMap } from '@bookable24/components/SectionsComponent/GoogleMap/GoogleMap';
 
-const AboutPage: React.FC<PageProps<IDataIndexPage>> = ({ location, data }) => {
-  // const { t } = useTranslation();
-  // const dataImgs = data?.sectionImg.nodes as Record<string, any>[];
-  // const imgMapping = mappingDataImages(dataImgs);
-  // const { heroSection, aboutSection, menuSection, bookingSection } =
-  //   homePageData;
+const ContactPage: React.FC<PageProps<IDataIndexPage>> = ({
+  location,
+  data,
+}) => {
+  const dataImgs = data?.sectionImg.nodes as Record<string, any>[];
+  const imgMapping = mappingDataImages(dataImgs);
+  const { aboutSection } = homePageData;
   return (
     <Layout>
-      <GoogleMap />
+      <CenterSectionComponent
+        img={imgMapping['about_section']}
+        componentInfo={aboutSection}
+      />
     </Layout>
   );
 };
 
-export default AboutPage;
+export default ContactPage;
 
 export const query = graphql`
   query ($language: String!) {

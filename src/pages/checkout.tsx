@@ -1,5 +1,5 @@
 import React from 'react';
-import { graphql, PageProps } from 'gatsby';
+import { graphql } from 'gatsby';
 
 import Layout from '@bookable24/components/Layout/Layout';
 import { Checkout } from '@bookable24/components/ShopOnline/CheckOut/CheckOut';
