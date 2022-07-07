@@ -16,7 +16,7 @@ export const NavbarMenuHeaderSt = styled('div')(({ theme }) => ({
   display: 'flex',
   justifyContent: 'space-between',
   padding: 16,
-  background: 'white',
+  background: theme.color.primary,
 }));
 
 export const DrawerSt = styled(Drawer)(({ theme }) => ({
@@ -37,7 +37,7 @@ export const WrapCloseIconSt = styled('div')(({ theme }) => ({
   // top: 20,
   // right: 20,
   svg: {
-    color: theme.color.primary,
+    color: theme.color.white,
     fontSize: 30,
   },
 }));

@@ -15,6 +15,7 @@ import {
   AccountHeadingSt,
   AccountInfoSt,
   AccountNoticeSt,
+  BoxFlexSt,
   TextFieldSt,
   TypographySt,
   WrapColSt,
@@ -72,42 +73,45 @@ export const Account = () => {
       <TextFieldSt value={fullName} disabled />
       <TypographySt>E-Mail-Adresse</TypographySt>
       <TextFieldSt value={email} disabled />
-      <AccountNoticeSt>
-        <InfoOutlinedIcon fontSize='small' />
-        <Button
-          size='small'
-          style={{
-            textTransform: 'none',
-          }}
-          onClick={handleOpen}
-        >
-          Passwort ändern
-        </Button>
-        <Modal
-          open={open}
-          onClose={handleClose}
-          aria-labelledby='modal-modal-title'
-          aria-describedby='modal-modal-description'
-        >
-          <Box sx={style}>
-            <ChangePassword />
-          </Box>
-        </Modal>
-      </AccountNoticeSt>
-      <AccountNoticeSt>
-        <ExitToAppOutlinedIcon fontSize='small' />
-        <Button
-          size='small'
-          style={{
-            textTransform: 'none',
-          }}
-          onClick={() => {
-            dispatch(signOutAccount());
-          }}
-        >
-          Abmelden
-        </Button>
-      </AccountNoticeSt>
+      <BoxFlexSt>
+        <AccountNoticeSt>
+          <InfoOutlinedIcon fontSize='small' />
+          <Button
+            size='small'
+            style={{
+              textTransform: 'none',
+            }}
+            onClick={handleOpen}
+          >
+            Passwort ändern
+          </Button>
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby='modal-modal-title'
+            aria-describedby='modal-modal-description'
+          >
+            <Box sx={style}>
+              <ChangePassword />
+            </Box>
+          </Modal>
+        </AccountNoticeSt>
+        <AccountNoticeSt>
+          <ExitToAppOutlinedIcon fontSize='small' />
+          <Button
+            size='small'
+            style={{
+              textTransform: 'none',
+            }}
+            onClick={() => {
+              dispatch(signOutAccount());
+            }}
+          >
+            Abmelden
+          </Button>
+        </AccountNoticeSt>
+      </BoxFlexSt>
+
       <UserInfo />
     </WrapColSt>
   );

@@ -15,6 +15,11 @@ export const WrapColSt = styled('div')`
   width: 100%;
 `;
 
+export const BoxFlexSt = styled('div')`
+  display: flex;
+  justify-content: space-evenly;
+`;
+
 export const AccountHeadingSt = styled('span')(({ theme }) => ({
   display: 'block',
   fontFamily: 'Work Sans,sans-serif',

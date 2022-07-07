@@ -7,7 +7,7 @@ export const AccountLinksSt = styled('div')(({ theme }) => ({
   flexDirection: 'column',
 
   svg: {
-    color: theme.color.primary,
+    color: theme.color.white,
     fontSize: 30,
   },
 }));
@@ -34,12 +34,12 @@ export const AccountInfoWrapperSt = styled('div')(({ theme }) => ({
   fontFamily: 'Work Sans,sans-serif',
   fontSize: 22,
   fontWeight: 700,
-  color: theme.color.primary,
+  color: theme.color.white,
   textAlign: 'left',
   lineHeight: 1.2,
   a: {
     display: 'block',
-    color: theme.color.primary,
+    color: theme.color.white,
     fontSize: 12,
     textDecoration: 'underline',
   },
@@ -51,7 +51,7 @@ export const FullNamefoWrapperSt = styled('div')(({ theme }) => ({
   fontFamily: 'Work Sans,sans-serif',
   fontSize: 22,
   fontWeight: 700,
-  color: theme.color.primary,
+  color: theme.color.white,
   textAlign: 'left',
   lineHeight: 1.2,
 }));

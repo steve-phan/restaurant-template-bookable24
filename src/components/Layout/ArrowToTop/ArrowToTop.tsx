@@ -51,7 +51,7 @@ function ScrollTop(props: Props) {
           bottom: 0,
           right: 0,
           zIndex: 1200,
-          padding: '10px',
+          padding: '14px 16px 10px',
         }}
       >
         {children}
