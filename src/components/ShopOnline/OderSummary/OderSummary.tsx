@@ -14,7 +14,7 @@ export const OderSummary = ({
     <Grid container bgcolor='InfoBackground'>
       <RowSt>
         <span>Zwischensumme</span>
-        <span>{sumPrices.toFixed(2)}</span>
+        <span>{sumPrices.toFixed(2)}€</span>
       </RowSt>
       <RowSt>
         <span>Lieferkosten</span>

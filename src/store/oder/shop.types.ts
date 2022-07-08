@@ -93,6 +93,7 @@ export interface IBooking {
   email: string;
   phone: string;
   require?: string;
+  deliveryTime: string;
 }
 
 export type TCartItems = IFoodItem[];

@@ -8,6 +8,9 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import dayjs from 'dayjs';
 import { DeliveryDining } from '@mui/icons-material';
 import { Typography } from '@mui/material';
+import { DeliveryHeadingSt } from './DeliveryTime.styles';
+import { useAppDispatch, useAppSelector } from '@bookable24/store/hooks';
+import { setDeliveryTime } from '@bookable24/store/oder/bookingSlice';
 
 const hourNow = dayjs().hour();
 const minutesNow = dayjs().minute();
@@ -75,21 +78,24 @@ const filterDeliveryTime = deliveryTimes.filter((time, index) => {
   }
 });
 
-export const DeliveryTime = () => {
-  const [time, setTime] = React.useState(filterDeliveryTime[0]);
+export const deliveryTimesDefault = filterDeliveryTime[0];
 
+export const DeliveryTime = () => {
+  const [time, setTime] = React.useState(deliveryTimesDefault);
+
+  const dispatch = useAppDispatch();
   const handleChange = (event: SelectChangeEvent) => {
-    setTime(event.target.value as string);
+    const newTime = event.target.value as string;
+    setTime(newTime);
+    dispatch(setDeliveryTime(newTime));
   };
 
-  console.log({ time });
-
   return (
-    <Box sx={{ minWidth: 120 }} id='thisisid'>
-      <Typography variant='body2'>
+    <Box sx={{ minWidth: 120 }}>
+      <DeliveryHeadingSt>
         <DeliveryDining />
         Delivery Time
-      </Typography>
+      </DeliveryHeadingSt>
 
       <FormControl fullWidth sx={{ minWidth: 120 }}>
         <InputLabel id='delivery-time-select-label'>Time</InputLabel>
@@ -99,17 +105,14 @@ export const DeliveryTime = () => {
           value={time}
           label='Time'
           onChange={handleChange}
-          // defaultValue={filterDeliveryTime[0]}
           MenuProps={{
             PaperProps: {
               sx: {
                 maxHeight: '40vh',
-                //  maxWidth: 500, width: '100%'
                 margin: '0 auto',
               },
             },
           }}
-          // sx={{ minWidth: 120, maxHeight: '560px !important' }}
         >
           {filterDeliveryTime.map((item, index) => (
             <MenuItem value={item} key={index + item}>

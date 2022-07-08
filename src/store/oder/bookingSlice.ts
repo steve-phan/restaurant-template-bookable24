@@ -76,6 +76,11 @@ const bookingSlice = createSlice({
     closeViewCartModal: (state: IBookingState) => {
       state.isViewCartModal = false;
     },
+    setDeliveryTime: (state: IBookingState, action: PayloadAction<string>) => {
+      state.deliveryTime = action.payload;
+    },
+
+    //Bookabke24
     setNumberOfCustomer: (
       state: IBookingState,
       action: PayloadAction<number>
@@ -146,6 +151,9 @@ export const {
   // AddNotes actions
   addRequireItemToCart,
   removeRequireItemFromCart,
+
+  // Add DeliveryTime action
+  setDeliveryTime,
 
   // Show Modal
   toggleShowBasketModal,

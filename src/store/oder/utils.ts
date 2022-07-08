@@ -1,3 +1,4 @@
+import { deliveryTimesDefault } from '@bookable24/components/molecules/DeliveryTime/DeliveryTime';
 import { localStorageGetItem } from '../localStore';
 import { IBookingState, IBooking, IFoodItem, TCartItems } from './shop.types';
 
@@ -10,6 +11,7 @@ export const intialBooking: IBooking = {
   email: '',
   phone: '',
   require: '',
+  deliveryTime: deliveryTimesDefault,
 };
 
 export const initialFoodItemModal = {

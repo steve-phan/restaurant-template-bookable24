@@ -44,9 +44,7 @@ const Transition = React.forwardRef(function Transition(
 
 export const Checkout = () => {
   const dispatch = useAppDispatch();
-  const { cartItems, isViewCartModal } = useAppSelector(
-    (state) => state.booking
-  );
+  const { cartItems, deliveryTime } = useAppSelector((state) => state.booking);
   const {
     isLoading,
     userInfo: { email, fullName, address },
@@ -110,6 +108,7 @@ export const Checkout = () => {
                   phone,
                   sumPrices: Number(sumPrices).toFixed(2),
                   sumQuantities,
+                  deliveryTime,
                   ...address,
                 };
                 const res = await axios.post(
