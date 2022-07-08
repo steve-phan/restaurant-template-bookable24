@@ -30,7 +30,6 @@ import axios from 'axios';
 import { setAccountLoading } from '@bookable24/store/account/accountSlice';
 import Loading from '@bookable24/components/molecules/Loading/Loading';
 import { EmptyViewCart } from '@bookable24/components/molecules/EmptyViewCart/EmptyViewCart';
-import { DeliveryDining } from '@mui/icons-material';
 import { DeliveryTime } from '@bookable24/components/molecules/DeliveryTime/DeliveryTime';
 
 const Transition = React.forwardRef(function Transition(
@@ -111,11 +110,11 @@ export const Checkout = () => {
                   deliveryTime,
                   ...address,
                 };
+
                 const res = await axios.post(
                   '/.netlify/functions/sendOderConfirmEmail',
                   dataToSend
                 );
-                dispatch(setAccountLoading(true));
                 if (res?.data?.message === 'SUCCESS') {
                   alert(
                     "Oder successfully, we'll send a confirm email in a fews minutes"
@@ -124,9 +123,8 @@ export const Checkout = () => {
                 } else {
                   alert('Ops.. Somethings gone wrong.. try again please');
                 }
-
-                dispatch(setAccountLoading(false));
               }
+              dispatch(setAccountLoading(false));
             }}
           >
             Submit Oder
