@@ -23,14 +23,15 @@ import { ViewCartFoodList } from '@bookable24/components/molecules/ViewCartFoodL
 import { AccountHeadingSt } from '@bookable24/components/Account/Account.styles';
 import { OderSummary } from '../OderSummary/OderSummary';
 import { TextWarningSt } from '@bookable24/components/molecules/ui/TextWarning/TextWarning';
-import { CTAButton } from '@bookable24/components/molecules/LinkButtons/InternalLink';
+
 import { CTAButtonFull } from '@bookable24/components/molecules/ui/Button/Buttons';
-import { confirmOderEmail } from '@bookable24/store/oder/booking.Thunks';
 import { RestaurantName } from '@bookable24/RESTAURANT.CONFIG/RESTAURANT.CONFIG';
 import axios from 'axios';
 import { setAccountLoading } from '@bookable24/store/account/accountSlice';
 import Loading from '@bookable24/components/molecules/Loading/Loading';
 import { EmptyViewCart } from '@bookable24/components/molecules/EmptyViewCart/EmptyViewCart';
+import { DeliveryDining } from '@mui/icons-material';
+import { DeliveryTime } from '@bookable24/components/molecules/DeliveryTime/DeliveryTime';
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -69,8 +70,10 @@ export const Checkout = () => {
         <>
           <HeadingCenter title='Please review your Oder and Address' />
           <UserInfo />
+          <DeliveryTime />
           <AccountHeadingSt>Warenkorb</AccountHeadingSt>
           <ViewCartFoodList cartItems={cartItems} />
+
           <OderSummary sumPrices={sumPrices} sumQuantities={sumQuantities} />
           <TextWarningSt>
             Im Moment akzeptieren wir nur Bargeld ... wir arbeiten an der
