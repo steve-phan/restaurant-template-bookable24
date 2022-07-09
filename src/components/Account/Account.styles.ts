@@ -61,6 +61,10 @@ export const TypographySt = styled(Typography)(({ theme }) => ({
   borderLeft: `2px solid ${theme.color.primary}`,
 }));
 
+export const AccountActionSt = styled(TypographySt)(({ theme }) => ({
+  color: theme.color.primary,
+}));
+
 export const AccountInfoSt = styled(Typography)(({ theme }) => ({
   fontSize: 12,
   fontWeight: 600,

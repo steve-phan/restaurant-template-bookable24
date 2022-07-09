@@ -51,11 +51,14 @@ export const BoxViewCart = () => {
     setOpen(false);
     dispatch(closeViewCartModal());
   };
-  useEffect(() => {
-    if (isViewCartModal) {
-      handleClickOpen();
-    }
-  }, [isViewCartModal]);
+
+  // useEffect(() => {
+  //   if (isViewCartModal) {
+  //     handleClickOpen();
+  //   } else {
+  //     setOpen(false);
+  //   }
+  // }, [isViewCartModal]);
 
   return (
     <WrapperBoxViewCartst>
@@ -117,7 +120,7 @@ export const BoxViewCart = () => {
               {cartItems.length !== 0 ? (
                 <>
                   <ViewCartFoodList cartItems={cartItems} />
-                  <CheckoutButton handleClose={handleClose} />
+                  <CheckoutButton />
                 </>
               ) : (
                 <EmptyViewCart />

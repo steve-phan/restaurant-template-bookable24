@@ -15,6 +15,7 @@ import {
   IAccountSliceStates,
   IAddress,
   ISignUpProps,
+  TAction,
 } from './account.types';
 
 export const accountSlice = createSlice({
@@ -26,6 +27,9 @@ export const accountSlice = createSlice({
     },
     setAccountLoading: (state, action) => {
       state.isLoading = action.payload;
+    },
+    setSignInAction: (state, action: PayloadAction<TAction>) => {
+      state.signInAction = action.payload;
     },
     toggleAccountLinksModal: (state) => {
       state.isShowAccountLinksModal = !state.isShowAccountLinksModal;
@@ -146,7 +150,7 @@ export const accountSlice = createSlice({
           state: IAccountSliceStates,
           action: PayloadAction<{ userInfo: IAddress }>
         ) => {
-          state.isLoading = false;
+          // state.isLoading = false;
           state.userInfo.address = action.payload.userInfo;
         }
       );
@@ -159,6 +163,7 @@ export const {
   setOpenNavbarMenu,
   setUserLogOut,
   toggleAccountLinksModal,
+  setSignInAction,
 } = accountSlice.actions;
 
 export default accountSlice.reducer;

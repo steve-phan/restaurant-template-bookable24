@@ -9,6 +9,7 @@ import Loading from '@bookable24/components/molecules/Loading/Loading';
 import {
   setAccountLoading,
   setOpenNavbarMenu,
+  setSignInAction,
 } from '@bookable24/store/account/accountSlice';
 
 import {
@@ -17,9 +18,11 @@ import {
   TypographySt,
   AccountHeadingSt,
   AccountInfoSt,
+  AccountActionSt,
 } from '../Account.styles';
 import { getSignInSchema } from '../utils';
 import { ButtonSt } from '../Account.styles';
+import { SignInActionMessages } from '@bookable24/store/account/account.types';
 
 interface ISignInProps {
   email: string;
@@ -29,7 +32,7 @@ interface ISignInProps {
 export const SignIn = () => {
   const { t, navigate } = useI18next();
   const dispatch = useAppDispatch();
-  const { isUserLogin, isLoading, isLoginFail } = useAppSelector(
+  const { isUserLogin, isLoading, isLoginFail, signInAction } = useAppSelector(
     (state) => state.account
   );
 
@@ -51,18 +54,30 @@ export const SignIn = () => {
     if (isLoginFail) {
       return alert('Your Email or Password is wrong...');
     }
+    if (
+      isUserLogin &&
+      signInAction === SignInActionMessages.SIGNIN_TO_CHECKOUT
+    ) {
+      navigate('/checkout');
+      return;
+    }
     if (isUserLogin) {
-      dispatch(setOpenNavbarMenu());
-      navigate('/oder');
+      navigate('/account');
       return;
     }
   }, [isLoading, isUserLogin, isLoginFail]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(setSignInAction(SignInActionMessages.SIGNIN));
+    };
+  }, []);
 
   const onSubmit = (data: ISignInProps) => {
     dispatch(setAccountLoading(true));
     dispatch(signInAccount({ email: data.email, password: data.password }));
   };
-  console.log({ isLoading });
+
   return (
     <WrapColSt>
       {isLoading && <Loading />}
@@ -72,6 +87,9 @@ export const SignIn = () => {
         wahrzunehmen. Neuer Kunde?
         <Link to='/account/signup'> {t('account.register')} </Link>
       </AccountInfoSt>
+      {signInAction === SignInActionMessages.SIGNIN_TO_CHECKOUT && (
+        <AccountActionSt>You need to signIn to checkout</AccountActionSt>
+      )}
       <form autoComplete='off' onSubmit={handleSubmit(onSubmit)}>
         <TextFieldSt
           {...register('email')}

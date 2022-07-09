@@ -32,7 +32,7 @@ export const DesktopViewCart = () => {
           </DesktopViewCartFoodListSt>
           <DesktopViewCartActionButtonSt>
             <CheckoutButton />
-          </DesktopViewCartActionButtonSt>{' '}
+          </DesktopViewCartActionButtonSt>
         </>
       ) : (
         <EmptyViewCart />

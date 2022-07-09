@@ -31,6 +31,7 @@ import { setAccountLoading } from '@bookable24/store/account/accountSlice';
 import Loading from '@bookable24/components/molecules/Loading/Loading';
 import { EmptyViewCart } from '@bookable24/components/molecules/EmptyViewCart/EmptyViewCart';
 import { DeliveryTime } from '@bookable24/components/molecules/DeliveryTime/DeliveryTime';
+import { ConfirmModal } from './ConfirmModal';
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -41,7 +42,17 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction='up' ref={ref} {...props} />;
 });
 
+const Message = {
+  error: 'Something gone wrong, please try again later.Thanks',
+  success: (email: string) =>
+    `Oder successfully, we'll send you a confirm <strong> ${email} </strong> in a few minutes`,
+  needLogin: 'Please update your delivery address first.',
+};
+
 export const Checkout = () => {
+  const [open, setOpen] = React.useState(false);
+  const [error, setError] = React.useState(false);
+  const [messages, setMessages] = useState('');
   const dispatch = useAppDispatch();
   const { cartItems, deliveryTime } = useAppSelector((state) => state.booking);
   const {
@@ -60,6 +71,12 @@ export const Checkout = () => {
 
   return (
     <ContainerSt>
+      <ConfirmModal
+        open={open}
+        setOpen={setOpen}
+        messages={messages}
+        email={email}
+      />
       {isLoading && <Loading />}
       {cartItems.length === 0 ? (
         <EmptyViewCart />
@@ -86,7 +103,8 @@ export const Checkout = () => {
                   left: 0,
                   behavior: 'smooth',
                 });
-                alert('You need update your address first');
+                setMessages(Message.needLogin);
+                setOpen(true);
               } else {
                 const dataToSend = {
                   restaurantName: RestaurantName,
@@ -116,12 +134,12 @@ export const Checkout = () => {
                   dataToSend
                 );
                 if (res?.data?.message === 'SUCCESS') {
-                  alert(
-                    "Oder successfully, we'll send a confirm email in a fews minutes"
-                  );
-                  navigate('/');
+                  setMessages('SUCCESS');
+                  setOpen(true);
                 } else {
-                  alert('Ops.. Somethings gone wrong.. try again please');
+                  setOpen(true);
+                  setMessages(Message.error);
+                  setError(true);
                 }
               }
               dispatch(setAccountLoading(false));

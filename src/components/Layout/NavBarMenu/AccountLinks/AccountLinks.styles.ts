@@ -13,7 +13,7 @@ export const AccountLinksSt = styled('div')(({ theme }) => ({
 }));
 
 export const ButtonAccountSt = styled(Button)(({ theme }) => ({
-  color: theme.color.primary,
+  color: theme.color.white,
   maxWidth: 260,
   margin: '0 auto',
   fontFamily: 'Mukta, sans-serif',
@@ -23,7 +23,7 @@ export const ButtonAccountSt = styled(Button)(({ theme }) => ({
   marginLeft: 8,
   textDecoration: 'underline',
   '&:hover': {
-    color: theme.color.primary,
+    color: theme.color.borderColor,
   },
 }));
 

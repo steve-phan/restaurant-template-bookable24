@@ -7,6 +7,7 @@ export const initialAccountState: IAccountSliceStates = {
   isUserChangePasswordSuccess: false,
   isOpenNavbarMenu: false,
   isShowAccountLinksModal: false,
+  signInAction: 'SIGNIN',
   userInfo: {
     fullName: '',
     email: '',

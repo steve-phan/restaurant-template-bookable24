@@ -12,10 +12,9 @@ import {
   WrapCloseIconSt,
   NavbarMenuHeaderSt,
   NavbarMenuBodyrSt,
-  AccountButtonGroupSt,
 } from './NavBarMenu.styles';
 import { AccountLinks } from './AccountLinks/AccountLinks';
-import { CTAButton } from '@bookable24/components/molecules/LinkButtons/InternalLink';
+
 import { useTranslation } from 'gatsby-plugin-react-i18next';
 
 export interface INavbarMenuprops {

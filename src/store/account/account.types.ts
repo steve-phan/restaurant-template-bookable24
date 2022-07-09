@@ -1,3 +1,5 @@
+import { GetValuesOf } from '@bookable24/RESTAURANT.CONFIG/restaurant.types';
+
 export interface ISignUpProps {
   fullName: string;
   email: string;
@@ -38,4 +40,12 @@ export interface IAccountSliceStates {
   isUserChangePasswordSuccess: boolean;
   userInfo: IAccount;
   isShowAccountLinksModal: boolean;
+  signInAction: 'SIGNIN_TO_CHECKOUT' | 'SIGNIN';
 }
+
+export const SignInActionMessages = {
+  SIGNIN_TO_CHECKOUT: 'SIGNIN_TO_CHECKOUT',
+  SIGNIN: 'SIGNIN',
+} as const;
+
+export type TAction = GetValuesOf<typeof SignInActionMessages>;

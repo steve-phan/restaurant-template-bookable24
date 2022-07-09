@@ -40,7 +40,7 @@ export const BastketModal = () => {
   const handleClose = () => {
     dispatch(toggleShowBasketModal());
   };
-
+  console.log({ isShowBasketModal });
   return (
     <WrapperBoxViewCartst>
       <BoxViewCartst>
@@ -49,6 +49,8 @@ export const BastketModal = () => {
           open={isShowBasketModal}
           onClose={handleClose}
           TransitionComponent={Transition}
+          aria-labelledby='basket-modal'
+          aria-describedby='basket-modal'
         >
           <AppBar
             sx={{
@@ -77,7 +79,7 @@ export const BastketModal = () => {
           {cartItems.length !== 0 ? (
             <>
               <ViewCartFoodList cartItems={cartItems} />
-              <CheckoutButton handleClose={handleClose} />
+              <CheckoutButton />
             </>
           ) : (
             <EmptyViewCart />

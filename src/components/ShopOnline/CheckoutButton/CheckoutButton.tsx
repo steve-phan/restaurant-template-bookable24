@@ -11,12 +11,18 @@ import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import { useI18next } from 'gatsby-plugin-react-i18next';
 
 import { useAppDispatch, useAppSelector } from '@bookable24/store/hooks';
-import { closeViewCartModal } from '@bookable24/store/oder/bookingSlice';
+import {
+  closeViewCartModal,
+  toggleShowBasketModal,
+} from '@bookable24/store/oder/bookingSlice';
 import { useSumDetailsCartItem } from '@bookable24/hooks/useSumDetailsCartItem';
 
 import { TCartItems } from '@bookable24/store/oder/shop.types';
 import { SumQuantitiesSt } from '../../molecules/BoxViewCart/BoxViewCart.styles';
 import { localStorageSetItem } from '@bookable24/store/localStore';
+import { ConfirmModal } from '../CheckOut/ConfirmModal';
+import { setSignInAction } from '@bookable24/store/account/accountSlice';
+import { SignInActionMessages } from '@bookable24/store/account/account.types';
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -32,6 +38,8 @@ interface ICheckoutButtonProps {
 }
 
 export const CheckoutButton = ({ handleClose }: ICheckoutButtonProps) => {
+  const [open, setOpen] = React.useState(false);
+  const [goTo, setGoTo] = useState('');
   const dispatch = useAppDispatch();
   const { cartItems, isViewCartModal } = useAppSelector(
     (state) => state.booking
@@ -53,12 +61,9 @@ export const CheckoutButton = ({ handleClose }: ICheckoutButtonProps) => {
     >
       <Toolbar
         onClick={() => {
-          console.log('go to checkout');
-          if (!!handleClose) {
-            handleClose();
-          }
+          dispatch(toggleShowBasketModal());
           if (!isUserLogin) {
-            alert('You need SignIn first');
+            dispatch(setSignInAction(SignInActionMessages.SIGNIN_TO_CHECKOUT));
             navigate('/account/signin');
           } else {
             navigate('/checkout');
