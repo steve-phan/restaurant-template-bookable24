@@ -41,7 +41,7 @@ export const CheckoutButton = ({ handleClose }: ICheckoutButtonProps) => {
   const [open, setOpen] = React.useState(false);
   const [goTo, setGoTo] = useState('');
   const dispatch = useAppDispatch();
-  const { cartItems, isViewCartModal } = useAppSelector(
+  const { cartItems, isViewCartModal, isShowBasketModal } = useAppSelector(
     (state) => state.booking
   );
   const { isUserLogin } = useAppSelector((state) => state.account);
@@ -61,7 +61,9 @@ export const CheckoutButton = ({ handleClose }: ICheckoutButtonProps) => {
     >
       <Toolbar
         onClick={() => {
-          dispatch(toggleShowBasketModal());
+          if (isShowBasketModal) {
+            dispatch(toggleShowBasketModal());
+          }
           if (!isUserLogin) {
             dispatch(setSignInAction(SignInActionMessages.SIGNIN_TO_CHECKOUT));
             navigate('/account/signin');
