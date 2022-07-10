@@ -4,8 +4,9 @@ import { db } from '../utils/firebase';
 
 export const handler: Handler = async (event, context) => {
   const data = JSON.parse(event.body as string);
-  const { email } = data;
+  const { email, restaurantName } = data;
   try {
+    await db.collection('oders').doc(restaurantName).set(data);
     await db.collection('mail').add({
       to: [email, 'bookable24.de@gmail.com'],
       template: {
