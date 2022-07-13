@@ -5,7 +5,7 @@ import Button from '@mui/material/Button/Button';
 import {
   openViewCartModal,
   closeFoodItemModal,
-} from '@bookable24/store/oder/bookingSlice';
+} from '@bookable24/store/oder/oderSlice';
 import { useAppDispatch, useAppSelector } from '@bookable24/store/hooks';
 
 import { AddFoodItemToCartSt } from './AddFoodItemToCart.styles';
@@ -14,7 +14,7 @@ import { BoxAdjustFoodItem } from '../../BoxAdjustFoodItem/BoxAdjustFoodItem';
 export const AddFoodItemToCart = () => {
   const dispatch = useAppDispatch();
 
-  const { foodItemModal } = useAppSelector((state) => state.booking);
+  const { foodItemModal } = useAppSelector((state) => state.oder);
 
   return (
     <AddFoodItemToCartSt>

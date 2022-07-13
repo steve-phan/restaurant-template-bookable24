@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { TCartItems } from '@bookable24/store/oder/shop.types';
+import { TCartItems } from '@bookable24/store/oder/oder.types';
 
 import {
   ViewCartFoodItemSt,

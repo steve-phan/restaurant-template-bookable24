@@ -14,7 +14,7 @@ import { TransitionProps } from '@mui/material/transitions';
 import CloseIcon from '@mui/icons-material/Close';
 
 import { useAppDispatch, useAppSelector } from '@bookable24/store/hooks';
-import { closeFoodItemModal } from '@bookable24/store/oder/bookingSlice';
+import { closeFoodItemModal } from '@bookable24/store/oder/oderSlice';
 
 import {
   CloseButtonSt,
@@ -43,7 +43,7 @@ export const ShowDetailsFoodItem = () => {
       foodName,
       descriptionAboutFood,
     },
-  } = useAppSelector((state) => state.booking);
+  } = useAppSelector((state) => state.oder);
 
   const image = getImage(foodImage as ImageDataLike) as IGatsbyImageData;
 

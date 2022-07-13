@@ -10,7 +10,7 @@ import { DeliveryDining } from '@mui/icons-material';
 import { Typography } from '@mui/material';
 import { DeliveryHeadingSt } from './DeliveryTime.styles';
 import { useAppDispatch, useAppSelector } from '@bookable24/store/hooks';
-import { setDeliveryTime } from '@bookable24/store/oder/bookingSlice';
+import { setDeliveryTime } from '@bookable24/store/oder/oderSlice';
 
 const hourNow = dayjs().hour();
 const minutesNow = dayjs().minute();

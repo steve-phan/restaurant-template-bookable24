@@ -12,7 +12,7 @@ import { useAppDispatch, useAppSelector } from '@bookable24/store/hooks';
 import {
   closeViewCartModal,
   toggleShowBasketModal,
-} from '@bookable24/store/oder/bookingSlice';
+} from '@bookable24/store/oder/oderSlice';
 
 import { CheckoutButton } from '../../ShopOnline/CheckoutButton/CheckoutButton';
 import { EmptyViewCart } from '../EmptyViewCart/EmptyViewCart';
@@ -34,7 +34,7 @@ const Transition = React.forwardRef(function Transition(
 export const BastketModal = () => {
   const dispatch = useAppDispatch();
   const { cartItems, isShowBasketModal } = useAppSelector(
-    (state) => state.booking
+    (state) => state.oder
   );
 
   const handleClose = () => {

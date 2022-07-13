@@ -13,7 +13,7 @@ import { useAppDispatch, useAppSelector } from '@bookable24/store/hooks';
 import {
   addItemToCart,
   openFoodItemModal,
-} from '@bookable24/store/oder/bookingSlice';
+} from '@bookable24/store/oder/oderSlice';
 
 import {
   BoxFoodItemSt,
@@ -31,7 +31,7 @@ export const BoxFoodItem = ({ item }: { item: IFoodItemFromContentFul }) => {
   const { foodName, descriptionAboutFood, priceOfFood, foodId, foodImage } =
     item;
   const dispatch = useAppDispatch();
-  const { cartItems } = useAppSelector((state) => state.booking);
+  const { cartItems } = useAppSelector((state) => state.oder);
 
   const exitsItem =
     !!cartItems && cartItems.find((item) => foodId === item.foodId);

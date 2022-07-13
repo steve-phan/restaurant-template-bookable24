@@ -2,7 +2,7 @@ import { Provider } from 'react-redux';
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 
 // import shopReducer from "./shop/shopSlice"
-import bookingReducer from './oder/bookingSlice';
+import oderReducer from './oder/oderSlice';
 import accountReducer from './account/accountSlice';
 import appReducer from './app/appSlice';
 
@@ -10,7 +10,7 @@ export const store = configureStore({
   reducer: {
     // shop: shopReducer,
     app: appReducer,
-    booking: bookingReducer,
+    oder: oderReducer,
     account: accountReducer,
   },
   middleware: (getDefaultMiddleware) =>

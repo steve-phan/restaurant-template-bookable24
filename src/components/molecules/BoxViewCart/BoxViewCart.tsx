@@ -11,7 +11,7 @@ import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import { useI18next } from 'gatsby-plugin-react-i18next';
 
 import { useAppDispatch, useAppSelector } from '@bookable24/store/hooks';
-import { closeViewCartModal } from '@bookable24/store/oder/bookingSlice';
+import { closeViewCartModal } from '@bookable24/store/oder/oderSlice';
 import { useSumDetailsCartItem } from '@bookable24/hooks/useSumDetailsCartItem';
 
 import {
@@ -36,9 +36,7 @@ const Transition = React.forwardRef(function Transition(
 export const BoxViewCart = () => {
   const [open, setOpen] = useState(false);
   const dispatch = useAppDispatch();
-  const { cartItems, isViewCartModal } = useAppSelector(
-    (state) => state.booking
-  );
+  const { cartItems, isViewCartModal } = useAppSelector((state) => state.oder);
   const { isUserLogin } = useAppSelector((state) => state.account);
   const { navigate } = useI18next();
   const { sumPrices, sumQuantities } = useSumDetailsCartItem(cartItems);

@@ -1,8 +1,8 @@
 import { deliveryTimesDefault } from '@bookable24/components/molecules/DeliveryTime/DeliveryTime';
 import { localStorageGetItem } from '../localStore';
-import { IBookingState, IBooking, IFoodItem, TCartItems } from './shop.types';
+import { IFoodItem, TCartItems, IOderState, IOder } from './oder.types';
 
-export const intialBooking: IBooking = {
+export const intialOder: IOder = {
   person: 1,
   selectedDate: new Date(),
   selectedSlot: 0,
@@ -33,8 +33,8 @@ export const getDefaultCartItems = (): TCartItems => {
   return JSON.parse(data);
 };
 
-export const initialBookingState: IBookingState = {
-  ...intialBooking,
+export const initialOderState: IOderState = {
+  ...intialOder,
   isValidInfo: false,
   isSubmitted: false,
 

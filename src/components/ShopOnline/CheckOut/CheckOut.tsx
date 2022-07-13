@@ -11,11 +11,17 @@ import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import { useI18next } from 'gatsby-plugin-react-i18next';
 
 import { useAppDispatch, useAppSelector } from '@bookable24/store/hooks';
-import { closeViewCartModal } from '@bookable24/store/oder/bookingSlice';
+import {
+  clearCart,
+  closeViewCartModal,
+} from '@bookable24/store/oder/oderSlice';
 import { useSumDetailsCartItem } from '@bookable24/hooks/useSumDetailsCartItem';
 
-import { TCartItems } from '@bookable24/store/oder/shop.types';
-import { localStorageSetItem } from '@bookable24/store/localStore';
+import { TCartItems } from '@bookable24/store/oder/oder.types';
+import {
+  localStorageRemoveItem,
+  localStorageSetItem,
+} from '@bookable24/store/localStore';
 import { ContainerSt } from '@bookable24/components/molecules/ui/Container/Container';
 import { HeadingCenter } from '@bookable24/components/molecules/ui/Heading/HeadingCenter';
 import { UserInfo } from '@bookable24/components/Account/UserInfo/UserInfo';
@@ -54,7 +60,7 @@ export const Checkout = () => {
   const [error, setError] = React.useState(false);
   const [messages, setMessages] = useState('');
   const dispatch = useAppDispatch();
-  const { cartItems, deliveryTime } = useAppSelector((state) => state.booking);
+  const { cartItems, deliveryTime } = useAppSelector((state) => state.oder);
   const {
     isLoading,
     userInfo: { email, fullName, address },
@@ -134,6 +140,8 @@ export const Checkout = () => {
                   dataToSend
                 );
                 if (res?.data?.message === 'SUCCESS') {
+                  localStorageRemoveItem('cartItems');
+                  dispatch(clearCart());
                   setMessages('SUCCESS');
                   setOpen(true);
                 } else {

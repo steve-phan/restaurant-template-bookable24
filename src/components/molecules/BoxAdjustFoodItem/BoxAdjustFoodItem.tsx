@@ -5,11 +5,11 @@ import ButtonGroup from '@mui/material/ButtonGroup/ButtonGroup';
 import {
   addItemToCart,
   removeItemFromCart,
-} from '@bookable24/store/oder/bookingSlice';
+} from '@bookable24/store/oder/oderSlice';
 import { useAppDispatch } from '@bookable24/store/hooks';
 
 import { FoodItemQuantitySt } from './BoxAdjustFoodItem.styles';
-import { IFoodItem } from '@bookable24/store/oder/shop.types';
+import { IFoodItem } from '@bookable24/store/oder/oder.types';
 
 export const BoxAdjustFoodItem = ({
   item,

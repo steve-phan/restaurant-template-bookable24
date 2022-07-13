@@ -17,9 +17,7 @@ import { EmptyViewCart } from '../EmptyViewCart/EmptyViewCart';
 
 export const DesktopViewCart = () => {
   const dispatch = useAppDispatch();
-  const { cartItems, isViewCartModal } = useAppSelector(
-    (state) => state.booking
-  );
+  const { cartItems, isViewCartModal } = useAppSelector((state) => state.oder);
   const { navigate } = useI18next();
   const { sumPrices, sumQuantities } = useSumDetailsCartItem(cartItems);
   return (

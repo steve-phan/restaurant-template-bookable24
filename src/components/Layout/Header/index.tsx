@@ -10,7 +10,7 @@ import { heightNavbar } from '@bookable24/components/config';
 import { BastketModal } from '@bookable24/components/molecules/BoxViewCart/BastketModal';
 import { setOpenNavbarMenu } from '@bookable24/store/account/accountSlice';
 import { useAppDispatch, useAppSelector } from '@bookable24/store/hooks';
-import { toggleShowBasketModal } from '@bookable24/store/oder/bookingSlice';
+import { toggleShowBasketModal } from '@bookable24/store/oder/oderSlice';
 
 import Logo from '../../molecules/Logo';
 import { NavbarMenu } from '../NavBarMenu/NavBarMenu';

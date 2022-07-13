@@ -14,10 +14,10 @@ import { useAppDispatch, useAppSelector } from '@bookable24/store/hooks';
 import {
   closeViewCartModal,
   toggleShowBasketModal,
-} from '@bookable24/store/oder/bookingSlice';
+} from '@bookable24/store/oder/oderSlice';
 import { useSumDetailsCartItem } from '@bookable24/hooks/useSumDetailsCartItem';
 
-import { TCartItems } from '@bookable24/store/oder/shop.types';
+import { TCartItems } from '@bookable24/store/oder/oder.types';
 import { SumQuantitiesSt } from '../../molecules/BoxViewCart/BoxViewCart.styles';
 import { localStorageSetItem } from '@bookable24/store/localStore';
 import { ConfirmModal } from '../CheckOut/ConfirmModal';
@@ -42,7 +42,7 @@ export const CheckoutButton = ({ handleClose }: ICheckoutButtonProps) => {
   const [goTo, setGoTo] = useState('');
   const dispatch = useAppDispatch();
   const { cartItems, isViewCartModal, isShowBasketModal } = useAppSelector(
-    (state) => state.booking
+    (state) => state.oder
   );
   const { isUserLogin } = useAppSelector((state) => state.account);
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Grid, TextareaAutosize } from '@mui/material';
 
-import { IFoodItem } from '@bookable24/store/oder/shop.types';
+import { IFoodItem } from '@bookable24/store/oder/oder.types';
 
 import {
   AddNotesActionsSt,
@@ -17,14 +17,14 @@ import { useAppDispatch, useAppSelector } from '@bookable24/store/hooks';
 import {
   addRequireItemToCart,
   removeRequireItemFromCart,
-} from '@bookable24/store/oder/bookingSlice';
+} from '@bookable24/store/oder/oderSlice';
 
 export const ViewCartFoodItem = ({ item }: { item: IFoodItem }) => {
   const [openNotes, setOpenNotes] = useState(false);
   const { foodName, priceOfFood, quantity, foodId, require } = item;
   const [notes, setNotes] = useState(require || '');
   const dispatch = useAppDispatch();
-  const {} = useAppSelector((state) => state.booking);
+  const {} = useAppSelector((state) => state.oder);
 
   return (
     <BoxViewCartFoodItemSt>

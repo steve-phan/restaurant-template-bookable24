@@ -1,20 +1,24 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { confirmOderEmail } from './booking.Thunks';
+import { confirmOderEmail } from './oder.Thunks';
 
-import { IBookingState, IInfoUserProps, IFoodItem } from './shop.types';
+import { IOderState, IInfoUserProps, IFoodItem } from './oder.types';
 import {
   addToCart,
   handleReduceCartItem,
   IAddNotes,
-  initialBookingState,
+  initialOderState,
   initialFoodItemModal,
 } from './utils';
 
-const bookingSlice = createSlice({
+const oderSlice = createSlice({
   name: 'oder',
-  initialState: initialBookingState,
+  initialState: initialOderState,
   reducers: {
-    addItemToCart: (state: IBookingState, action: PayloadAction<IFoodItem>) => {
+    clearCart: (state) => {
+      state.cartItems = [];
+    },
+
+    addItemToCart: (state: IOderState, action: PayloadAction<IFoodItem>) => {
       const newCartItems = addToCart({
         prevCartItems: state.cartItems,
         nextCartItem: action.payload,
@@ -24,7 +28,7 @@ const bookingSlice = createSlice({
       state.foodItemModal.quantity = state.foodItemModal.quantity + 1;
     },
     addRequireItemToCart: (
-      state: IBookingState,
+      state: IOderState,
       action: PayloadAction<{ addNotes: IAddNotes }>
     ) => {
       const newCartItems = addToCart({
@@ -34,7 +38,7 @@ const bookingSlice = createSlice({
       state.cartItems = newCartItems;
     },
     removeItemFromCart: (
-      state: IBookingState,
+      state: IOderState,
       action: PayloadAction<IFoodItem>
     ) => {
       const newCartItems = handleReduceCartItem({
@@ -46,7 +50,7 @@ const bookingSlice = createSlice({
       state.foodItemModal.quantity = state.foodItemModal.quantity - 1;
     },
     removeRequireItemFromCart: (
-      state: IBookingState,
+      state: IOderState,
       action: PayloadAction<{ addNotes: IAddNotes }>
     ) => {
       const newCartItems = handleReduceCartItem({
@@ -58,43 +62,40 @@ const bookingSlice = createSlice({
       state.foodItemModal.quantity = state.foodItemModal.quantity + 1;
     },
     openFoodItemModal: (
-      state: IBookingState,
+      state: IOderState,
       action: PayloadAction<IFoodItem>
     ) => {
       state.foodItemModal = action.payload;
     },
-    closeFoodItemModal: (state: IBookingState) => {
+    closeFoodItemModal: (state: IOderState) => {
       state.foodItemModal = initialFoodItemModal;
     },
-    toggleShowBasketModal: (state: IBookingState) => {
+    toggleShowBasketModal: (state: IOderState) => {
       state.isShowBasketModal = !state.isShowBasketModal;
       // state.foodItemModal.isOpenModal = !state.foodItemModal.isOpenModal;
     },
-    openViewCartModal: (state: IBookingState) => {
+    openViewCartModal: (state: IOderState) => {
       state.isViewCartModal = true;
     },
-    closeViewCartModal: (state: IBookingState) => {
+    closeViewCartModal: (state: IOderState) => {
       state.isViewCartModal = false;
     },
-    setDeliveryTime: (state: IBookingState, action: PayloadAction<string>) => {
+    setDeliveryTime: (state: IOderState, action: PayloadAction<string>) => {
       state.deliveryTime = action.payload;
     },
 
     //Bookabke24
-    setNumberOfCustomer: (
-      state: IBookingState,
-      action: PayloadAction<number>
-    ) => {
+    setNumberOfCustomer: (state: IOderState, action: PayloadAction<number>) => {
       state.person = action.payload;
     },
-    setSelectedSlot: (state: IBookingState, action: PayloadAction<number>) => {
+    setSelectedSlot: (state: IOderState, action: PayloadAction<number>) => {
       state.selectedSlot = action.payload;
     },
-    setSelectedDate: (state: IBookingState, action: PayloadAction<Date>) => {
+    setSelectedDate: (state: IOderState, action: PayloadAction<Date>) => {
       state.selectedDate = action.payload;
     },
     setCustomerInfo: (
-      state: IBookingState,
+      state: IOderState,
       action: PayloadAction<IInfoUserProps>
     ) => {
       const { firstName, lastName, email, phone, require } = action.payload;
@@ -106,7 +107,7 @@ const bookingSlice = createSlice({
       state.isSubmitted = true;
     },
     setCustomerValidInfo: (
-      state: IBookingState,
+      state: IOderState,
       action: PayloadAction<boolean>
     ) => {
       state.isValidInfo = action.payload;
@@ -117,14 +118,14 @@ const bookingSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(confirmOderEmail.pending, (state: IBookingState) => {
+      .addCase(confirmOderEmail.pending, (state: IOderState) => {
         // state.isLoading = true;
       })
-      .addCase(confirmOderEmail.rejected, (state: IBookingState) => {
+      .addCase(confirmOderEmail.rejected, (state: IOderState) => {
         // state.isLoading = false;
         // state.isLoading = true;
       })
-      .addCase(confirmOderEmail.fulfilled, (state: IBookingState) => {
+      .addCase(confirmOderEmail.fulfilled, (state: IOderState) => {
         // state.isLoading = true;
         // state.isLoading = false;
         // state.isUserLogin = false;
@@ -137,6 +138,8 @@ export const {
   setSelectedSlot,
   setCustomerInfo,
   setCustomerValidInfo,
+  // Clear Cart
+  clearCart,
 
   // Adjust Item
   addItemToCart,
@@ -157,6 +160,6 @@ export const {
 
   // Show Modal
   toggleShowBasketModal,
-} = bookingSlice.actions;
+} = oderSlice.actions;
 
-export default bookingSlice.reducer;
+export default oderSlice.reducer;

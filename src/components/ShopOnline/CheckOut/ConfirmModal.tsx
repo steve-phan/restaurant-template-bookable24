@@ -6,7 +6,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useI18next } from 'gatsby-plugin-react-i18next';
-import { closeViewCartModal } from '@bookable24/store/oder/bookingSlice';
+import { closeViewCartModal } from '@bookable24/store/oder/oderSlice';
 import { useAppDispatch } from '@bookable24/store/hooks';
 
 export interface IConfirmModalProps {

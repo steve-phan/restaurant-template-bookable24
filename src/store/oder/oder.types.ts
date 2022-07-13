@@ -84,7 +84,7 @@ export type TCustomerInfo =
   | 'phone'
   | 'require';
 
-export interface IBooking {
+export interface IOder {
   person: number;
   selectedDate: Date;
   selectedSlot: number;
@@ -117,7 +117,7 @@ export interface ICustomerInfos {
   timeDelivery?: Date;
 }
 
-export interface IBookingState extends IBooking {
+export interface IOderState extends IOder {
   isValidInfo: boolean;
   isSubmitted: boolean;
 
