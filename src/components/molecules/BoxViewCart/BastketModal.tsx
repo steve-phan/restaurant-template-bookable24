@@ -40,7 +40,6 @@ export const BastketModal = () => {
   const handleClose = () => {
     dispatch(toggleShowBasketModal());
   };
-  console.log({ isShowBasketModal });
   return (
     <WrapperBoxViewCartst>
       <BoxViewCartst>

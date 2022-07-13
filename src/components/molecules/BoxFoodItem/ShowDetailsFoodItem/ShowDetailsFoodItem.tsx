@@ -46,7 +46,6 @@ export const ShowDetailsFoodItem = () => {
   } = useAppSelector((state) => state.oder);
 
   const image = getImage(foodImage as ImageDataLike) as IGatsbyImageData;
-
   const handleClose = () => {
     dispatch(closeFoodItemModal());
   };
@@ -64,14 +63,16 @@ export const ShowDetailsFoodItem = () => {
         <CloseButtonSt onClick={handleClose}>
           <CloseIcon fontSize='medium' />
         </CloseButtonSt>
-        <GatsbyImage
-          image={image}
-          alt='bookable24.de Booking Online System'
-          style={{
-            borderRadius: '4px',
-            minHeight: '30vh',
-          }}
-        />
+        {image && (
+          <GatsbyImage
+            image={image}
+            alt='bookable24.de Booking Online System'
+            style={{
+              borderRadius: '4px',
+              minHeight: '30vh',
+            }}
+          />
+        )}
         <DialogContent>
           <DialogContentText id={`${foodId}-bookable-24-online-booking-system`}>
             {descriptionAboutFood}
