@@ -17,6 +17,9 @@ const oderSlice = createSlice({
     clearCart: (state) => {
       state.cartItems = [];
     },
+    setIsOderConfirm: (state, action: PayloadAction<boolean>) => {
+      state.isOderConfirmed = action.payload;
+    },
 
     addItemToCart: (state: IOderState, action: PayloadAction<IFoodItem>) => {
       const newCartItems = addToCart({
@@ -160,6 +163,9 @@ export const {
 
   // Show Modal
   toggleShowBasketModal,
+
+  // Show OderConfirmation
+  setIsOderConfirm,
 } = oderSlice.actions;
 
 export default oderSlice.reducer;

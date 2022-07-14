@@ -117,7 +117,7 @@ export const BoxViewCart = () => {
               </AppBar>
               {cartItems.length !== 0 ? (
                 <>
-                  <ViewCartFoodList cartItems={cartItems} />
+                  <ViewCartFoodList />
                   <CheckoutButton />
                 </>
               ) : (

@@ -126,6 +126,7 @@ export interface IOderState extends IOder {
   foodItemModal: IFoodItem;
   isViewCartModal: boolean;
   isShowBasketModal: boolean;
+  isOderConfirmed: boolean;
 }
 
 export interface IFoodItemModal {

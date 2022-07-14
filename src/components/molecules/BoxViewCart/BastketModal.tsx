@@ -77,7 +77,7 @@ export const BastketModal = () => {
           </AppBar>
           {cartItems.length !== 0 ? (
             <>
-              <ViewCartFoodList cartItems={cartItems} />
+              <ViewCartFoodList />
               <CheckoutButton />
             </>
           ) : (

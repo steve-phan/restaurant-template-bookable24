@@ -43,6 +43,7 @@ export const initialOderState: IOderState = {
   foodItemModal: initialFoodItemModal,
   isViewCartModal: false,
   isShowBasketModal: false,
+  isOderConfirmed: false,
 };
 
 export const existingCartItem = (

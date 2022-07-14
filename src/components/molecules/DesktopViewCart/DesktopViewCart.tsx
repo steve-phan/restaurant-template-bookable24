@@ -26,7 +26,7 @@ export const DesktopViewCart = () => {
       {sumPrices ? (
         <>
           <DesktopViewCartFoodListSt>
-            <ViewCartFoodList cartItems={cartItems} />
+            <ViewCartFoodList />
           </DesktopViewCartFoodListSt>
           <DesktopViewCartActionButtonSt>
             <CheckoutButton />

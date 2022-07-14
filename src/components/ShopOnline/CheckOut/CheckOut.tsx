@@ -14,6 +14,7 @@ import { useAppDispatch, useAppSelector } from '@bookable24/store/hooks';
 import {
   clearCart,
   closeViewCartModal,
+  setIsOderConfirm,
 } from '@bookable24/store/oder/oderSlice';
 import { useSumDetailsCartItem } from '@bookable24/hooks/useSumDetailsCartItem';
 
@@ -37,16 +38,7 @@ import { setAccountLoading } from '@bookable24/store/account/accountSlice';
 import Loading from '@bookable24/components/molecules/Loading/Loading';
 import { EmptyViewCart } from '@bookable24/components/molecules/EmptyViewCart/EmptyViewCart';
 import { DeliveryTime } from '@bookable24/components/molecules/DeliveryTime/DeliveryTime';
-import { ConfirmModal } from './ConfirmModal';
-
-const Transition = React.forwardRef(function Transition(
-  props: TransitionProps & {
-    children: React.ReactElement;
-  },
-  ref: React.Ref<unknown>
-) {
-  return <Slide direction='up' ref={ref} {...props} />;
-});
+import { OderConfirmation } from './OderConfirmation';
 
 const Message = {
   error: 'Something gone wrong, please try again later.Thanks',
@@ -56,11 +48,12 @@ const Message = {
 };
 
 export const Checkout = () => {
-  const [open, setOpen] = React.useState(false);
   const [error, setError] = React.useState(false);
-  const [messages, setMessages] = useState('');
+
   const dispatch = useAppDispatch();
-  const { cartItems, deliveryTime } = useAppSelector((state) => state.oder);
+  const { cartItems, deliveryTime, isOderConfirmed } = useAppSelector(
+    (state) => state.oder
+  );
   const {
     isLoading,
     userInfo: { email, fullName, address },
@@ -75,16 +68,18 @@ export const Checkout = () => {
     localStorageSetItem('cartItems', JSON.stringify(cartItems));
   }, [cartItems]);
 
+  if (true) {
+    return (
+      <ContainerSt>
+        <OderConfirmation />
+      </ContainerSt>
+    );
+  }
+
   return (
     <ContainerSt>
-      <ConfirmModal
-        open={open}
-        setOpen={setOpen}
-        messages={messages}
-        email={email}
-      />
       {isLoading && <Loading />}
-      {cartItems.length === 0 ? (
+      {cartItems.length === 0 && !isOderConfirmed ? (
         <EmptyViewCart />
       ) : (
         <>
@@ -92,7 +87,7 @@ export const Checkout = () => {
           <UserInfo />
           <DeliveryTime />
           <AccountHeadingSt>Warenkorb</AccountHeadingSt>
-          <ViewCartFoodList cartItems={cartItems} />
+          <ViewCartFoodList />
 
           <OderSummary sumPrices={sumPrices} sumQuantities={sumQuantities} />
           <TextWarningSt>
@@ -109,8 +104,6 @@ export const Checkout = () => {
                   left: 0,
                   behavior: 'smooth',
                 });
-                setMessages(Message.needLogin);
-                setOpen(true);
               } else {
                 const dataToSend = {
                   restaurantName: RestaurantName,
@@ -140,13 +133,8 @@ export const Checkout = () => {
                   dataToSend
                 );
                 if (res?.data?.message === 'SUCCESS') {
-                  localStorageRemoveItem('cartItems');
-                  dispatch(clearCart());
-                  setMessages('SUCCESS');
-                  setOpen(true);
+                  dispatch(setIsOderConfirm(true));
                 } else {
-                  setOpen(true);
-                  setMessages(Message.error);
                   setError(true);
                 }
               }
