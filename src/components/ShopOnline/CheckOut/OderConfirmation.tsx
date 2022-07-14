@@ -1,4 +1,5 @@
 import { HeadingCenterSt } from '@bookable24/components/molecules/ui/Heading/Heading.styles';
+import { useSumDetailsCartItem } from '@bookable24/hooks/useSumDetailsCartItem';
 import { useAppDispatch, useAppSelector } from '@bookable24/store/hooks';
 import { localStorageRemoveItem } from '@bookable24/store/localStore';
 import { clearCart, setIsOderConfirm } from '@bookable24/store/oder/oderSlice';
@@ -8,6 +9,8 @@ import {
   ConfirmDeliverySectionHeader,
   ConfirmDeliveryText,
   ConfirmDeliveryTime,
+  ConfirmOderItemWrap,
+  ConfirmRequirest,
   ConfirmTextst,
   OderConfirmSt,
 } from './OderConfirm.styles';
@@ -21,13 +24,14 @@ export const OderConfirmation = () => {
   const { cartItems, deliveryTime, isOderConfirmed } = useAppSelector(
     (state) => state.oder
   );
+  const { sumPrices, sumQuantities } = useSumDetailsCartItem(cartItems);
+
   const { phone, postCode, houseNumber, street, city } = address;
 
   useEffect(() => {
     return () => {
       if (isOderConfirmed) {
         localStorageRemoveItem('cartItems');
-
         dispatch(setIsOderConfirm(false));
         dispatch(clearCart());
       }
@@ -35,7 +39,6 @@ export const OderConfirmation = () => {
   }, []);
   return (
     <OderConfirmSt>
-      <HeadingCenterSt> Hi {fullName}</HeadingCenterSt>
       <ConfirmTextst>
         vielen Dank für Deine Bestellung beim MaiSonTom® Lieferservice!
       </ConfirmTextst>
@@ -59,15 +62,25 @@ export const OderConfirmation = () => {
       </ConfirmDeliverySectionHeader>
       <div>
         {cartItems.map((item, index) => {
-          const { quantity, foodId, foodName, priceOfFood } = item;
+          const { quantity, foodId, foodName, priceOfFood, require } = item;
           return (
             <div key={`${foodId}-${index}`}>
-              <div>{`${quantity} x ${foodId} ${foodName}`}</div>
+              <ConfirmOderItemWrap>
+                <span>{`${quantity} x ${foodId}`} </span>
+                <span>{foodName} </span>
+                <span>{(quantity * priceOfFood).toFixed(2)}€ </span>
+              </ConfirmOderItemWrap>
+              {!!require && <ConfirmRequirest> {require}</ConfirmRequirest>}
             </div>
           );
         })}
       </div>
-
+      <ConfirmDeliverySectionHeader>
+        <ConfirmOderItemWrap>
+          <div>GESAMTE BESTELLUNG:</div>
+          <div>{sumPrices}€</div>
+        </ConfirmOderItemWrap>
+      </ConfirmDeliverySectionHeader>
       <ConfirmTextst>
         Wir wünschen Dir einen guten Appetit und freuen uns schon auf Deinen
         nächsten Besuch auf unserer Webseite

@@ -13,7 +13,9 @@ import { BasketQuanties } from './BasketHeaderButton.styles';
 
 export const BasketHeaderButton = () => {
   const dispatch = useAppDispatch();
-  const { cartItems, isViewCartModal } = useAppSelector((state) => state.oder);
+  const { cartItems, isViewCartModal, isOderConfirmed } = useAppSelector(
+    (state) => state.oder
+  );
   const { sumQuantities } = useSumDetailsCartItem(cartItems);
   return (
     <>
@@ -23,7 +25,7 @@ export const BasketHeaderButton = () => {
         }}
       >
         <ShoppingBagIcon />
-        <BasketQuanties>{sumQuantities}</BasketQuanties>
+        <BasketQuanties>{isOderConfirmed ? 0 : sumQuantities}</BasketQuanties>
       </IconButtonSt>
     </>
   );

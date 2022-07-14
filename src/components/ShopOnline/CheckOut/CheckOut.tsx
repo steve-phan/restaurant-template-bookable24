@@ -68,7 +68,7 @@ export const Checkout = () => {
     localStorageSetItem('cartItems', JSON.stringify(cartItems));
   }, [cartItems]);
 
-  if (true) {
+  if (isOderConfirmed) {
     return (
       <ContainerSt>
         <OderConfirmation />
