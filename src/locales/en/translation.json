@@ -27,7 +27,7 @@
     "Settings": "Settings"
   },
   "account": {
-    "register": "Account Create",
+    "register": "Create an Account",
     "login": "Login",
     "logout": "Logout",
     "registration": "Registration",
