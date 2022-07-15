@@ -63,13 +63,12 @@ export const SignUp = () => {
   return (
     <WrapColSt>
       {isLoading && <Loading />}
-      <AccountHeadingSt> {t('account.register')} </AccountHeadingSt>
+      <AccountHeadingSt> {t('account.registration')} </AccountHeadingSt>
       <AccountInfoSt>
         Erstellen Sie sich jetzt ein Kundenkonto für ein persönlicheres .
-        Bereits Kunde?
+        Bereits Kunde?{' '}
         <Link to='/account/signin' className='siteLink'>
-          {' '}
-          Zur Anmeldung
+          {t('account.toLogin')}
         </Link>
       </AccountInfoSt>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -129,8 +128,8 @@ export const SignUp = () => {
           error={!!errors.street}
           helperText={errors?.street?.message}
           variant='standard'
-          placeholder='Street'
-          label='Street*'
+          placeholder='Straße'
+          label='Straße*'
           autoComplete='off'
           type='text'
           // disabled={!edit}
@@ -140,8 +139,8 @@ export const SignUp = () => {
           error={!!errors.houseNumber}
           helperText={errors?.houseNumber?.message}
           variant='standard'
-          placeholder='House Number'
-          label='House Number*'
+          placeholder='Hausnummer'
+          label='Hausnummer*'
           autoComplete='off'
           type='text'
           // disabled={!edit}
@@ -151,8 +150,8 @@ export const SignUp = () => {
           error={!!errors.postCode}
           helperText={errors?.postCode?.message}
           variant='standard'
-          placeholder='Post Code'
-          label='Post Code*'
+          placeholder='Postleitzahl'
+          label='Postleitzahl*'
           autoComplete='off'
           type='text'
           // disabled={!edit}
@@ -162,8 +161,8 @@ export const SignUp = () => {
           error={!!errors.city}
           helperText={errors?.city?.message}
           variant='standard'
-          placeholder='City'
-          label='City*'
+          placeholder='Stadt'
+          label='Stadt*'
           autoComplete='off'
           type='text'
           // disabled={!edit}
@@ -173,13 +172,13 @@ export const SignUp = () => {
           error={!!errors.password}
           helperText={errors?.password?.message}
           variant='standard'
-          placeholder='password'
-          label='Password*'
+          placeholder='Passwort'
+          label='Passwort*'
           autoComplete='off'
           type='password'
         />
         <ButtonSt variant='contained' color='primary' type='submit'>
-          Sign Up
+          {t('account.registration')}
         </ButtonSt>
         <TypographySt>
           Alle Felder, die mit einem Sternchen (*) gekennzeichnet sind, müssen

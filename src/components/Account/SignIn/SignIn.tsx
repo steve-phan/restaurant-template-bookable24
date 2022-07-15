@@ -85,7 +85,7 @@ export const SignIn = () => {
       <AccountInfoSt>
         Loggen Sie sich jetzt ein, um alle Vorteile des Kundenkontos
         wahrzunehmen. Neuer Kunde?
-        <Link to='/account/signup'> {t('account.register')} </Link>
+        <Link to='/account/signup'> {t('account.toRegister')} </Link>
       </AccountInfoSt>
       {signInAction === SignInActionMessages.SIGNIN_TO_CHECKOUT && (
         <AccountActionSt>You need to signIn to checkout</AccountActionSt>
@@ -111,7 +111,7 @@ export const SignIn = () => {
           type='password'
         />
         <ButtonSt variant='contained' color='primary' type='submit'>
-          Sign In
+          Anmelden
         </ButtonSt>
 
         <TypographySt>

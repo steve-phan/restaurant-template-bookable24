@@ -27,11 +27,12 @@
     "Settings": "Settings"
   },
   "account": {
-    "register": "Create an Account",
-    "login": "Login",
-    "logout": "Logout",
-    "registration": "Registration",
-    "forgot": "Forgot password",
+    "toRegister": "Zur Registrierung",
+    "toLogin": "Zur Anmeldung",
+    "login": "Anmelden",
+    "logout": "Anmelden",
+    "registration": "Registrieren",
+    "forgot": "Passwort vergessen",
     "error": {
       "fistName": "Bitte Vornamen eingeben",
       "lastName": "Bitte Nachnamen eingeben",

@@ -26,9 +26,10 @@
     "Settings": "Einstellungen"
   },
   "account": {
-    "register": "Zur Registrierung",
+    "toRegister": "Zur Registrierung",
+    "toLogin": "Zur Anmeldung",
     "login": "Anmelden",
-    "logout": "Ausloggen",
+    "logout": "Anmelden",
     "registration": "Registrieren",
     "forgot": "Passwort vergessen",
     "error": {

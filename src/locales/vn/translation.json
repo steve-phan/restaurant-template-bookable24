@@ -26,7 +26,8 @@
     "Settings": "Cài đặt"
   },
   "account": {
-    "register": "Tạo mới tài khoản",
+    "toRegister": "Đăng ký",
+    "toLogin": "Đăng nhập",
     "login": "Đăng nhập",
     "logout": "Đăng xuất",
     "registration": "Đăng ký",
