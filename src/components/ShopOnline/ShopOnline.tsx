@@ -68,7 +68,17 @@ export const ShopOnline = ({ restaurantMenu, CATEGORY }: IShopOnlineProps) => {
                   key={index}
                   active={isInview ? 'active' : 'normal'}
                   onClick={() => {
-                    navigate(`/oder/#${category}`);
+                    const activeElement = document.getElementById(
+                      `${category}`
+                    );
+                    console.log({ activeElement });
+                    if (activeElement) {
+                      console.log('do something');
+                      const EoffSet = activeElement.offsetTop;
+                      window.scrollTo({
+                        top: EoffSet + 120, // 120px the top sticky section
+                      });
+                    }
                     setActiveMenu(category);
                   }}
                 >
@@ -77,18 +87,19 @@ export const ShopOnline = ({ restaurantMenu, CATEGORY }: IShopOnlineProps) => {
               ))}
             </Slider>
           </CategoryMenuSt>
+
+          {sortingCategoryMenu.map(([foodName, category], outerIndex) => {
+            return (
+              <CategorySectionSt key={outerIndex} id={foodName}>
+                <HeadingSectionSt>{foodName}</HeadingSectionSt>
+                {category?.foodItems?.map((item, innerIndex) => (
+                  <BoxFoodItem key={innerIndex} item={item} />
+                ))}
+              </CategorySectionSt>
+            );
+          })}
+          <ShowDetailsFoodItem />
         </CategorySt>
-        {sortingCategoryMenu.map(([foodName, category], outerIndex) => {
-          return (
-            <CategorySectionSt key={outerIndex} id={foodName}>
-              <HeadingSectionSt>{foodName}</HeadingSectionSt>
-              {category?.foodItems?.map((item, innerIndex) => (
-                <BoxFoodItem key={innerIndex} item={item} />
-              ))}
-            </CategorySectionSt>
-          );
-        })}
-        <ShowDetailsFoodItem />
       </ShopOnlineMenuListSt>
       {device !== 'small' ? (
         <ShopOnlineBasketSt>

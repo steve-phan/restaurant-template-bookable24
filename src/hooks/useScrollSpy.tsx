@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import { TCategory } from '@bookable24/RESTAURANT.CONFIG/restaurant.types';
 
-export const isInView = (element: HTMLElement, offset = 110) => {
+export const isInView = (element: HTMLElement, offset = 90) => {
   const top = element.getBoundingClientRect().top;
   const bottom = element.getBoundingClientRect().bottom;
 
