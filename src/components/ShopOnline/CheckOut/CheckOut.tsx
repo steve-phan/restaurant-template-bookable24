@@ -84,12 +84,12 @@ export const Checkout = () => {
       ) : (
         <>
           <HeadingCenter title='Please review your Oder and Address' />
-          <UserInfo />
-          <DeliveryTime />
+
           <AccountHeadingSt>Warenkorb</AccountHeadingSt>
           <ViewCartFoodList />
-
           <OderSummary sumPrices={sumPrices} sumQuantities={sumQuantities} />
+          <UserInfo />
+          <DeliveryTime />
           <TextWarningSt>
             Im Moment akzeptieren wir nur Bargeld ... wir arbeiten an der
             Online-Zahlung
