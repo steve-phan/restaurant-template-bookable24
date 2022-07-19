@@ -15,7 +15,6 @@ export const InternalLink = ({
   target,
 }: CTAButtonProps): JSX.Element => {
   const theme = useTheme();
-  const { navigate } = useI18next();
   const bgColor = hasBackground ? theme?.color.primary : 'white';
   const color = !hasBackground ? theme?.color.primary : 'white';
   return (

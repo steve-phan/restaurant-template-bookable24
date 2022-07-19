@@ -63,7 +63,7 @@ export const ButtonGroupSt = styled('div')(({ theme }) => ({
     display: 'block',
     marginTop: 20,
     marginBottom: 20,
-    width: 'fit-content',
+    // width: 'fit-content',
     paddingRight: 26,
     paddingLeft: 26,
   },
