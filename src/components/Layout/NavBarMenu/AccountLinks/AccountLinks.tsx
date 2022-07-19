@@ -56,7 +56,7 @@ export const AccountLinks = ({
                 navigate('/account/signup');
               }}
             >
-              {t('account.register')}
+              {t('account.registration')}
             </ButtonAccountSt>
             <ButtonAccountSt
               onClick={() => {
